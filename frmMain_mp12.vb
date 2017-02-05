@@ -343,14 +343,14 @@ Public Class FrmMain_mp12
         Dim txt As TextBox, lblRegName As Label
         Dim v As View
         For fld As pca_data_fields_enum_t = pca_data_fields_enum_t.reg_0 To pca_data_fields_enum_t.reg_2A
-            lblRegName = New Label With {.Location = New Point(col * 187 + xOffset, 3 + yOffset + 24 * row), .Size = New Size(140, 20)}
-            txt = New TextBox With {.Location = New Point(col * 187 + xOffset + 140, yOffset + 24 * row), .Size = New Size(40, 20)}
+            lblRegName = New Label With {.Location = New Point(col * 197 + xOffset, 3 + yOffset + 24 * row), .Size = New Size(150, 20)}
+            txt = New TextBox With {.Location = New Point(col * 197 + xOffset + 150, yOffset + 24 * row), .Size = New Size(40, 20)}
             v = New View(txt, fld)
             txt.Enabled = Not New mvc.DataField(fld).IsReadOnly
             If offset <= 16 Then
-                lblRegName.Text = "0x" & Strings.Right("0" & Hex(offset), 2) & "   " & mvc.Model.Caption(fld)
+                lblRegName.Text = "0x" & Strings.Right("0" & Hex(offset), 2) & "  " & mvc.Model.Caption(fld)
             Else
-                lblRegName.Text = "0x" & Strings.Right("0" & Hex(offset2), 2) & "   " & mvc.Model.Caption(fld)
+                lblRegName.Text = "0x" & Strings.Right("0" & Hex(offset2), 2) & "  " & mvc.Model.Caption(fld)
             End If
             pnlRegisters.Controls.Add(lblRegName)
             pnlRegisters.Controls.Add(txt)
