@@ -22,11 +22,16 @@
 pca_data_bits_t pca_data_bits_default[] = {
 	/* 00 */ 0x18, 0x00, 0x00, 0x00, 
 	/* 04 */ 0x00, 0x00, 0x00, 0x00, 
+#ifdef _DEBUG
+	/* 08 */ 0xF3FE, 0x8FF3, 0x3F8F,0xFC3F,
+	/* 0C */ 0x03E0, 0x0F03, 0x380F,
+#else
 	/* 08 */ 0x0000, 0x0000, 0x0000, 0x0000,
 	/* 0C */ 0x0000, 0x0000, 0x0000,
+#endif
 	/* 20 */ 0x3C, 0x9E, 0xB0, 0x02,
 	/* 24 */ 0xFF, 0x01, 0x00, 0x7B,
-	/* 28 */ 0x02, 0xFF03
+	/* 28 */ 0x02, 0x03FF
 };
 
 /*************************************************************************************/
@@ -435,13 +440,24 @@ void pca_tf_mA_adc(char *textbuffer, size_t sz, int index)
 	}
 }
 
+void pca_tf_sts_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			int val = index & 0x3FF;
+			sprintf_s(textbuffer, sz, "0x%x", val);
+		}
+	}
+}
+
 
 pca_data_field_t pca_DataFields[] = {
 	/*25 Datafiled in total, all callbacks need to be reviewed YY*/
 	/*Reg#,lsb,bitCnt,MaxVal,	Field index, Caption, textSupply function*/
 	/*REG 0x00, Device Info*/
-	{ 0x00, 0,  3,   0, dev_id, "Device ID",  pca_tf_Three_bits  },
-	{ 0x00, 3,  3,   0, dev_rev, "Device Revision",  pca_tf_Three_bits  },
+	{ 0x00, 0,  4,   0, dev_id, "Device ID",  pca_tf_Three_bits  },
+	{ 0x00, 4,  4,   0, dev_rev, "Device Revision",  pca_tf_Three_bits  },
 	/*REG 0x01, INT1 (RC) - (should read the INT1_STS for actual interrupt status)*/
 	{ 0x01, 7,  1,   0, v_ok_int, "V OK INT",  pca_tf_En_Dis  },	
 	{ 0x01, 6,	1,	 0, ntc_temp_int, "NTC TEMP INT", pca_tf_En_Dis },
@@ -492,13 +508,13 @@ pca_data_field_t pca_DataFields[] = {
 	/*REG 0x07, STS_D (R)*/
 	{ 0x07, 1, 7, 0, ichg_sts, "ICHG status", pca_tf_mA_adc },
 	/*REG 0x08-0x10, STS_ADC_1-9 (R)*/ 
-	{ 0x08, 0, 16, 0, adc_iin, "iin ADC", pca_tf_A_adc },
-	{ 0x09, 0, 16, 0, adc_iout, "Iout ADC", pca_tf_A_adc },
-	{ 0x0A, 0, 16, 0, adc_vin, "Vin ADC", pca_tf_V_adc },
-	{ 0x0B, 0, 16, 0, adc_vout, "Vout ADC", pca_tf_V_adc },
-	{ 0x0C, 0, 16, 0, adc_vbat, "Vbat ADC", pca_tf_V_adc },
-	{ 0x0D, 0, 16, 0, adc_dietemp, "DieTemp ADC", pca_tf_T_adc },
-	{ 0x0E, 0, 16, 0, adc_ntcv, "NTCV ADC", pca_tf_V_adc },
+	{ 0x08, 0, 10, 0, adc_iin, "iin ADC", pca_tf_sts_adc },
+	{ 0x09, 2, 10, 0, adc_iout, "Iout ADC", pca_tf_sts_adc },
+	{ 0x0A, 4, 10, 0, adc_vin, "Vin ADC", pca_tf_sts_adc },
+	{ 0x0B, 6, 10, 0, adc_vout, "Vout ADC", pca_tf_sts_adc },
+	{ 0x0C, 0, 10, 0, adc_vbat, "Vbat ADC", pca_tf_sts_adc },
+	{ 0x0D, 2, 10, 0, adc_dietemp, "DieTemp ADC", pca_tf_sts_adc },
+	{ 0x0E, 4, 10, 0, adc_ntcv, "NTCV ADC", pca_tf_sts_adc },
 	/*REG 0x20, ICHG_CTRL (R/W)*/
 	{ 0x0F, 7, 1, 0, ichg_ss, "Charge Current Step Time", pca_tf_ichg_ss },
 	{ 0x0F, 0, 7, 0x51, ichg_cfg, "Charge Current Set", pca_tf_ichg_cfg },
@@ -527,11 +543,11 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x13, 2, 1, 0, ch2_en, "Battery Voltage ADC", pca_tf_En_Dis },
 	{ 0x13, 1, 1, 0, ch1_en, "Input Voltage ADC", pca_tf_En_Dis },
 	/*REG 0x25, TEMP_CTRL (R/W)*/
-	{ 0x14, 6, 2, 0, temp_reg, "Die Temp Regulation", pca_tf_temp_reg },
-	{ 0x14, 4, 2, 0, temp_delta, "Die Temp Regulation Delta", pca_tf_temp_delta },
-	{ 0x14, 3, 1, 0, temp_reg_en, "Die Temp Regulation", pca_tf_En_Dis },
+	{ 0x14, 6, 2, 0, temp_reg, "DieTemp Regulation", pca_tf_temp_reg },
+	{ 0x14, 4, 2, 0, temp_delta, "DieTemp Regulation Delta", pca_tf_temp_delta },
+	{ 0x14, 3, 1, 0, temp_reg_en, "DieTemp Regulation", pca_tf_En_Dis },
 	{ 0x14, 2, 1, 0, ntc_protection_en, "Ext Thermistor Temp Protection", pca_tf_En_Dis },
-	{ 0x14, 1, 1, 0, temp_max_en, "Die Temp Standby Mode", pca_tf_En_Dis },
+	{ 0x14, 1, 1, 0, temp_max_en, "DieTemp Standby Mode", pca_tf_En_Dis },
 	/*REG 0x26, PWR_COLLAPSE (R/W)*/
 	{ 0x15, 6, 2, 0, uv_delta, "VIN UnderVoltage Setting", pca_tf_uv_delta },
 	{ 0x15, 5, 1, 0, collapse_det_en, "Power Collapse Detection", pca_tf_En_Dis },
@@ -547,7 +563,7 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x17, 2, 2, 0, chg_timer_cfg, "Charger Timer Select", pca_tf_chgtmr_cfg },
 	{ 0x17, 0, 2, 0, ov_delta, "VIN Overvoltage Set", pca_tf_uv_delta },
 	/*REG 0x29-0x2A, NTC_THRESHOLD_1(R/W)*/
-	{ 0x18, 0, 16, 0x400, ntc_threshold, "Ext NTC Voltage Threshold", pca_tf_ntcvthres_set },
+	{ 0x18, 0, 10, 0x400, ntc_threshold, "Ext NTC Voltage Threshold", pca_tf_ntcvthres_set },
 	/* Registers */
 	{ 0x00, 0,  8,   0, reg_0, "DEV_INFO", pca_tf_byte },
 	{ 0x01, 0,  8,   0, reg_1, "INT1", pca_tf_byte },
@@ -557,16 +573,16 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x05, 0,  8,   0, reg_5, "STS_B", pca_tf_byte },
 	{ 0x06, 0,  8,   0, reg_6, "STS_C", pca_tf_byte },
 	{ 0x07, 0,  8,   0, reg_7, "STS_D", pca_tf_byte },
-	/*some issue here with ADC reading mapping. need to resolve later YY.*/
+	/*RegNo 0x08-0x0E each contains 16bits, while each STS_ADC used twice .*/
 	{ 0x08, 0,  8,   0, reg_8, "STS_ADC_1", pca_tf_byte },
-	{ 0x08, 0,	8,	 0, reg_9, "STS_ADC_2", pca_tf_byte },
-	{ 0x09, 0,  8,   0, reg_a, "STS_ADC_3", pca_tf_byte },
-	{ 0x0A, 0,  8,   0, reg_b, "STS_ADC_4", pca_tf_byte },
-	{ 0x0B, 0,  8,   0, reg_c, "STS_ADC_5", pca_tf_byte },
+	{ 0x08, 8,	8,	 0, reg_9, "STS_ADC_2", pca_tf_byte },
+	{ 0x09, 8,  8,   0, reg_a, "STS_ADC_3", pca_tf_byte },
+	{ 0x0A, 8,  8,   0, reg_b, "STS_ADC_4", pca_tf_byte },
+	{ 0x0B, 8,  8,   0, reg_c, "STS_ADC_5", pca_tf_byte },
 	{ 0x0C, 0,  8,   0, reg_d, "STS_ADC_6", pca_tf_byte },
-	{ 0x0D, 0,  8,   0, reg_e, "STS_ADC_7", pca_tf_byte },
-	{ 0x0E, 0,  8,   0, reg_f, "STS_ADC_8", pca_tf_byte },
-	{ 0x0E, 0,	4,	 0, reg_10, "STS_ADC_9", pca_tf_byte },
+	{ 0x0C, 8,  8,   0, reg_e, "STS_ADC_7", pca_tf_byte },
+	{ 0x0D, 8,  8,   0, reg_f, "STS_ADC_8", pca_tf_byte },
+	{ 0x0E, 8,	6,	 0, reg_10, "STS_ADC_9", pca_tf_byte },
 	{ 0x0F, 0,  8,   0, reg_20, "ICHG_CTRL", pca_tf_byte },
 	{ 0x10, 0,  8,   0, reg_21, "IIN_CTRL", pca_tf_byte },
 	{ 0x11, 0,  8,   0, reg_22, "START_CTRL", pca_tf_byte },
@@ -577,7 +593,7 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x16, 0,  8,   0, reg_27, "V_VFLOAT", pca_tf_byte },
 	{ 0x17, 0,  8,   0, reg_28, "SAFETY_CTRL", pca_tf_byte },
 	{ 0x18, 0,  8,   0, reg_29, "NTC_TH_1", pca_tf_byte },
-	{ 0x18, 0,  8,   0, reg_2A, "NTC_TH_2", pca_tf_byte },
+	{ 0x18, 8,  2,   0, reg_2A, "NTC_TH_2", pca_tf_byte }
 };
 
 pca_register_t pca_registers[] = {
@@ -589,13 +605,15 @@ pca_register_t pca_registers[] = {
 	{ true,  PCA9498_AUTO_INC | 0x05,  8, pca_data_bits_default[ 5] },
 	{ true,  PCA9498_AUTO_INC | 0x06,  8, pca_data_bits_default[ 6] },
 	{ true,  PCA9498_AUTO_INC | 0x07,  8, pca_data_bits_default[ 7] },
-	{ true,  PCA9498_AUTO_INC | 0x08,  8, pca_data_bits_default[ 8] },
-	{ true,  PCA9498_AUTO_INC | 0x09,  8, pca_data_bits_default[ 9] },
-	{ true,  PCA9498_AUTO_INC | 0x0A,  8, pca_data_bits_default[10] },
-	{ true,  PCA9498_AUTO_INC | 0x0B,  16, pca_data_bits_default[11] },
-	{ true,  PCA9498_AUTO_INC | 0x0D,  8, pca_data_bits_default[12] },
-	{ true,  PCA9498_AUTO_INC | 0x0E,  8, pca_data_bits_default[13] },
-	{ true,  PCA9498_AUTO_INC | 0x0F,  16, pca_data_bits_default[14] },
+	/*Special 16 bytes for ADC storage*/
+	{ true,  PCA9498_AUTO_INC | 0x08, 16, pca_data_bits_default[8] },	/*STS_ADC_2|STS_ADC_1*/
+	{ true,  PCA9498_AUTO_INC | 0x09, 16, pca_data_bits_default[9] },	/*STS_ADC_3|STS_ADC_2*/
+	{ true,  PCA9498_AUTO_INC | 0x0A, 16, pca_data_bits_default[10] },	/*STS_ADC_4|STS_ADC_3*/
+	{ true,  PCA9498_AUTO_INC | 0x0B, 16, pca_data_bits_default[11] },	/*STS_ADC_5|STS_ADC_4*/
+	{ true,  PCA9498_AUTO_INC | 0x0D, 16, pca_data_bits_default[12] },	/*STS_ADC_7|STS_ADC_6*/
+	{ true,  PCA9498_AUTO_INC | 0x0E, 16, pca_data_bits_default[13] },	/*STS_ADC_8|STS_ADC_7*/
+	{ true,  PCA9498_AUTO_INC | 0x0F, 16, pca_data_bits_default[14] },	/*STS_ADC_9|STS_ADC_8*/
+	/*Control Registers*/
 	{ false, PCA9498_AUTO_INC | 0x20,  8, pca_data_bits_default[15] },
 	{ false, PCA9498_AUTO_INC | 0x21,  8, pca_data_bits_default[16] },
 	{ false, PCA9498_AUTO_INC | 0x22,  8, pca_data_bits_default[17] },
