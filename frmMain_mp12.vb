@@ -17,6 +17,7 @@ Public Class FrmMain_mp12
     Private Const cFT232_ID As UInt32 = 5
 
     Private cSlaBase As Byte = &H66
+    
 
     Private m_scheduleScan As Int64 = 0
     Private m_scheduleConnect As Int64 = 0
@@ -99,11 +100,13 @@ Public Class FrmMain_mp12
         Dim v As New View(chkVOkInt, pca_data_fields_enum_t.v_ok_int)
         v = New View(chkNTCtempInt, pca_data_fields_enum_t.ntc_temp_int)
         v = New View(chkChgPhaseInt, pca_data_fields_enum_t.chg_phase_int)
-        v = New View(chkPwrCollapseInt, pca_data_fields_enum_t.pwr_collapse_int)
         v = New View(chkCtrlLimitInt, pca_data_fields_enum_t.ctrl_limit_int)
         v = New View(chkTempRegInt, pca_data_fields_enum_t.temp_reg_int)
         v = New View(chkADCDoneInt, pca_data_fields_enum_t.adc_done_int)
         v = New View(chkTimerInt, pca_data_fields_enum_t.timer_int)
+
+        v = New View(lblId, pca_data_fields_enum_t.dev_id)
+        v = New View(lblRev, pca_data_fields_enum_t.dev_rev)
 
         'Ctrl View'
         lblSenseR.Text = Model.Caption(pca_data_fields_enum_t.snsres)
@@ -158,11 +161,17 @@ Public Class FrmMain_mp12
         v = New View(chkVOkMask, pca_data_fields_enum_t.v_ok_m)
         v = New View(chkNtcTempMask, pca_data_fields_enum_t.ntc_temp_m)
         v = New View(chkChgPhaseMask, pca_data_fields_enum_t.chg_phase_m)
-        v = New View(chkPwrCollapseMask, pca_data_fields_enum_t.pwr_collapse_m)
         v = New View(chkCtrlLimitMask, pca_data_fields_enum_t.ctrl_limit_m)
         v = New View(chkTempRegMask, pca_data_fields_enum_t.temp_reg_m)
         v = New View(chkADCDoneMask, pca_data_fields_enum_t.adc_done_m)
         v = New View(chkTimerMask, pca_data_fields_enum_t.timer_m)
+        v = New View(chkVOkSts, pca_data_fields_enum_t.v_ok_sts)
+        v = New View(chkNtcTempSts, pca_data_fields_enum_t.ntc_temp_sts)
+        v = New View(chkChgPhaseSts, pca_data_fields_enum_t.chg_phase_sts)
+        v = New View(chkCtrlLimitSts, pca_data_fields_enum_t.ctrl_limit_sts)
+        v = New View(chkTempRegSts, pca_data_fields_enum_t.temp_reg_sts)
+        v = New View(chkADCDoneSts, pca_data_fields_enum_t.adc_done_sts)
+        v = New View(chkTimerSts, pca_data_fields_enum_t.timer_sts)
 
         'Status View'
         v = New View(chkIinLoopSts, pca_data_fields_enum_t.iin_loop_sts)
@@ -198,7 +207,6 @@ Public Class FrmMain_mp12
         v = New View(trbVFloat, pca_data_fields_enum_t.v_float)
         v = New View(lblVFloatVal, pca_data_fields_enum_t.v_float)
 
-        v = New View(chkPwrCollapseDetEn, pca_data_fields_enum_t.collapse_det_en)
         v = New View(chkIinForceIncrementEn, pca_data_fields_enum_t.iin_force_count)
         v = New View(chkMissBatteryDetEn, pca_data_fields_enum_t.bat_miss_det_en)
         v = New View(chkBattMissShutDownEn, pca_data_fields_enum_t.batt_miss_shdn_en)
@@ -275,6 +283,8 @@ Public Class FrmMain_mp12
         '    End If
         'Next
         ScheduleStatusRead()
+
+        'this need to be modified to read MP15 status register'
         If Model.ReadRegisters(3, 2) = Model.pca_result_t.pca_ok Then
             If Model.ReadRegisters(19, 9) = Model.pca_result_t.pca_ok Then
                 Exit Sub
@@ -306,6 +316,22 @@ Public Class FrmMain_mp12
         End If
     End Sub
 
+    Private Sub tsmInterval0_Click(sender As System.Object, e As System.EventArgs) Handles tsmInterval0.Click
+        SetAutoRefresh(0)
+    End Sub
+
+    Private Sub tsmInterval1_Click(sender As System.Object, e As System.EventArgs) Handles tsmInterval1.Click
+        SetAutoRefresh(1)
+    End Sub
+
+    Private Sub tsmInterval2_Click(sender As System.Object, e As System.EventArgs) Handles tsmInterval2.Click
+        SetAutoRefresh(2)
+    End Sub
+
+    Private Sub tsmInterval4_Click(sender As System.Object, e As System.EventArgs) Handles tsmInterval4.Click
+        SetAutoRefresh(4)
+    End Sub
+
     Private Sub SetAutoRefresh(interval As UInteger)
         tsmInterval0.Checked = False
         tsmInterval1.Checked = False
@@ -332,6 +358,10 @@ Public Class FrmMain_mp12
         My.Settings.Interval = CUInt(tscRefresh.SelectedIndex)
         My.Settings.Save()
         ScheduleStatusRead()
+    End Sub
+
+    Private Sub tsbRead_Click(sender As System.Object, e As System.EventArgs) Handles tsbRead.Click
+        ReadAll()
     End Sub
 
     Private Sub BuildRegisterMap()
@@ -397,4 +427,65 @@ Public Class FrmMain_mp12
         If tscRefresh.SelectedIndex >= 0 Then SetAutoRefresh(CUInt(tscRefresh.SelectedIndex))
     End Sub
 
+    Private Sub WriteAll()
+        Model.WriteAll()
+        UpdateModel()
+    End Sub
+
+    Private Sub ReadAll()
+        UpdateModel()
+    End Sub
+
+    Private Sub btnCurrentADCRead_Click(sender As Object, e As EventArgs) Handles btnCurrentADCRead.Click
+        mvc.Model.ReadRegisters(6, 2)       'Read IIN Status and ICHG Status'
+        mvc.Model.ReadADCRegisters(8, 9)    'Read ADC 1-9'
+    End Sub
+
+    Private Sub btnRaisedIntRead_Click(sender As Object, e As EventArgs) Handles btnRaisedIntRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnCtlSet_Click(sender As Object, e As EventArgs) Handles btnCtlSet.Click
+        WriteAll()
+    End Sub
+
+    Private Sub btnAdcEnSet_Click(sender As Object, e As EventArgs) Handles btnAdcEnSet.Click
+        WriteAll()
+    End Sub
+
+    Private Sub btnIntSet_Click(sender As Object, e As EventArgs) Handles btnIntSet.Click
+        WriteAll()
+    End Sub
+
+    Private Sub btnProtectSet_Click(sender As Object, e As EventArgs) Handles btnProtectSet.Click
+        WriteAll()
+    End Sub
+
+    Private Sub btnThermalSet_Click(sender As Object, e As EventArgs) Handles btnThermalSet.Click
+        WriteAll()
+    End Sub
+
+    Private Sub btnThermalRead_Click(sender As Object, e As EventArgs) Handles btnThermalRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnProtectRead_Click(sender As Object, e As EventArgs) Handles btnProtectRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnStsRead_Click(sender As Object, e As EventArgs) Handles btnStsRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnIntRead_Click(sender As Object, e As EventArgs) Handles btnIntRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnAdcEnRead_Click(sender As Object, e As EventArgs) Handles btnAdcEnRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnCtlRead_Click(sender As Object, e As EventArgs) Handles btnCtlRead.Click
+        ReadAll()
+    End Sub
 End Class
