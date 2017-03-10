@@ -84,6 +84,8 @@ pca_result_t pcaReadRegister(int regnum);
 
 /* Reads <count> registers starting at <regNumber>'s offset */
 pca_result_t pcaReadRegisters(int regNumber, int count);
+pca_result_t pcaReadADCRegisters(int RegNumber, int count);
+
 
 /* Reads all registers. For each change in data fields, all call-back's will be called. */
 pca_result_t pcaReadAll();
