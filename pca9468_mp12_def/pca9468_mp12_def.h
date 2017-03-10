@@ -13,7 +13,7 @@
 
 typedef void (* pca_value_text_func_t)(char *textbuffer, size_t sz, int index);
 
-#define PCA9498_REG_COUNT	0x1C			/* 2 * 8 bit registers are combined into 1 * 16 bit regsister */
+#define PCA9468_MP12_REG_COUNT 25
 
 typedef uint32_t pca_data_bits_t;
 
