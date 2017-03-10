@@ -126,4 +126,9 @@ Friend Module pca9468_mp12_import
     Friend Function pcaReadRegisters_hidden(RegNumber As Integer, count As Integer) As pca_result_t
     End Function
 
+    'Reads <count> registers starting at <regNumber>'s offset
+    <DllImportAttribute(DLLname, EntryPoint:="pcaReadADCRegisters", SetLastError:=False, CharSet:=CharSet.Unicode, ExactSpelling:=True, CallingConvention:=CallingConvention.Cdecl)>
+    Friend Function pcaReadADCRegisters_hidden(RegNumber As Integer, count As Integer) As pca_result_t
+    End Function
+
 End Module
