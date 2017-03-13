@@ -12,11 +12,9 @@
 #include <stdio.h>
 
 #ifdef _DEBUG
-//#define PCA9498_AUTO_INC          0x00
-#define PCA9498_AUTO_INC          0x80
 #define PCA9468_MP12_AUTO_INC			0x00
 #else
-#define PCA9498_AUTO_INC          0x80
+#define PCA9468_MP12_AUTO_INC			0x00
 #endif
 
 pca_data_bits_t pca_data_bits_default[] = {
@@ -380,8 +378,8 @@ void pca_tf_ntcvthres_set(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 10) {
 			if (index <= 1023)
-			/*range from 0mV - 2400mV with 2.3mV per step*/
-			sprintf_s(textbuffer, sz, "%0.1fmV", (index * 2.3));
+			/*range from 0mV - 2400mV with 2.346mV per step*/
+			sprintf_s(textbuffer, sz, "%0.1fmV", (index * 2.346));
 		}
 	}
 }
@@ -433,9 +431,7 @@ void pca_tf_mA_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = index & 0x1FFF;
-			if ((index & 0x8000) == 0x8000) val *= -1;
-			sprintf_s(textbuffer, sz, "%dmA", val);
+			sprintf_s(textbuffer, sz, "%dmA", index*100);
 		}
 	}
 }
@@ -447,6 +443,378 @@ void pca_tf_sts_adc(char *textbuffer, size_t sz, int index)
 		if (sz >= 10) {
 			int val = index & 0x3FF;
 			sprintf_s(textbuffer, sz, "0x%x", val);
+		}
+	}
+}
+
+/*MP12 ADC Readings*/
+/*ADC Input Voltage text*/
+void pca_tf_VIN_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			float val = (index & 0x3FF);
+			/*0.016V per step, 0-16.368V*/
+			sprintf_s(textbuffer, sz, "%0.3fV", val * 0.016);
+		}
+	}
+}
+
+/*ADC Battery Voltage & Vout text*/
+void pca_tf_Vout_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			float val = (index & 0x3FF);
+			/*0.005V per step, 0-5.115V*/
+			sprintf_s(textbuffer, sz, "%0.3fV", val * 0.005);
+		}
+	}
+}
+
+
+/*ADC Input Current (Iin) text*/
+void pca_tf_IIN_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			float val = (index & 0x3FF);
+			/*4.89mA per step, 0-5000mA*/
+			sprintf_s(textbuffer, sz, "%0.2fmA", val * 4.89);
+		}
+	}
+}
+
+/*ADC Charge Current (Iout) text*/
+void pca_tf_Iout_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			float val = (index & 0x3FF);
+			/*7.81mA per step, 0-8000mA*/
+			sprintf_s(textbuffer, sz, "%0.2fmA", val * 7.82);
+		}
+	}
+}
+
+/*ADC DieTemp text*/
+void pca_tf_DieTemp_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			float val = (index & 0x3FF);
+			/*LSB 0.5C with -25C ~ 160C*/
+			sprintf_s(textbuffer, sz, "%0.1f °C", (val*0.5-25));
+		}
+	}
+}
+
+/*ADC NTC text*/
+void pca_tf_NTC_adc(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			float val = (index & 0x3FF);
+			/*2.4mA per step 2.4V*/
+			sprintf_s(textbuffer, sz, "%0.1fmV", val * 2.4);
+		}
+	}
+}
+
+/**Status 1& Status 2*/
+void pca_tf_iinloop_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+			sprintf_s(textbuffer, sz, "IIN Loop Active");
+			else
+			sprintf_s(textbuffer, sz, "IIN Loop Inactive");
+		}
+	}
+}
+
+void pca_tf_ichgloop_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "ICharge Loop Active");
+			else
+				sprintf_s(textbuffer, sz, "ICharge Loop Inactive");
+		}
+	}
+}
+
+void pca_tf_Vfltloop_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "V Float Loop Active");
+			else
+				sprintf_s(textbuffer, sz, "V Float Loop Inactive");
+		}
+	}
+}
+
+
+void pca_tf_VoutUV_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Vout > Vout OK");
+			else
+				sprintf_s(textbuffer, sz, "Vout < Vout OK");
+		}
+	}
+}
+
+
+void pca_tf_VbatOV_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "VBat > VBat OVLO");
+			else
+				sprintf_s(textbuffer, sz, "VBat < VBat OVLO");
+		}
+	}
+}
+
+
+void pca_tf_VinOV_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Vin > Vin OVLO");
+			else
+				sprintf_s(textbuffer, sz, "Vin < Vin OVLO");
+		}
+	}
+}
+
+
+void pca_tf_VinUV_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Vin < Vin UVLO");
+			else
+				sprintf_s(textbuffer, sz, "Vin > Vin UVLO");
+		}
+	}
+}
+
+void pca_tf_BattMiss_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Battery is Missing");
+			else
+				sprintf_s(textbuffer, sz, "Battery is detected");
+		}
+	}
+}
+
+void pca_tf_OcpFast_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "IIN > 50A");
+			else
+				sprintf_s(textbuffer, sz, "IIN < 50A");
+		}
+	}
+}
+
+void pca_tf_OcpAvg_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "IIN > IIN_CFG*150%%");
+			else
+				sprintf_s(textbuffer, sz, "IIN < IIN_CFG*150%%");
+		}
+	}
+}
+
+void pca_tf_ActiveState_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Active State");
+			else
+				sprintf_s(textbuffer, sz, "Inactive State");
+		}
+	}
+}
+
+void pca_tf_ShutDown_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Shutdown State");
+			else
+				sprintf_s(textbuffer, sz, "No Shutdown State");
+		}
+	}
+}
+
+void pca_tf_Standby_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Standby State");
+			else
+				sprintf_s(textbuffer, sz, "No Standby State");
+		}
+	}
+}
+
+void pca_tf_ChargeTmr_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 30) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Charger Timer is expired");
+			else
+				sprintf_s(textbuffer, sz, "Charger Timer is not expired");
+		}
+	}
+}
+
+void pca_tf_watchdog_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Watchdog is expired");
+			else
+				sprintf_s(textbuffer, sz, "Watchdog is not expired");
+		}
+	}
+}
+
+void pca_tf_VOK_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Vin Status Not OK");
+			else
+				sprintf_s(textbuffer, sz, "Vin Status OK");
+		}
+	}
+}
+
+void pca_tf_NtcTemp_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "NTC above Threshold");
+			else
+				sprintf_s(textbuffer, sz, "NTC below Threshold");
+		}
+	}
+}
+
+void pca_tf_ChgPhrase_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 25) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Phrase Changed");
+			else
+				sprintf_s(textbuffer, sz, "No Phrase Change");
+		}
+	}
+}
+
+void pca_tf_CtrlLimit_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 30) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Duty Cycle or Freq reached limit");
+			else
+				sprintf_s(textbuffer, sz, "Normal Operation");
+		}
+	}
+}
+
+
+void pca_tf_TempReg_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 35) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Under Temperature Regulation");
+			else
+				sprintf_s(textbuffer, sz, "Not In Temperature Regulation");
+		}
+	}
+}
+
+void pca_tf_ADCDone_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 35) {
+			if (index)
+				sprintf_s(textbuffer, sz, "ADC Done");
+			else
+				sprintf_s(textbuffer, sz, "ADC not Done");
+		}
+	}
+}
+
+void pca_tf_Timer_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 35) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Watchdog or ChargerTimer has expired");
+			else
+				sprintf_s(textbuffer, sz, "No Timer is expired");
 		}
 	}
 }
@@ -477,44 +845,44 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x02, 1, 1, 0, adc_done_m, "Adc done Int mask", pca_tf_En_Dis },
 	{ 0x02, 0, 1, 0, timer_m, "Timer Int mask", pca_tf_En_Dis },
 	/*REG 0x03, INT1_STS (R)*/
-	{ 0x03, 7, 1, 0, v_ok_sts, "V_OK status", pca_tf_En_Dis },
-	{ 0x03, 6, 1, 0, ntc_temp_sts, "NTC temp status", pca_tf_En_Dis },
-	{ 0x03, 5, 1, 0, chg_phase_sts, "CHG phrase status(NA)", pca_tf_En_Dis },
+	{ 0x03, 7, 1, 0, v_ok_sts, "V_OK status", pca_tf_VOK_sts },
+	{ 0x03, 6, 1, 0, ntc_temp_sts, "NTC temp status", pca_tf_NtcTemp_sts},
+	{ 0x03, 5, 1, 0, chg_phase_sts, "CHG phrase status(NA)", pca_tf_ChgPhrase_sts },
 	{ 0x03, 4, 1, 0, pwr_collapse_sts, "Power collapse status", pca_tf_En_Dis },
-	{ 0x03, 3, 1, 0, ctrl_limit_sts, "CTRL limit status", pca_tf_En_Dis },
-	{ 0x03, 2, 1, 0, temp_reg_sts, "TEMP regulation status", pca_tf_En_Dis },
-	{ 0x03, 1, 1, 0, adc_done_sts, "ADC done status", pca_tf_En_Dis },
-	{ 0x03, 0, 1, 0, timer_sts, "Timer status", pca_tf_En_Dis },
+	{ 0x03, 3, 1, 0, ctrl_limit_sts, "CTRL limit status", pca_tf_CtrlLimit_sts },
+	{ 0x03, 2, 1, 0, temp_reg_sts, "TEMP regulation status", pca_tf_TempReg_sts },
+	{ 0x03, 1, 1, 0, adc_done_sts, "ADC done status", pca_tf_ADCDone_sts },
+	{ 0x03, 0, 1, 0, timer_sts, "Timer status", pca_tf_Timer_sts },
 	/*REG 0x04, STS_A (R)*/
-	{ 0x04, 7, 1, 0, iin_loop_sts, "IIN loop status", pca_tf_En_Dis },
-	{ 0x04, 6, 1, 0, chg_loop_sts, "ICHG loop status", pca_tf_En_Dis },
-	{ 0x04, 5, 1, 0, vflt_loop_sts, "V_Float loop status", pca_tf_En_Dis },
+	{ 0x04, 7, 1, 0, iin_loop_sts, "IIN loop status", pca_tf_iinloop_sts },
+	{ 0x04, 6, 1, 0, chg_loop_sts, "ICHG loop status", pca_tf_ichgloop_sts },
+	{ 0x04, 5, 1, 0, vflt_loop_sts, "V_Float loop status", pca_tf_Vfltloop_sts },
 	{ 0x04, 4, 1, 0, rsvd_1, "Reserved", pca_tf_En_Dis },
-	{ 0x04, 3, 1, 0, vout_uv_sts, "VOut below V_OK status", pca_tf_En_Dis },
-	{ 0x04, 2, 1, 0, vbat_ov_sts, "VBat above VBat_OVLO  ", pca_tf_En_Dis },
-	{ 0x04, 1, 1, 0, vin_ov_sts, "VIn above VIn_OVLO", pca_tf_En_Dis },
-	{ 0x04, 0, 1, 0, vin_uv_sts, "Ibus over current", pca_tf_En_Dis },
+	{ 0x04, 3, 1, 0, vout_uv_sts, "VOut below V_OK", pca_tf_VoutUV_sts },
+	{ 0x04, 2, 1, 0, vbat_ov_sts, "VBat above VBat_OVLO  ", pca_tf_VbatOV_sts },
+	{ 0x04, 1, 1, 0, vin_ov_sts, "VIn above VIn_OVLO", pca_tf_VinOV_sts },
+	{ 0x04, 0, 1, 0, vin_uv_sts, "Ibus over current", pca_tf_VinUV_sts },
 	/*REG 0x05, STS_B (R)*/
-	{ 0x05, 7, 1, 0, batt_miss_sts, "Battery miss status", pca_tf_En_Dis },
-	{ 0x05, 6, 1, 0, ocp_fast_sts, "Fast over current status", pca_tf_En_Dis },
-	{ 0x05, 5, 1, 0, ocp_avg_sts, "Avarage over current status", pca_tf_En_Dis },
-	{ 0x05, 4, 1, 0, active_state_sts, "Charge active status", pca_tf_En_Dis },
-	{ 0x05, 3, 1, 0, shutdown_state_sts, "Charge shutdown status", pca_tf_En_Dis },
-	{ 0x05, 2, 1, 0, standby_state_sts, "Charge standby status", pca_tf_En_Dis },
-	{ 0x05, 1, 1, 0, charge_timer_sts, "Charge timer status", pca_tf_En_Dis },
-	{ 0x05, 0, 1, 0, watchdog_timer_sts, "Watchdog timer status", pca_tf_En_Dis },
+	{ 0x05, 7, 1, 0, batt_miss_sts, "Battery miss", pca_tf_BattMiss_sts },
+	{ 0x05, 6, 1, 0, ocp_fast_sts, "Fast over current", pca_tf_OcpFast_sts },
+	{ 0x05, 5, 1, 0, ocp_avg_sts, "Avarage over current", pca_tf_OcpAvg_sts },
+	{ 0x05, 4, 1, 0, active_state_sts, "Charge active", pca_tf_ActiveState_sts },
+	{ 0x05, 3, 1, 0, shutdown_state_sts, "Charge shutdown", pca_tf_ShutDown_sts },
+	{ 0x05, 2, 1, 0, standby_state_sts, "Charge standby", pca_tf_Standby_sts },
+	{ 0x05, 1, 1, 0, charge_timer_sts, "Charge timer", pca_tf_ChargeTmr_sts },
+	{ 0x05, 0, 1, 0, watchdog_timer_sts, "Watchdog timer", pca_tf_watchdog_sts },
 	/*REG 0x06, STS_C (R)*/
 	{ 0x06, 2, 6, 0, iin_sts, "iin status", pca_tf_mA_adc },
 	/*REG 0x07, STS_D (R)*/
 	{ 0x07, 1, 7, 0, ichg_sts, "ICHG status", pca_tf_mA_adc },
 	/*REG 0x08-0x10, STS_ADC_1-9 (R)*/ 
-	{ 0x08, 0, 10, 0, adc_iin, "iin ADC", pca_tf_sts_adc },
-	{ 0x09, 2, 10, 0, adc_iout, "Iout ADC", pca_tf_sts_adc },
-	{ 0x0A, 4, 10, 0, adc_vin, "Vin ADC", pca_tf_sts_adc },
-	{ 0x0B, 6, 10, 0, adc_vout, "Vout ADC", pca_tf_sts_adc },
-	{ 0x0C, 0, 10, 0, adc_vbat, "Vbat ADC", pca_tf_sts_adc },
-	{ 0x0D, 2, 10, 0, adc_dietemp, "DieTemp ADC", pca_tf_sts_adc },
-	{ 0x0E, 4, 10, 0, adc_ntcv, "NTCV ADC", pca_tf_sts_adc },
+	{ 0x08, 0, 10, 0, adc_iin, "iin ADC", pca_tf_IIN_adc },
+	{ 0x09, 2, 10, 0, adc_iout, "Iout ADC", pca_tf_Iout_adc },
+	{ 0x0A, 4, 10, 0, adc_vin, "Vin ADC", pca_tf_VIN_adc },
+	{ 0x0B, 6, 10, 0, adc_vout, "Vout ADC", pca_tf_Vout_adc },
+	{ 0x0C, 0, 10, 0, adc_vbat, "Vbat ADC", pca_tf_Vout_adc },
+	{ 0x0D, 2, 10, 0, adc_dietemp, "DieTemp ADC", pca_tf_DieTemp_adc },
+	{ 0x0E, 4, 10, 0, adc_ntcv, "NTCV ADC", pca_tf_NTC_adc },
 	/*REG 0x20, ICHG_CTRL (R/W)*/
 	{ 0x0F, 7, 1, 0, ichg_ss, "Charge Current Step Time", pca_tf_ichg_ss },
 	{ 0x0F, 0, 7, 0x51, ichg_cfg, "Charge Current Set", pca_tf_ichg_cfg },
@@ -535,13 +903,13 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x12, 1, 1, 0, adc_osr_cfg, "ADC Oscillator Select", pca_tf_adcosr_cfg },
 	{ 0x12, 0, 1, 0, adc_en, "ADC Enable", pca_tf_En_Dis },
 	/*REG 0x24, ADCCH_CFG (R/W)*/
-	{ 0x13, 7, 1, 0, ch7_en, "NTC Voltage ADC", pca_tf_En_Dis },
-	{ 0x13, 6, 1, 0, ch6_en, "Sys Voltage ADC", pca_tf_En_Dis },
-	{ 0x13, 5, 1, 0, ch5_en, "Die Temp ADC", pca_tf_En_Dis },
-	{ 0x13, 4, 1, 0, ch4_en, "Charge Current ADC", pca_tf_En_Dis },
-	{ 0x13, 3, 1, 0, ch3_en, "Input Current ADC", pca_tf_En_Dis },
-	{ 0x13, 2, 1, 0, ch2_en, "Battery Voltage ADC", pca_tf_En_Dis },
-	{ 0x13, 1, 1, 0, ch1_en, "Input Voltage ADC", pca_tf_En_Dis },
+	{ 0x13, 7, 1, 0, ch7_en, "NTC Voltage", pca_tf_En_Dis },
+	{ 0x13, 6, 1, 0, ch6_en, "Sys Voltage", pca_tf_En_Dis },
+	{ 0x13, 5, 1, 0, ch5_en, "Die Temp", pca_tf_En_Dis },
+	{ 0x13, 4, 1, 0, ch4_en, "Charge Current", pca_tf_En_Dis },
+	{ 0x13, 3, 1, 0, ch3_en, "Input Current", pca_tf_En_Dis },
+	{ 0x13, 2, 1, 0, ch2_en, "Battery Voltage", pca_tf_En_Dis },
+	{ 0x13, 1, 1, 0, ch1_en, "Input Voltage", pca_tf_En_Dis },
 	/*REG 0x25, TEMP_CTRL (R/W)*/
 	{ 0x14, 6, 2, 0, temp_reg, "DieTemp Regulation", pca_tf_temp_reg },
 	{ 0x14, 4, 2, 0, temp_delta, "DieTemp Regulation Delta", pca_tf_temp_delta },
@@ -597,31 +965,31 @@ pca_data_field_t pca_DataFields[] = {
 };
 
 pca_register_t pca_registers[] = {
-	{ true,  PCA9498_AUTO_INC | 0x00,  8, pca_data_bits_default[ 0] },
-	{ true,  PCA9498_AUTO_INC | 0x01,  8, pca_data_bits_default[ 1] },
-	{ false, PCA9498_AUTO_INC | 0x02,  8, pca_data_bits_default[ 2] },
-	{ true,  PCA9498_AUTO_INC | 0x03,  8, pca_data_bits_default[ 3] },
-	{ true,  PCA9498_AUTO_INC | 0x04,  8, pca_data_bits_default[ 4] },
-	{ true,  PCA9498_AUTO_INC | 0x05,  8, pca_data_bits_default[ 5] },
-	{ true,  PCA9498_AUTO_INC | 0x06,  8, pca_data_bits_default[ 6] },
-	{ true,  PCA9498_AUTO_INC | 0x07,  8, pca_data_bits_default[ 7] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x00, 8, pca_data_bits_default[0] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x01, 8, pca_data_bits_default[1] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x02, 8, pca_data_bits_default[2] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x03, 8, pca_data_bits_default[3] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x04, 8, pca_data_bits_default[4] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x05, 8, pca_data_bits_default[5] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x06, 8, pca_data_bits_default[6] },
+	{ true,  PCA9468_MP12_AUTO_INC | 0x07, 8, pca_data_bits_default[7] },
 	/*Special 16 bytes for ADC storage*/
-	{ true,  PCA9498_AUTO_INC | 0x08, 16, pca_data_bits_default[8] },	/*STS_ADC_2|STS_ADC_1*/
-	{ true,  PCA9498_AUTO_INC | 0x09, 16, pca_data_bits_default[9] },	/*STS_ADC_3|STS_ADC_2*/
-	{ true,  PCA9498_AUTO_INC | 0x0A, 16, pca_data_bits_default[10] },	/*STS_ADC_4|STS_ADC_3*/
-	{ true,  PCA9498_AUTO_INC | 0x0B, 16, pca_data_bits_default[11] },	/*STS_ADC_5|STS_ADC_4*/
-	{ true,  PCA9498_AUTO_INC | 0x0D, 16, pca_data_bits_default[12] },	/*STS_ADC_7|STS_ADC_6*/
-	{ true,  PCA9498_AUTO_INC | 0x0E, 16, pca_data_bits_default[13] },	/*STS_ADC_8|STS_ADC_7*/
-	{ true,  PCA9498_AUTO_INC | 0x0F, 16, pca_data_bits_default[14] },	/*STS_ADC_9|STS_ADC_8*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x08, 16, pca_data_bits_default[8] },	/*STS_ADC_2|STS_ADC_1*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x09, 16, pca_data_bits_default[9] },	/*STS_ADC_3|STS_ADC_2*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x0A, 16, pca_data_bits_default[10] },	/*STS_ADC_4|STS_ADC_3*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x0B, 16, pca_data_bits_default[11] },	/*STS_ADC_5|STS_ADC_4*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x0D, 16, pca_data_bits_default[12] },	/*STS_ADC_7|STS_ADC_6*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x0E, 16, pca_data_bits_default[13] },	/*STS_ADC_8|STS_ADC_7*/
+	{ true,  PCA9468_MP12_AUTO_INC | 0x0F, 16, pca_data_bits_default[14] },	/*STS_ADC_9|STS_ADC_8*/
 	/*Control Registers*/
-	{ false, PCA9498_AUTO_INC | 0x20,  8, pca_data_bits_default[15] },
-	{ false, PCA9498_AUTO_INC | 0x21,  8, pca_data_bits_default[16] },
-	{ false, PCA9498_AUTO_INC | 0x22,  8, pca_data_bits_default[17] },
-	{ false, PCA9498_AUTO_INC | 0x23,  8, pca_data_bits_default[18] },
-	{ false, PCA9498_AUTO_INC | 0x24,  8, pca_data_bits_default[19] },
-	{ false, PCA9498_AUTO_INC | 0x25,  8, pca_data_bits_default[20] },
-	{ false, PCA9498_AUTO_INC | 0x26,  8, pca_data_bits_default[21] },
-	{ false, PCA9498_AUTO_INC | 0x27,  8, pca_data_bits_default[22] },
-	{ false, PCA9498_AUTO_INC | 0x28,  8, pca_data_bits_default[23] },
-	{ false, PCA9498_AUTO_INC | 0x29,  16, pca_data_bits_default[24] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x20, 8, pca_data_bits_default[15] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x21, 8, pca_data_bits_default[16] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x22, 8, pca_data_bits_default[17] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x23, 8, pca_data_bits_default[18] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x24, 8, pca_data_bits_default[19] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x25, 8, pca_data_bits_default[20] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x26, 8, pca_data_bits_default[21] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x27, 8, pca_data_bits_default[22] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x28, 8, pca_data_bits_default[23] },
+	{ false, PCA9468_MP12_AUTO_INC | 0x29, 16, pca_data_bits_default[24] },
 };
