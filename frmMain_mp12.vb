@@ -16,7 +16,7 @@ Public Class FrmMain_mp12
     Private Const cAardvark_ID As UInt32 = 2
     Private Const cFT232_ID As UInt32 = 5
 
-    Private cSlaBase As Byte = &H66
+    Private cSlaBase As Byte = &H55
     
 
     Private m_scheduleScan As Int64 = 0
@@ -82,12 +82,21 @@ Public Class FrmMain_mp12
     Private Sub I2C_Connect()
         If USB_connected Then
             Dim con As Boolean = False
-            ' try all three addresses
+            ' try all three addresses *need to revise
             For idx As Integer = 0 To 2
-                Model.SlaveAddress = CByte(cSlaBase + idx)
+                'scan 0x55, 0x57, 0x5E
+                Select Case idx
+                    Case 0
+                        cSlaBase = &H55
+                    Case 1
+                        cSlaBase = &H57
+                    Case 2
+                        cSlaBase = &H5E
+                End Select
+                Model.SlaveAddress = CByte(cSlaBase)
                 con = mvc.Model.ReadRegister(0) = mvc.Model.pca_result_t.pca_ok
                 If con Then
-                    lblAddr.Text = "0x" & Hex(cSlaBase + idx)
+                    lblAddr.Text = "0x" & Hex(cSlaBase)
                     Exit For
                 End If
             Next
@@ -96,16 +105,7 @@ Public Class FrmMain_mp12
     End Sub
 
     Private Sub AttachModel()
-        'Rasied interrrupt View'
-        Dim v As New View(chkVOkInt, pca_data_fields_enum_t.v_ok_int)
-        v = New View(chkNTCtempInt, pca_data_fields_enum_t.ntc_temp_int)
-        v = New View(chkChgPhaseInt, pca_data_fields_enum_t.chg_phase_int)
-        v = New View(chkCtrlLimitInt, pca_data_fields_enum_t.ctrl_limit_int)
-        v = New View(chkTempRegInt, pca_data_fields_enum_t.temp_reg_int)
-        v = New View(chkADCDoneInt, pca_data_fields_enum_t.adc_done_int)
-        v = New View(chkTimerInt, pca_data_fields_enum_t.timer_int)
-
-        v = New View(lblId, pca_data_fields_enum_t.dev_id)
+        Dim v As New View(lblId, pca_data_fields_enum_t.dev_id)
         v = New View(lblRev, pca_data_fields_enum_t.dev_rev)
 
         'Ctrl View'
@@ -157,6 +157,15 @@ Public Class FrmMain_mp12
         v = New View(cmbAdcOscSel, pca_data_fields_enum_t.adc_osr_cfg)
         v = New View(chkAdcEn, pca_data_fields_enum_t.adc_en)
 
+        'Rasied interrrupt View'
+        v = New View(chkVOkInt, pca_data_fields_enum_t.v_ok_int)
+        v = New View(chkNTCtempInt, pca_data_fields_enum_t.ntc_temp_int)
+        v = New View(chkChgPhaseInt, pca_data_fields_enum_t.chg_phase_int)
+        v = New View(chkCtrlLimitInt, pca_data_fields_enum_t.ctrl_limit_int)
+        v = New View(chkTempRegInt, pca_data_fields_enum_t.temp_reg_int)
+        v = New View(chkADCDoneInt, pca_data_fields_enum_t.adc_done_int)
+        v = New View(chkTimerInt, pca_data_fields_enum_t.timer_int)
+
         'Interrupt View'
         v = New View(chkVOkMask, pca_data_fields_enum_t.v_ok_m)
         v = New View(chkNtcTempMask, pca_data_fields_enum_t.ntc_temp_m)
@@ -172,6 +181,15 @@ Public Class FrmMain_mp12
         v = New View(chkTempRegSts, pca_data_fields_enum_t.temp_reg_sts)
         v = New View(chkADCDoneSts, pca_data_fields_enum_t.adc_done_sts)
         v = New View(chkTimerSts, pca_data_fields_enum_t.timer_sts)
+
+        v = New View(txtVOKSts, pca_data_fields_enum_t.v_ok_sts)
+        v = New View(txtNtcTempSts, pca_data_fields_enum_t.ntc_temp_sts)
+        v = New View(txtChgPhaseSts, pca_data_fields_enum_t.chg_phase_sts)
+        v = New View(txtCtrlLimitSts, pca_data_fields_enum_t.ctrl_limit_sts)
+        v = New View(txtTempRegSts, pca_data_fields_enum_t.temp_reg_sts)
+        v = New View(txtADCDoneSts, pca_data_fields_enum_t.adc_done_sts)
+        v = New View(txtTimerSts, pca_data_fields_enum_t.timer_sts)
+
 
         'Status View'
         v = New View(chkIinLoopSts, pca_data_fields_enum_t.iin_loop_sts)
@@ -189,9 +207,24 @@ Public Class FrmMain_mp12
         v = New View(chkStandbyStateSts, pca_data_fields_enum_t.standby_state_sts)
         v = New View(chkChargeTmrSts, pca_data_fields_enum_t.charge_timer_sts)
         v = New View(chkWatchdogTmrSts, pca_data_fields_enum_t.watchdog_timer_sts)
-
         v = New View(txtIinStatus, pca_data_fields_enum_t.iin_sts)
         v = New View(txtIchgStatus, pca_data_fields_enum_t.ichg_sts)
+
+        v = New View(txtIinLoopSts, pca_data_fields_enum_t.iin_loop_sts)
+        v = New View(txtChgLoopSts, pca_data_fields_enum_t.chg_loop_sts)
+        v = New View(txtVFLTLoopSts, pca_data_fields_enum_t.vflt_loop_sts)
+        v = New View(txtVoutUvSts, pca_data_fields_enum_t.vout_uv_sts)
+        v = New View(txtVbatOvSts, pca_data_fields_enum_t.vbat_ov_sts)
+        v = New View(txtVinOvSts, pca_data_fields_enum_t.vin_ov_sts)
+        v = New View(txtVinUvSts, pca_data_fields_enum_t.vin_uv_sts)
+        v = New View(txtBatteryMissSts, pca_data_fields_enum_t.batt_miss_sts)
+        v = New View(txtOcpFastSts, pca_data_fields_enum_t.ocp_fast_sts)
+        v = New View(txtOcpAvgSts, pca_data_fields_enum_t.ocp_avg_sts)
+        v = New View(txtActiveStateSts, pca_data_fields_enum_t.active_state_sts)
+        v = New View(txtShutDownStateSts, pca_data_fields_enum_t.shutdown_state_sts)
+        v = New View(txtStandbyStateSts, pca_data_fields_enum_t.standby_state_sts)
+        v = New View(txtChargeTmrSts, pca_data_fields_enum_t.charge_timer_sts)
+        v = New View(txtWatchdogTmrSts, pca_data_fields_enum_t.watchdog_timer_sts)
 
         'Protection View'
         lblUVDelta.Text = Model.Caption(pca_data_fields_enum_t.uv_delta)
@@ -284,9 +317,10 @@ Public Class FrmMain_mp12
         'Next
         ScheduleStatusRead()
 
-        'this need to be modified to read MP15 status register'
-        If Model.ReadRegisters(3, 2) = Model.pca_result_t.pca_ok Then
-            If Model.ReadRegisters(19, 9) = Model.pca_result_t.pca_ok Then
+        'this is modified to read MP15 status register 0x02-0x07 6 Status Registers'
+        If Model.ReadRegisters(1, 7) = Model.pca_result_t.pca_ok Then
+            'this is modified to read MP15 ADC registers 0x08-0x10 9 Status Registers'
+            If Model.ReadADCRegisters(8, 9) = Model.pca_result_t.pca_ok Then
                 Exit Sub
             End If
         End If
@@ -358,10 +392,6 @@ Public Class FrmMain_mp12
         My.Settings.Interval = CUInt(tscRefresh.SelectedIndex)
         My.Settings.Save()
         ScheduleStatusRead()
-    End Sub
-
-    Private Sub tsbRead_Click(sender As System.Object, e As System.EventArgs) Handles tsbRead.Click
-        ReadAll()
     End Sub
 
     Private Sub BuildRegisterMap()
@@ -487,5 +517,17 @@ Public Class FrmMain_mp12
 
     Private Sub btnCtlRead_Click(sender As Object, e As EventArgs) Handles btnCtlRead.Click
         ReadAll()
+    End Sub
+
+    Private Sub tsbWrite_Click(sender As Object, e As EventArgs) Handles tsbWrite.Click
+        WriteAll()
+    End Sub
+
+    Private Sub tsbRead_Click(sender As System.Object, e As System.EventArgs) Handles tsbRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnReadADC_Click(sender As Object, e As EventArgs) Handles btnReadADC.Click
+        mvc.Model.ReadADCRegisters(8, 9)    'Read ADC 1-9'
     End Sub
 End Class

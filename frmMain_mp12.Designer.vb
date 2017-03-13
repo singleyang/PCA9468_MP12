@@ -49,6 +49,14 @@ Partial Class FrmMain_mp12
         Me.tbpEvents = New System.Windows.Forms.TabPage()
         Me.btnStsRead = New System.Windows.Forms.Button()
         Me.GrpBoxSYSB = New System.Windows.Forms.GroupBox()
+        Me.txtWatchdogTmrSts = New System.Windows.Forms.TextBox()
+        Me.txtChargeTmrSts = New System.Windows.Forms.TextBox()
+        Me.txtStandbyStateSts = New System.Windows.Forms.TextBox()
+        Me.txtShutDownStateSts = New System.Windows.Forms.TextBox()
+        Me.txtActiveStateSts = New System.Windows.Forms.TextBox()
+        Me.txtOcpAvgSts = New System.Windows.Forms.TextBox()
+        Me.txtOcpFastSts = New System.Windows.Forms.TextBox()
+        Me.txtBatteryMissSts = New System.Windows.Forms.TextBox()
         Me.chkWatchdogTmrSts = New System.Windows.Forms.CheckBox()
         Me.chkStandbyStateSts = New System.Windows.Forms.CheckBox()
         Me.chkChargeTmrSts = New System.Windows.Forms.CheckBox()
@@ -58,6 +66,13 @@ Partial Class FrmMain_mp12
         Me.chkActiveStateSts = New System.Windows.Forms.CheckBox()
         Me.chkShutDownStateSts = New System.Windows.Forms.CheckBox()
         Me.GrpBoxSTSA = New System.Windows.Forms.GroupBox()
+        Me.txtVinUvSts = New System.Windows.Forms.TextBox()
+        Me.txtVinOvSts = New System.Windows.Forms.TextBox()
+        Me.txtVbatOvSts = New System.Windows.Forms.TextBox()
+        Me.txtVoutUvSts = New System.Windows.Forms.TextBox()
+        Me.txtVFLTLoopSts = New System.Windows.Forms.TextBox()
+        Me.txtChgLoopSts = New System.Windows.Forms.TextBox()
+        Me.txtIinLoopSts = New System.Windows.Forms.TextBox()
         Me.chkVinOvSts = New System.Windows.Forms.CheckBox()
         Me.chkVinUvSts = New System.Windows.Forms.CheckBox()
         Me.chkIinLoopSts = New System.Windows.Forms.CheckBox()
@@ -133,6 +148,7 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSTSC = New System.Windows.Forms.GroupBox()
         Me.txtIinStatus = New System.Windows.Forms.TextBox()
         Me.grpAdcChannels = New System.Windows.Forms.GroupBox()
+        Me.btnReadADC = New System.Windows.Forms.Button()
         Me.txtBatteryVoltage = New System.Windows.Forms.TextBox()
         Me.txtInputVoltage = New System.Windows.Forms.TextBox()
         Me.txtChargeCurrent = New System.Windows.Forms.TextBox()
@@ -202,6 +218,13 @@ Partial Class FrmMain_mp12
         Me.tsmView = New System.Windows.Forms.ToolStripMenuItem()
         Me.TheMenu = New System.Windows.Forms.MenuStrip()
         Me.pnlRegisters = New System.Windows.Forms.Panel()
+        Me.txtTimerSts = New System.Windows.Forms.TextBox()
+        Me.txtADCDoneSts = New System.Windows.Forms.TextBox()
+        Me.txtTempRegSts = New System.Windows.Forms.TextBox()
+        Me.txtCtrlLimitSts = New System.Windows.Forms.TextBox()
+        Me.txtChgPhaseSts = New System.Windows.Forms.TextBox()
+        Me.txtNtcTempSts = New System.Windows.Forms.TextBox()
+        Me.txtVOKSts = New System.Windows.Forms.TextBox()
         Me.tbpInt.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -269,6 +292,13 @@ Partial Class FrmMain_mp12
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.txtTimerSts)
+        Me.GroupBox2.Controls.Add(Me.txtADCDoneSts)
+        Me.GroupBox2.Controls.Add(Me.txtTempRegSts)
+        Me.GroupBox2.Controls.Add(Me.txtCtrlLimitSts)
+        Me.GroupBox2.Controls.Add(Me.txtChgPhaseSts)
+        Me.GroupBox2.Controls.Add(Me.txtNtcTempSts)
+        Me.GroupBox2.Controls.Add(Me.txtVOKSts)
         Me.GroupBox2.Controls.Add(Me.chkVOKSts)
         Me.GroupBox2.Controls.Add(Me.chkNtcTempSts)
         Me.GroupBox2.Controls.Add(Me.chkChgPhaseSts)
@@ -510,6 +540,14 @@ Partial Class FrmMain_mp12
         '
         'GrpBoxSYSB
         '
+        Me.GrpBoxSYSB.Controls.Add(Me.txtWatchdogTmrSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtChargeTmrSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtStandbyStateSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtShutDownStateSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtActiveStateSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtOcpAvgSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtOcpFastSts)
+        Me.GrpBoxSYSB.Controls.Add(Me.txtBatteryMissSts)
         Me.GrpBoxSYSB.Controls.Add(Me.chkWatchdogTmrSts)
         Me.GrpBoxSYSB.Controls.Add(Me.chkStandbyStateSts)
         Me.GrpBoxSYSB.Controls.Add(Me.chkChargeTmrSts)
@@ -524,6 +562,78 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSYSB.TabIndex = 36
         Me.GrpBoxSYSB.TabStop = False
         Me.GrpBoxSYSB.Text = "STS_B"
+        '
+        'txtWatchdogTmrSts
+        '
+        Me.txtWatchdogTmrSts.Location = New System.Drawing.Point(38, 217)
+        Me.txtWatchdogTmrSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtWatchdogTmrSts.Name = "txtWatchdogTmrSts"
+        Me.txtWatchdogTmrSts.ReadOnly = True
+        Me.txtWatchdogTmrSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtWatchdogTmrSts.TabIndex = 44
+        '
+        'txtChargeTmrSts
+        '
+        Me.txtChargeTmrSts.Location = New System.Drawing.Point(38, 191)
+        Me.txtChargeTmrSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtChargeTmrSts.Name = "txtChargeTmrSts"
+        Me.txtChargeTmrSts.ReadOnly = True
+        Me.txtChargeTmrSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtChargeTmrSts.TabIndex = 43
+        '
+        'txtStandbyStateSts
+        '
+        Me.txtStandbyStateSts.Location = New System.Drawing.Point(38, 162)
+        Me.txtStandbyStateSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtStandbyStateSts.Name = "txtStandbyStateSts"
+        Me.txtStandbyStateSts.ReadOnly = True
+        Me.txtStandbyStateSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtStandbyStateSts.TabIndex = 42
+        '
+        'txtShutDownStateSts
+        '
+        Me.txtShutDownStateSts.Location = New System.Drawing.Point(38, 134)
+        Me.txtShutDownStateSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtShutDownStateSts.Name = "txtShutDownStateSts"
+        Me.txtShutDownStateSts.ReadOnly = True
+        Me.txtShutDownStateSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtShutDownStateSts.TabIndex = 41
+        '
+        'txtActiveStateSts
+        '
+        Me.txtActiveStateSts.Location = New System.Drawing.Point(38, 104)
+        Me.txtActiveStateSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtActiveStateSts.Name = "txtActiveStateSts"
+        Me.txtActiveStateSts.ReadOnly = True
+        Me.txtActiveStateSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtActiveStateSts.TabIndex = 40
+        '
+        'txtOcpAvgSts
+        '
+        Me.txtOcpAvgSts.Location = New System.Drawing.Point(38, 78)
+        Me.txtOcpAvgSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtOcpAvgSts.Name = "txtOcpAvgSts"
+        Me.txtOcpAvgSts.ReadOnly = True
+        Me.txtOcpAvgSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtOcpAvgSts.TabIndex = 39
+        '
+        'txtOcpFastSts
+        '
+        Me.txtOcpFastSts.Location = New System.Drawing.Point(38, 48)
+        Me.txtOcpFastSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtOcpFastSts.Name = "txtOcpFastSts"
+        Me.txtOcpFastSts.ReadOnly = True
+        Me.txtOcpFastSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtOcpFastSts.TabIndex = 38
+        '
+        'txtBatteryMissSts
+        '
+        Me.txtBatteryMissSts.Location = New System.Drawing.Point(38, 22)
+        Me.txtBatteryMissSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtBatteryMissSts.Name = "txtBatteryMissSts"
+        Me.txtBatteryMissSts.ReadOnly = True
+        Me.txtBatteryMissSts.Size = New System.Drawing.Size(178, 22)
+        Me.txtBatteryMissSts.TabIndex = 37
         '
         'chkWatchdogTmrSts
         '
@@ -615,6 +725,13 @@ Partial Class FrmMain_mp12
         '
         'GrpBoxSTSA
         '
+        Me.GrpBoxSTSA.Controls.Add(Me.txtVinUvSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.txtVinOvSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.txtVbatOvSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.txtVoutUvSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.txtVFLTLoopSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.txtChgLoopSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.txtIinLoopSts)
         Me.GrpBoxSTSA.Controls.Add(Me.chkVinOvSts)
         Me.GrpBoxSTSA.Controls.Add(Me.chkVinUvSts)
         Me.GrpBoxSTSA.Controls.Add(Me.chkIinLoopSts)
@@ -628,6 +745,69 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSTSA.TabIndex = 35
         Me.GrpBoxSTSA.TabStop = False
         Me.GrpBoxSTSA.Text = "STS_A"
+        '
+        'txtVinUvSts
+        '
+        Me.txtVinUvSts.Location = New System.Drawing.Point(38, 191)
+        Me.txtVinUvSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVinUvSts.Name = "txtVinUvSts"
+        Me.txtVinUvSts.ReadOnly = True
+        Me.txtVinUvSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtVinUvSts.TabIndex = 36
+        '
+        'txtVinOvSts
+        '
+        Me.txtVinOvSts.Location = New System.Drawing.Point(38, 162)
+        Me.txtVinOvSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVinOvSts.Name = "txtVinOvSts"
+        Me.txtVinOvSts.ReadOnly = True
+        Me.txtVinOvSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtVinOvSts.TabIndex = 35
+        '
+        'txtVbatOvSts
+        '
+        Me.txtVbatOvSts.Location = New System.Drawing.Point(38, 134)
+        Me.txtVbatOvSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVbatOvSts.Name = "txtVbatOvSts"
+        Me.txtVbatOvSts.ReadOnly = True
+        Me.txtVbatOvSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtVbatOvSts.TabIndex = 34
+        '
+        'txtVoutUvSts
+        '
+        Me.txtVoutUvSts.Location = New System.Drawing.Point(38, 104)
+        Me.txtVoutUvSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVoutUvSts.Name = "txtVoutUvSts"
+        Me.txtVoutUvSts.ReadOnly = True
+        Me.txtVoutUvSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtVoutUvSts.TabIndex = 33
+        '
+        'txtVFLTLoopSts
+        '
+        Me.txtVFLTLoopSts.Location = New System.Drawing.Point(38, 78)
+        Me.txtVFLTLoopSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVFLTLoopSts.Name = "txtVFLTLoopSts"
+        Me.txtVFLTLoopSts.ReadOnly = True
+        Me.txtVFLTLoopSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtVFLTLoopSts.TabIndex = 32
+        '
+        'txtChgLoopSts
+        '
+        Me.txtChgLoopSts.Location = New System.Drawing.Point(38, 48)
+        Me.txtChgLoopSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtChgLoopSts.Name = "txtChgLoopSts"
+        Me.txtChgLoopSts.ReadOnly = True
+        Me.txtChgLoopSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtChgLoopSts.TabIndex = 31
+        '
+        'txtIinLoopSts
+        '
+        Me.txtIinLoopSts.Location = New System.Drawing.Point(38, 22)
+        Me.txtIinLoopSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtIinLoopSts.Name = "txtIinLoopSts"
+        Me.txtIinLoopSts.ReadOnly = True
+        Me.txtIinLoopSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtIinLoopSts.TabIndex = 28
         '
         'chkVinOvSts
         '
@@ -1423,6 +1603,7 @@ Partial Class FrmMain_mp12
         '
         'grpAdcChannels
         '
+        Me.grpAdcChannels.Controls.Add(Me.btnReadADC)
         Me.grpAdcChannels.Controls.Add(Me.txtBatteryVoltage)
         Me.grpAdcChannels.Controls.Add(Me.txtInputVoltage)
         Me.grpAdcChannels.Controls.Add(Me.txtChargeCurrent)
@@ -1446,73 +1627,84 @@ Partial Class FrmMain_mp12
         Me.grpAdcChannels.TabStop = False
         Me.grpAdcChannels.Text = "ADC channels"
         '
+        'btnReadADC
+        '
+        Me.btnReadADC.BackColor = System.Drawing.SystemColors.Control
+        Me.btnReadADC.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnReadADC.Location = New System.Drawing.Point(463, 113)
+        Me.btnReadADC.Name = "btnReadADC"
+        Me.btnReadADC.Size = New System.Drawing.Size(76, 26)
+        Me.btnReadADC.TabIndex = 58
+        Me.btnReadADC.Text = "Read"
+        Me.btnReadADC.UseVisualStyleBackColor = False
+        '
         'txtBatteryVoltage
         '
-        Me.txtBatteryVoltage.Location = New System.Drawing.Point(419, 18)
+        Me.txtBatteryVoltage.Location = New System.Drawing.Point(417, 17)
         Me.txtBatteryVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBatteryVoltage.Name = "txtBatteryVoltage"
         Me.txtBatteryVoltage.ReadOnly = True
-        Me.txtBatteryVoltage.Size = New System.Drawing.Size(79, 22)
+        Me.txtBatteryVoltage.Size = New System.Drawing.Size(103, 22)
         Me.txtBatteryVoltage.TabIndex = 26
         '
         'txtInputVoltage
         '
-        Me.txtInputVoltage.Location = New System.Drawing.Point(419, 50)
+        Me.txtInputVoltage.Location = New System.Drawing.Point(417, 49)
         Me.txtInputVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtInputVoltage.Name = "txtInputVoltage"
         Me.txtInputVoltage.ReadOnly = True
-        Me.txtInputVoltage.Size = New System.Drawing.Size(79, 22)
+        Me.txtInputVoltage.Size = New System.Drawing.Size(103, 22)
         Me.txtInputVoltage.TabIndex = 26
         '
         'txtChargeCurrent
         '
-        Me.txtChargeCurrent.Location = New System.Drawing.Point(164, 114)
+        Me.txtChargeCurrent.Location = New System.Drawing.Point(163, 113)
         Me.txtChargeCurrent.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChargeCurrent.Name = "txtChargeCurrent"
         Me.txtChargeCurrent.ReadOnly = True
-        Me.txtChargeCurrent.Size = New System.Drawing.Size(79, 22)
+        Me.txtChargeCurrent.Size = New System.Drawing.Size(95, 22)
         Me.txtChargeCurrent.TabIndex = 25
         '
         'txtInputCurrent
         '
-        Me.txtInputCurrent.Location = New System.Drawing.Point(419, 85)
+        Me.txtInputCurrent.Location = New System.Drawing.Point(417, 84)
         Me.txtInputCurrent.Margin = New System.Windows.Forms.Padding(4)
         Me.txtInputCurrent.Name = "txtInputCurrent"
         Me.txtInputCurrent.ReadOnly = True
-        Me.txtInputCurrent.Size = New System.Drawing.Size(79, 22)
+        Me.txtInputCurrent.Size = New System.Drawing.Size(103, 22)
         Me.txtInputCurrent.TabIndex = 25
         '
         'txtDieTemp
         '
-        Me.txtDieTemp.Location = New System.Drawing.Point(164, 82)
+        Me.txtDieTemp.Location = New System.Drawing.Point(163, 81)
         Me.txtDieTemp.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDieTemp.Name = "txtDieTemp"
         Me.txtDieTemp.ReadOnly = True
-        Me.txtDieTemp.Size = New System.Drawing.Size(79, 22)
+        Me.txtDieTemp.Size = New System.Drawing.Size(95, 22)
         Me.txtDieTemp.TabIndex = 24
         '
         'txtSysVoltage
         '
-        Me.txtSysVoltage.Location = New System.Drawing.Point(164, 50)
+        Me.txtSysVoltage.Location = New System.Drawing.Point(163, 49)
         Me.txtSysVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSysVoltage.Name = "txtSysVoltage"
         Me.txtSysVoltage.ReadOnly = True
-        Me.txtSysVoltage.Size = New System.Drawing.Size(79, 22)
+        Me.txtSysVoltage.Size = New System.Drawing.Size(95, 22)
         Me.txtSysVoltage.TabIndex = 23
         '
         'txtNtcAdc
         '
-        Me.txtNtcAdc.Location = New System.Drawing.Point(164, 18)
+        Me.txtNtcAdc.Location = New System.Drawing.Point(163, 17)
         Me.txtNtcAdc.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNtcAdc.Name = "txtNtcAdc"
         Me.txtNtcAdc.ReadOnly = True
-        Me.txtNtcAdc.Size = New System.Drawing.Size(79, 22)
+        Me.txtNtcAdc.Size = New System.Drawing.Size(95, 22)
         Me.txtNtcAdc.TabIndex = 22
         '
         'chkInputVoltageAdcEn
         '
         Me.chkInputVoltageAdcEn.AutoSize = True
-        Me.chkInputVoltageAdcEn.Location = New System.Drawing.Point(264, 50)
+        Me.chkInputVoltageAdcEn.Location = New System.Drawing.Point(286, 49)
         Me.chkInputVoltageAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkInputVoltageAdcEn.Name = "chkInputVoltageAdcEn"
         Me.chkInputVoltageAdcEn.Size = New System.Drawing.Size(95, 21)
@@ -1523,7 +1715,7 @@ Partial Class FrmMain_mp12
         'chkBatteryVoltageAdcEn
         '
         Me.chkBatteryVoltageAdcEn.AutoSize = True
-        Me.chkBatteryVoltageAdcEn.Location = New System.Drawing.Point(264, 18)
+        Me.chkBatteryVoltageAdcEn.Location = New System.Drawing.Point(286, 17)
         Me.chkBatteryVoltageAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkBatteryVoltageAdcEn.Name = "chkBatteryVoltageAdcEn"
         Me.chkBatteryVoltageAdcEn.Size = New System.Drawing.Size(95, 21)
@@ -1534,7 +1726,7 @@ Partial Class FrmMain_mp12
         'chkInputCurrentAdcEn
         '
         Me.chkInputCurrentAdcEn.AutoSize = True
-        Me.chkInputCurrentAdcEn.Location = New System.Drawing.Point(264, 82)
+        Me.chkInputCurrentAdcEn.Location = New System.Drawing.Point(286, 81)
         Me.chkInputCurrentAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkInputCurrentAdcEn.Name = "chkInputCurrentAdcEn"
         Me.chkInputCurrentAdcEn.Size = New System.Drawing.Size(95, 21)
@@ -2115,6 +2307,69 @@ Partial Class FrmMain_mp12
         Me.pnlRegisters.TabIndex = 38
         Me.pnlRegisters.Visible = False
         '
+        'txtTimerSts
+        '
+        Me.txtTimerSts.Location = New System.Drawing.Point(38, 191)
+        Me.txtTimerSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTimerSts.Name = "txtTimerSts"
+        Me.txtTimerSts.ReadOnly = True
+        Me.txtTimerSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtTimerSts.TabIndex = 50
+        '
+        'txtADCDoneSts
+        '
+        Me.txtADCDoneSts.Location = New System.Drawing.Point(38, 162)
+        Me.txtADCDoneSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCDoneSts.Name = "txtADCDoneSts"
+        Me.txtADCDoneSts.ReadOnly = True
+        Me.txtADCDoneSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtADCDoneSts.TabIndex = 49
+        '
+        'txtTempRegSts
+        '
+        Me.txtTempRegSts.Location = New System.Drawing.Point(38, 134)
+        Me.txtTempRegSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTempRegSts.Name = "txtTempRegSts"
+        Me.txtTempRegSts.ReadOnly = True
+        Me.txtTempRegSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtTempRegSts.TabIndex = 48
+        '
+        'txtCtrlLimitSts
+        '
+        Me.txtCtrlLimitSts.Location = New System.Drawing.Point(38, 104)
+        Me.txtCtrlLimitSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtCtrlLimitSts.Name = "txtCtrlLimitSts"
+        Me.txtCtrlLimitSts.ReadOnly = True
+        Me.txtCtrlLimitSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtCtrlLimitSts.TabIndex = 47
+        '
+        'txtChgPhaseSts
+        '
+        Me.txtChgPhaseSts.Location = New System.Drawing.Point(38, 78)
+        Me.txtChgPhaseSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtChgPhaseSts.Name = "txtChgPhaseSts"
+        Me.txtChgPhaseSts.ReadOnly = True
+        Me.txtChgPhaseSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtChgPhaseSts.TabIndex = 46
+        '
+        'txtNtcTempSts
+        '
+        Me.txtNtcTempSts.Location = New System.Drawing.Point(38, 48)
+        Me.txtNtcTempSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtNtcTempSts.Name = "txtNtcTempSts"
+        Me.txtNtcTempSts.ReadOnly = True
+        Me.txtNtcTempSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtNtcTempSts.TabIndex = 45
+        '
+        'txtVOKSts
+        '
+        Me.txtVOKSts.Location = New System.Drawing.Point(38, 22)
+        Me.txtVOKSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVOKSts.Name = "txtVOKSts"
+        Me.txtVOKSts.ReadOnly = True
+        Me.txtVOKSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtVOKSts.TabIndex = 44
+        '
         'FrmMain_mp12
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2358,4 +2613,27 @@ Partial Class FrmMain_mp12
     Friend WithEvents btnRaisedIntRead As System.Windows.Forms.Button
     Friend WithEvents btnThermalRead As System.Windows.Forms.Button
     Friend WithEvents btnThermalSet As System.Windows.Forms.Button
+    Friend WithEvents btnReadADC As System.Windows.Forms.Button
+    Friend WithEvents txtVinUvSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtVinOvSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtVbatOvSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtVoutUvSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtVFLTLoopSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtChgLoopSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtIinLoopSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtWatchdogTmrSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtChargeTmrSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtStandbyStateSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtShutDownStateSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtActiveStateSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtOcpAvgSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtOcpFastSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtBatteryMissSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtTimerSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCDoneSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtTempRegSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtCtrlLimitSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtChgPhaseSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtNtcTempSts As System.Windows.Forms.TextBox
+    Friend WithEvents txtVOKSts As System.Windows.Forms.TextBox
 End Class
