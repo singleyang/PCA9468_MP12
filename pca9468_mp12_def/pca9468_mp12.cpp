@@ -74,7 +74,7 @@ uint16_t _pcaSetRegister(int regNumber, int value) {
 }
 
 uint16_t _pcaSetRegisterSwapped(int regNumber, int value) {
-	int swapped;
+	int swapped = 0;
 	int bytecount = pca_registers[regNumber].bitSz / 8;
 	if (bytecount == 1) {
 		swapped = value;
@@ -210,8 +210,8 @@ pca_result_t pcaReadRegisters(int regNumber, int count) {
 		bytecount += pca_registers[idx].bitSz / 8;
 	}
 	uint8_t data[0xFF];
-	/*Check whether auto incremental(0x80) need to to changed */
-	if ((result = (pca_result_t)pc_readRegister(gSla, 0x80 | pca_registers[regNumber].offset, (uint8_t *) &data, bytecount)) == pca_ok)
+	/*Check whether auto incremental(0x00) need to to changed */
+	if ((result = (pca_result_t)pc_readRegister(gSla, pca_registers[regNumber].offset, (uint8_t *) &data, bytecount)) == pca_ok)
 	{
 		bytecount = 0;
 		for (idx = regNumber; idx < regNumber + count; idx++) {
@@ -232,7 +232,7 @@ pca_result_t pcaReadADCRegisters(int regNumber, int count) {
 		bytecount += pca_registers[idx].bitSz / 16;
 	}
 	uint8_t data[0xFF];
-#ifdef _DEBUG
+#if 0
 	{
 		data[0] =  0xAA;
 		data[1] =  0xBB;
@@ -285,9 +285,7 @@ pca_result_t pcaReadAll() {
 			/*Read out Interrupt and Status Regs 0x20-0x2A (11 Registers)*/
 			result = pcaReadRegisters(17, 11);
 		}
-		
 	}
-
 	return result;
 }
 
@@ -337,8 +335,8 @@ pca_result_t pcaWriteAll() {
 	unsigned int idx, offset;
 	uint8_t data[0xFF];
 	offset = 0;
-#if 1
-	/*Write Int Mask*/
+	
+	/*Write Int Mask 0x02*/
 	idx = 2;
 	data[offset++] = (pca_registers[idx].data_bits & 0xFF);
 	result = pc_writeRegister(gSla, 0x02, data, 1) == pc_ok ? pca_ok : pca_writeFailed;
@@ -346,24 +344,15 @@ pca_result_t pcaWriteAll() {
 	/*Write Config Reg 0x20-0x2A (11 regs)*/
 	if (result == pca_ok) {
 		offset = 0;
-		for (idx = 16; idx < 0x27; idx++) {
+		/*Write Config Reg 0x20-0x28*/
+		for (idx = 15; idx < 24; idx++) {
 			data[offset++] = (pca_registers[idx].data_bits & 0xFF);
 		}
+		/*Write Config Reg 0x29-0x2A*/
+		data[offset++] = (pca_registers[24].data_bits) >> 8 & 0xFF;
+		data[offset++] = (pca_registers[24].data_bits) & 0xFF;
 		result = pc_writeRegister(gSla, 0x20, data, 11) == pc_ok ? pca_ok : pca_writeFailed;
 	}
-#else
-	for (idx = 1; idx < 3; idx++) {
-		data[offset++] = (pca_registers[idx].data_bits & 0xFF);
-	}
-	result = pc_writeRegister(gSla, 0x81, data, 2) == pc_ok ? pca_ok : pca_writeFailed;
-	if (result == pca_ok) {
-		offset = 0;
-		for (idx = 5; idx < 0x13; idx++) {
-			data[offset++] = (pca_registers[idx].data_bits & 0xFF);
-		}
-		result = pc_writeRegister(gSla, 0x85, data, 0x13 - 5) == pc_ok ? pca_ok : pca_writeFailed;
-	}
-#endif
 	return result;
 }
 
