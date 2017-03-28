@@ -396,8 +396,8 @@ void pca_tf_ntcvthres_set(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 10) {
 			if (index <= 1023)
-			/*range from 0mV - 2400mV with 2.346mV per step*/
-			sprintf_s(textbuffer, sz, "%0.1fmV", (index * 2.346));
+			/*range from 0mV - 2400mV with 2.3mV per step*/
+			sprintf_s(textbuffer, sz, "%0.1fmV", (index * 2.3));
 		}
 	}
 }
