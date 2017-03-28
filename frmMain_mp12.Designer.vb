@@ -28,6 +28,13 @@ Partial Class FrmMain_mp12
         Me.btnIntRead = New System.Windows.Forms.Button()
         Me.btnIntSet = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.txtTimerSts = New System.Windows.Forms.TextBox()
+        Me.txtADCDoneSts = New System.Windows.Forms.TextBox()
+        Me.txtTempRegSts = New System.Windows.Forms.TextBox()
+        Me.txtCtrlLimitSts = New System.Windows.Forms.TextBox()
+        Me.txtChgPhaseSts = New System.Windows.Forms.TextBox()
+        Me.txtNtcTempSts = New System.Windows.Forms.TextBox()
+        Me.txtVOKSts = New System.Windows.Forms.TextBox()
         Me.chkVOKSts = New System.Windows.Forms.CheckBox()
         Me.chkNtcTempSts = New System.Windows.Forms.CheckBox()
         Me.chkChgPhaseSts = New System.Windows.Forms.CheckBox()
@@ -86,8 +93,6 @@ Partial Class FrmMain_mp12
         Me.lblAdcOffset = New System.Windows.Forms.Label()
         Me.chkRevCurrentDet = New System.Windows.Forms.CheckBox()
         Me.chkStandbyEn = New System.Windows.Forms.CheckBox()
-        Me.lblSwFreqVal = New System.Windows.Forms.Label()
-        Me.trbSwFreqCfg = New System.Windows.Forms.TrackBar()
         Me.lblSwFreqCfg = New System.Windows.Forms.Label()
         Me.lblIinCfgVal = New System.Windows.Forms.Label()
         Me.trbIinCfg = New System.Windows.Forms.TrackBar()
@@ -109,7 +114,6 @@ Partial Class FrmMain_mp12
         Me.Label2 = New System.Windows.Forms.Label()
         Me.chkChargerTimerEn = New System.Windows.Forms.CheckBox()
         Me.chkWatchDogEn = New System.Windows.Forms.CheckBox()
-        Me.chkBattMissShutDownEn = New System.Windows.Forms.CheckBox()
         Me.chkMissBatteryDetEn = New System.Windows.Forms.CheckBox()
         Me.chkIinForceIncrementEn = New System.Windows.Forms.CheckBox()
         Me.cmbOVDelta = New System.Windows.Forms.ComboBox()
@@ -165,6 +169,7 @@ Partial Class FrmMain_mp12
         Me.chkNtcAdcEn = New System.Windows.Forms.CheckBox()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.tbpControl = New System.Windows.Forms.TabPage()
+        Me.cmbSwFreqCfg = New System.Windows.Forms.ComboBox()
         Me.btnCtlRead = New System.Windows.Forms.Button()
         Me.btnCtlSet = New System.Windows.Forms.Button()
         Me.chkLimitIncrementEn = New System.Windows.Forms.CheckBox()
@@ -187,6 +192,41 @@ Partial Class FrmMain_mp12
         Me.lblNTCThresholdVal = New System.Windows.Forms.Label()
         Me.trbNTCThreshold = New System.Windows.Forms.TrackBar()
         Me.lblNTCThreshold = New System.Windows.Forms.Label()
+        Me.tbpMisc = New System.Windows.Forms.TabPage()
+        Me.gbxDebug = New System.Windows.Forms.GroupBox()
+        Me.btnDbgRegRead6 = New System.Windows.Forms.Button()
+        Me.btnDbgRegSet6 = New System.Windows.Forms.Button()
+        Me.txtDbgRegAddr6 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegVal6 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegReadBack6 = New System.Windows.Forms.TextBox()
+        Me.btnDbgRegRead5 = New System.Windows.Forms.Button()
+        Me.btnDbgRegSet5 = New System.Windows.Forms.Button()
+        Me.btnDbgRegRead4 = New System.Windows.Forms.Button()
+        Me.btnDbgRegSet4 = New System.Windows.Forms.Button()
+        Me.btnDbgRegRead3 = New System.Windows.Forms.Button()
+        Me.btnDbgRegSet3 = New System.Windows.Forms.Button()
+        Me.btnDbgRegRead2 = New System.Windows.Forms.Button()
+        Me.btnDbgRegSet2 = New System.Windows.Forms.Button()
+        Me.txtDbgRegAddr5 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegVal5 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegReadBack5 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegAddr3 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegVal3 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegReadBack3 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegAddr4 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegVal4 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegReadBack4 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegAddr2 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegVal2 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegReadBack2 = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnDbgRegRead1 = New System.Windows.Forms.Button()
+        Me.btnDbgRegSet1 = New System.Windows.Forms.Button()
+        Me.txtDbgRegAddr1 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegVal1 = New System.Windows.Forms.TextBox()
+        Me.txtDbgRegReadBack1 = New System.Windows.Forms.TextBox()
         Me.tsbRefresh = New System.Windows.Forms.ToolStripLabel()
         Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbRegisters = New System.Windows.Forms.ToolStripButton()
@@ -218,20 +258,12 @@ Partial Class FrmMain_mp12
         Me.tsmView = New System.Windows.Forms.ToolStripMenuItem()
         Me.TheMenu = New System.Windows.Forms.MenuStrip()
         Me.pnlRegisters = New System.Windows.Forms.Panel()
-        Me.txtTimerSts = New System.Windows.Forms.TextBox()
-        Me.txtADCDoneSts = New System.Windows.Forms.TextBox()
-        Me.txtTempRegSts = New System.Windows.Forms.TextBox()
-        Me.txtCtrlLimitSts = New System.Windows.Forms.TextBox()
-        Me.txtChgPhaseSts = New System.Windows.Forms.TextBox()
-        Me.txtNtcTempSts = New System.Windows.Forms.TextBox()
-        Me.txtVOKSts = New System.Windows.Forms.TextBox()
         Me.tbpInt.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.tbpEvents.SuspendLayout()
         Me.GrpBoxSYSB.SuspendLayout()
         Me.GrpBoxSTSA.SuspendLayout()
-        CType(Me.trbSwFreqCfg, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trbIinCfg, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.trbIchgCfg, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpAdc.SuspendLayout()
@@ -249,6 +281,8 @@ Partial Class FrmMain_mp12
         Me.tbpControl.SuspendLayout()
         Me.tbpThermal.SuspendLayout()
         CType(Me.trbNTCThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpMisc.SuspendLayout()
+        Me.gbxDebug.SuspendLayout()
         Me.theToolbar.SuspendLayout()
         Me.TheMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -312,6 +346,69 @@ Partial Class FrmMain_mp12
         Me.GroupBox2.TabIndex = 38
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Interrupt Status"
+        '
+        'txtTimerSts
+        '
+        Me.txtTimerSts.Location = New System.Drawing.Point(38, 191)
+        Me.txtTimerSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTimerSts.Name = "txtTimerSts"
+        Me.txtTimerSts.ReadOnly = True
+        Me.txtTimerSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtTimerSts.TabIndex = 50
+        '
+        'txtADCDoneSts
+        '
+        Me.txtADCDoneSts.Location = New System.Drawing.Point(38, 162)
+        Me.txtADCDoneSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCDoneSts.Name = "txtADCDoneSts"
+        Me.txtADCDoneSts.ReadOnly = True
+        Me.txtADCDoneSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtADCDoneSts.TabIndex = 49
+        '
+        'txtTempRegSts
+        '
+        Me.txtTempRegSts.Location = New System.Drawing.Point(38, 134)
+        Me.txtTempRegSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtTempRegSts.Name = "txtTempRegSts"
+        Me.txtTempRegSts.ReadOnly = True
+        Me.txtTempRegSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtTempRegSts.TabIndex = 48
+        '
+        'txtCtrlLimitSts
+        '
+        Me.txtCtrlLimitSts.Location = New System.Drawing.Point(38, 104)
+        Me.txtCtrlLimitSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtCtrlLimitSts.Name = "txtCtrlLimitSts"
+        Me.txtCtrlLimitSts.ReadOnly = True
+        Me.txtCtrlLimitSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtCtrlLimitSts.TabIndex = 47
+        '
+        'txtChgPhaseSts
+        '
+        Me.txtChgPhaseSts.Location = New System.Drawing.Point(38, 78)
+        Me.txtChgPhaseSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtChgPhaseSts.Name = "txtChgPhaseSts"
+        Me.txtChgPhaseSts.ReadOnly = True
+        Me.txtChgPhaseSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtChgPhaseSts.TabIndex = 46
+        '
+        'txtNtcTempSts
+        '
+        Me.txtNtcTempSts.Location = New System.Drawing.Point(38, 48)
+        Me.txtNtcTempSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtNtcTempSts.Name = "txtNtcTempSts"
+        Me.txtNtcTempSts.ReadOnly = True
+        Me.txtNtcTempSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtNtcTempSts.TabIndex = 45
+        '
+        'txtVOKSts
+        '
+        Me.txtVOKSts.Location = New System.Drawing.Point(38, 22)
+        Me.txtVOKSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtVOKSts.Name = "txtVOKSts"
+        Me.txtVOKSts.ReadOnly = True
+        Me.txtVOKSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtVOKSts.TabIndex = 44
         '
         'chkVOKSts
         '
@@ -946,29 +1043,10 @@ Partial Class FrmMain_mp12
         Me.chkStandbyEn.Text = "Standby En"
         Me.chkStandbyEn.UseVisualStyleBackColor = True
         '
-        'lblSwFreqVal
-        '
-        Me.lblSwFreqVal.AutoSize = True
-        Me.lblSwFreqVal.Location = New System.Drawing.Point(431, 225)
-        Me.lblSwFreqVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblSwFreqVal.Name = "lblSwFreqVal"
-        Me.lblSwFreqVal.Size = New System.Drawing.Size(32, 17)
-        Me.lblSwFreqVal.TabIndex = 52
-        Me.lblSwFreqVal.Text = "kHz"
-        '
-        'trbSwFreqCfg
-        '
-        Me.trbSwFreqCfg.AutoSize = False
-        Me.trbSwFreqCfg.Location = New System.Drawing.Point(175, 222)
-        Me.trbSwFreqCfg.Margin = New System.Windows.Forms.Padding(4)
-        Me.trbSwFreqCfg.Name = "trbSwFreqCfg"
-        Me.trbSwFreqCfg.Size = New System.Drawing.Size(252, 31)
-        Me.trbSwFreqCfg.TabIndex = 51
-        '
         'lblSwFreqCfg
         '
         Me.lblSwFreqCfg.AutoSize = True
-        Me.lblSwFreqCfg.Location = New System.Drawing.Point(19, 225)
+        Me.lblSwFreqCfg.Location = New System.Drawing.Point(19, 129)
         Me.lblSwFreqCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSwFreqCfg.Name = "lblSwFreqCfg"
         Me.lblSwFreqCfg.Size = New System.Drawing.Size(53, 17)
@@ -978,7 +1056,7 @@ Partial Class FrmMain_mp12
         'lblIinCfgVal
         '
         Me.lblIinCfgVal.AutoSize = True
-        Me.lblIinCfgVal.Location = New System.Drawing.Point(431, 189)
+        Me.lblIinCfgVal.Location = New System.Drawing.Point(433, 228)
         Me.lblIinCfgVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIinCfgVal.Name = "lblIinCfgVal"
         Me.lblIinCfgVal.Size = New System.Drawing.Size(28, 17)
@@ -988,7 +1066,7 @@ Partial Class FrmMain_mp12
         'trbIinCfg
         '
         Me.trbIinCfg.AutoSize = False
-        Me.trbIinCfg.Location = New System.Drawing.Point(175, 186)
+        Me.trbIinCfg.Location = New System.Drawing.Point(177, 225)
         Me.trbIinCfg.Margin = New System.Windows.Forms.Padding(4)
         Me.trbIinCfg.Name = "trbIinCfg"
         Me.trbIinCfg.Size = New System.Drawing.Size(252, 31)
@@ -997,7 +1075,7 @@ Partial Class FrmMain_mp12
         'lblIinCfg
         '
         Me.lblIinCfg.AutoSize = True
-        Me.lblIinCfg.Location = New System.Drawing.Point(19, 189)
+        Me.lblIinCfg.Location = New System.Drawing.Point(21, 228)
         Me.lblIinCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIinCfg.Name = "lblIinCfg"
         Me.lblIinCfg.Size = New System.Drawing.Size(43, 17)
@@ -1007,7 +1085,7 @@ Partial Class FrmMain_mp12
         'lblIchgCfgVal
         '
         Me.lblIchgCfgVal.AutoSize = True
-        Me.lblIchgCfgVal.Location = New System.Drawing.Point(431, 153)
+        Me.lblIchgCfgVal.Location = New System.Drawing.Point(433, 192)
         Me.lblIchgCfgVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIchgCfgVal.Name = "lblIchgCfgVal"
         Me.lblIchgCfgVal.Size = New System.Drawing.Size(28, 17)
@@ -1017,7 +1095,7 @@ Partial Class FrmMain_mp12
         'trbIchgCfg
         '
         Me.trbIchgCfg.AutoSize = False
-        Me.trbIchgCfg.Location = New System.Drawing.Point(175, 151)
+        Me.trbIchgCfg.Location = New System.Drawing.Point(177, 190)
         Me.trbIchgCfg.Margin = New System.Windows.Forms.Padding(4)
         Me.trbIchgCfg.Name = "trbIchgCfg"
         Me.trbIchgCfg.Size = New System.Drawing.Size(252, 31)
@@ -1026,7 +1104,7 @@ Partial Class FrmMain_mp12
         'lblIchgCfg
         '
         Me.lblIchgCfg.AutoSize = True
-        Me.lblIchgCfg.Location = New System.Drawing.Point(19, 153)
+        Me.lblIchgCfg.Location = New System.Drawing.Point(21, 192)
         Me.lblIchgCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIchgCfg.Name = "lblIchgCfg"
         Me.lblIchgCfg.Size = New System.Drawing.Size(55, 17)
@@ -1176,7 +1254,7 @@ Partial Class FrmMain_mp12
         'chkChargerTimerEn
         '
         Me.chkChargerTimerEn.AutoSize = True
-        Me.chkChargerTimerEn.Location = New System.Drawing.Point(327, 146)
+        Me.chkChargerTimerEn.Location = New System.Drawing.Point(327, 117)
         Me.chkChargerTimerEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChargerTimerEn.Name = "chkChargerTimerEn"
         Me.chkChargerTimerEn.Size = New System.Drawing.Size(95, 21)
@@ -1187,24 +1265,13 @@ Partial Class FrmMain_mp12
         'chkWatchDogEn
         '
         Me.chkWatchDogEn.AutoSize = True
-        Me.chkWatchDogEn.Location = New System.Drawing.Point(327, 116)
+        Me.chkWatchDogEn.Location = New System.Drawing.Point(327, 86)
         Me.chkWatchDogEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkWatchDogEn.Name = "chkWatchDogEn"
         Me.chkWatchDogEn.Size = New System.Drawing.Size(95, 21)
         Me.chkWatchDogEn.TabIndex = 54
         Me.chkWatchDogEn.Text = "Vbus OVP"
         Me.chkWatchDogEn.UseVisualStyleBackColor = True
-        '
-        'chkBattMissShutDownEn
-        '
-        Me.chkBattMissShutDownEn.AutoSize = True
-        Me.chkBattMissShutDownEn.Location = New System.Drawing.Point(327, 86)
-        Me.chkBattMissShutDownEn.Margin = New System.Windows.Forms.Padding(4)
-        Me.chkBattMissShutDownEn.Name = "chkBattMissShutDownEn"
-        Me.chkBattMissShutDownEn.Size = New System.Drawing.Size(95, 21)
-        Me.chkBattMissShutDownEn.TabIndex = 53
-        Me.chkBattMissShutDownEn.Text = "Vbus OVP"
-        Me.chkBattMissShutDownEn.UseVisualStyleBackColor = True
         '
         'chkMissBatteryDetEn
         '
@@ -1369,7 +1436,6 @@ Partial Class FrmMain_mp12
         Me.tbpProt.Controls.Add(Me.btnProtectSet)
         Me.tbpProt.Controls.Add(Me.chkChargerTimerEn)
         Me.tbpProt.Controls.Add(Me.chkWatchDogEn)
-        Me.tbpProt.Controls.Add(Me.chkBattMissShutDownEn)
         Me.tbpProt.Controls.Add(Me.chkMissBatteryDetEn)
         Me.tbpProt.Controls.Add(Me.chkIinForceIncrementEn)
         Me.tbpProt.Controls.Add(Me.cmbOVDelta)
@@ -1787,6 +1853,7 @@ Partial Class FrmMain_mp12
         Me.TabControl2.Controls.Add(Me.tbpEvents)
         Me.TabControl2.Controls.Add(Me.tbpProt)
         Me.TabControl2.Controls.Add(Me.tbpThermal)
+        Me.TabControl2.Controls.Add(Me.tbpMisc)
         Me.TabControl2.Location = New System.Drawing.Point(253, 8)
         Me.TabControl2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl2.Name = "TabControl2"
@@ -1798,13 +1865,12 @@ Partial Class FrmMain_mp12
         '
         Me.tbpControl.BackColor = System.Drawing.SystemColors.Control
         Me.tbpControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tbpControl.Controls.Add(Me.cmbSwFreqCfg)
         Me.tbpControl.Controls.Add(Me.btnCtlRead)
         Me.tbpControl.Controls.Add(Me.btnCtlSet)
         Me.tbpControl.Controls.Add(Me.chkLimitIncrementEn)
         Me.tbpControl.Controls.Add(Me.chkRevCurrentDet)
         Me.tbpControl.Controls.Add(Me.chkStandbyEn)
-        Me.tbpControl.Controls.Add(Me.lblSwFreqVal)
-        Me.tbpControl.Controls.Add(Me.trbSwFreqCfg)
         Me.tbpControl.Controls.Add(Me.lblSwFreqCfg)
         Me.tbpControl.Controls.Add(Me.lblIinCfgVal)
         Me.tbpControl.Controls.Add(Me.trbIinCfg)
@@ -1826,6 +1892,15 @@ Partial Class FrmMain_mp12
         Me.tbpControl.Size = New System.Drawing.Size(546, 304)
         Me.tbpControl.TabIndex = 1
         Me.tbpControl.Text = "Control"
+        '
+        'cmbSwFreqCfg
+        '
+        Me.cmbSwFreqCfg.FormattingEnabled = True
+        Me.cmbSwFreqCfg.Location = New System.Drawing.Point(183, 126)
+        Me.cmbSwFreqCfg.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmbSwFreqCfg.Name = "cmbSwFreqCfg"
+        Me.cmbSwFreqCfg.Size = New System.Drawing.Size(89, 24)
+        Me.cmbSwFreqCfg.TabIndex = 58
         '
         'btnCtlRead
         '
@@ -2059,6 +2134,375 @@ Partial Class FrmMain_mp12
         Me.lblNTCThreshold.Size = New System.Drawing.Size(66, 17)
         Me.lblNTCThreshold.TabIndex = 44
         Me.lblNTCThreshold.Text = "NtcThres"
+        '
+        'tbpMisc
+        '
+        Me.tbpMisc.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tbpMisc.Controls.Add(Me.gbxDebug)
+        Me.tbpMisc.Location = New System.Drawing.Point(4, 28)
+        Me.tbpMisc.Name = "tbpMisc"
+        Me.tbpMisc.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpMisc.Size = New System.Drawing.Size(546, 304)
+        Me.tbpMisc.TabIndex = 6
+        Me.tbpMisc.Text = "Misc"
+        Me.tbpMisc.UseVisualStyleBackColor = True
+        '
+        'gbxDebug
+        '
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegRead6)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegSet6)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegAddr6)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegVal6)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegReadBack6)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegRead5)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegSet5)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegRead4)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegSet4)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegRead3)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegSet3)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegRead2)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegSet2)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegAddr5)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegVal5)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegReadBack5)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegAddr3)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegVal3)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegReadBack3)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegAddr4)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegVal4)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegReadBack4)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegAddr2)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegVal2)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegReadBack2)
+        Me.gbxDebug.Controls.Add(Me.Label6)
+        Me.gbxDebug.Controls.Add(Me.Label3)
+        Me.gbxDebug.Controls.Add(Me.Label1)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegRead1)
+        Me.gbxDebug.Controls.Add(Me.btnDbgRegSet1)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegAddr1)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegVal1)
+        Me.gbxDebug.Controls.Add(Me.txtDbgRegReadBack1)
+        Me.gbxDebug.Location = New System.Drawing.Point(18, 16)
+        Me.gbxDebug.Name = "gbxDebug"
+        Me.gbxDebug.Size = New System.Drawing.Size(502, 255)
+        Me.gbxDebug.TabIndex = 31
+        Me.gbxDebug.TabStop = False
+        Me.gbxDebug.Text = "Debug Registers"
+        '
+        'btnDbgRegRead6
+        '
+        Me.btnDbgRegRead6.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegRead6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegRead6.Location = New System.Drawing.Point(398, 189)
+        Me.btnDbgRegRead6.Name = "btnDbgRegRead6"
+        Me.btnDbgRegRead6.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegRead6.TabIndex = 94
+        Me.btnDbgRegRead6.Text = "Read"
+        Me.btnDbgRegRead6.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegSet6
+        '
+        Me.btnDbgRegSet6.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegSet6.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegSet6.Location = New System.Drawing.Point(316, 189)
+        Me.btnDbgRegSet6.Name = "btnDbgRegSet6"
+        Me.btnDbgRegSet6.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegSet6.TabIndex = 93
+        Me.btnDbgRegSet6.Text = "Set"
+        Me.btnDbgRegSet6.UseVisualStyleBackColor = False
+        '
+        'txtDbgRegAddr6
+        '
+        Me.txtDbgRegAddr6.Location = New System.Drawing.Point(27, 189)
+        Me.txtDbgRegAddr6.MaxLength = 2
+        Me.txtDbgRegAddr6.Name = "txtDbgRegAddr6"
+        Me.txtDbgRegAddr6.Size = New System.Drawing.Size(68, 22)
+        Me.txtDbgRegAddr6.TabIndex = 92
+        '
+        'txtDbgRegVal6
+        '
+        Me.txtDbgRegVal6.AutoCompleteCustomSource.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f"})
+        Me.txtDbgRegVal6.Location = New System.Drawing.Point(119, 189)
+        Me.txtDbgRegVal6.MaxLength = 2
+        Me.txtDbgRegVal6.Name = "txtDbgRegVal6"
+        Me.txtDbgRegVal6.Size = New System.Drawing.Size(71, 22)
+        Me.txtDbgRegVal6.TabIndex = 91
+        '
+        'txtDbgRegReadBack6
+        '
+        Me.txtDbgRegReadBack6.Location = New System.Drawing.Point(212, 189)
+        Me.txtDbgRegReadBack6.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDbgRegReadBack6.Name = "txtDbgRegReadBack6"
+        Me.txtDbgRegReadBack6.ReadOnly = True
+        Me.txtDbgRegReadBack6.Size = New System.Drawing.Size(70, 22)
+        Me.txtDbgRegReadBack6.TabIndex = 90
+        '
+        'btnDbgRegRead5
+        '
+        Me.btnDbgRegRead5.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegRead5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegRead5.Location = New System.Drawing.Point(398, 161)
+        Me.btnDbgRegRead5.Name = "btnDbgRegRead5"
+        Me.btnDbgRegRead5.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegRead5.TabIndex = 89
+        Me.btnDbgRegRead5.Text = "Read"
+        Me.btnDbgRegRead5.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegSet5
+        '
+        Me.btnDbgRegSet5.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegSet5.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegSet5.Location = New System.Drawing.Point(316, 161)
+        Me.btnDbgRegSet5.Name = "btnDbgRegSet5"
+        Me.btnDbgRegSet5.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegSet5.TabIndex = 88
+        Me.btnDbgRegSet5.Text = "Set"
+        Me.btnDbgRegSet5.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegRead4
+        '
+        Me.btnDbgRegRead4.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegRead4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegRead4.Location = New System.Drawing.Point(398, 131)
+        Me.btnDbgRegRead4.Name = "btnDbgRegRead4"
+        Me.btnDbgRegRead4.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegRead4.TabIndex = 87
+        Me.btnDbgRegRead4.Text = "Read"
+        Me.btnDbgRegRead4.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegSet4
+        '
+        Me.btnDbgRegSet4.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegSet4.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegSet4.Location = New System.Drawing.Point(316, 131)
+        Me.btnDbgRegSet4.Name = "btnDbgRegSet4"
+        Me.btnDbgRegSet4.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegSet4.TabIndex = 86
+        Me.btnDbgRegSet4.Text = "Set"
+        Me.btnDbgRegSet4.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegRead3
+        '
+        Me.btnDbgRegRead3.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegRead3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegRead3.Location = New System.Drawing.Point(398, 103)
+        Me.btnDbgRegRead3.Name = "btnDbgRegRead3"
+        Me.btnDbgRegRead3.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegRead3.TabIndex = 85
+        Me.btnDbgRegRead3.Text = "Read"
+        Me.btnDbgRegRead3.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegSet3
+        '
+        Me.btnDbgRegSet3.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegSet3.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegSet3.Location = New System.Drawing.Point(316, 103)
+        Me.btnDbgRegSet3.Name = "btnDbgRegSet3"
+        Me.btnDbgRegSet3.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegSet3.TabIndex = 84
+        Me.btnDbgRegSet3.Text = "Set"
+        Me.btnDbgRegSet3.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegRead2
+        '
+        Me.btnDbgRegRead2.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegRead2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegRead2.Location = New System.Drawing.Point(398, 75)
+        Me.btnDbgRegRead2.Name = "btnDbgRegRead2"
+        Me.btnDbgRegRead2.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegRead2.TabIndex = 83
+        Me.btnDbgRegRead2.Text = "Read"
+        Me.btnDbgRegRead2.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegSet2
+        '
+        Me.btnDbgRegSet2.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegSet2.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegSet2.Location = New System.Drawing.Point(316, 75)
+        Me.btnDbgRegSet2.Name = "btnDbgRegSet2"
+        Me.btnDbgRegSet2.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegSet2.TabIndex = 82
+        Me.btnDbgRegSet2.Text = "Set"
+        Me.btnDbgRegSet2.UseVisualStyleBackColor = False
+        '
+        'txtDbgRegAddr5
+        '
+        Me.txtDbgRegAddr5.Location = New System.Drawing.Point(27, 161)
+        Me.txtDbgRegAddr5.MaxLength = 2
+        Me.txtDbgRegAddr5.Name = "txtDbgRegAddr5"
+        Me.txtDbgRegAddr5.Size = New System.Drawing.Size(68, 22)
+        Me.txtDbgRegAddr5.TabIndex = 81
+        '
+        'txtDbgRegVal5
+        '
+        Me.txtDbgRegVal5.AutoCompleteCustomSource.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f"})
+        Me.txtDbgRegVal5.Location = New System.Drawing.Point(119, 161)
+        Me.txtDbgRegVal5.MaxLength = 2
+        Me.txtDbgRegVal5.Name = "txtDbgRegVal5"
+        Me.txtDbgRegVal5.Size = New System.Drawing.Size(71, 22)
+        Me.txtDbgRegVal5.TabIndex = 80
+        '
+        'txtDbgRegReadBack5
+        '
+        Me.txtDbgRegReadBack5.Location = New System.Drawing.Point(212, 161)
+        Me.txtDbgRegReadBack5.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDbgRegReadBack5.Name = "txtDbgRegReadBack5"
+        Me.txtDbgRegReadBack5.ReadOnly = True
+        Me.txtDbgRegReadBack5.Size = New System.Drawing.Size(70, 22)
+        Me.txtDbgRegReadBack5.TabIndex = 79
+        '
+        'txtDbgRegAddr3
+        '
+        Me.txtDbgRegAddr3.Location = New System.Drawing.Point(27, 103)
+        Me.txtDbgRegAddr3.MaxLength = 2
+        Me.txtDbgRegAddr3.Name = "txtDbgRegAddr3"
+        Me.txtDbgRegAddr3.Size = New System.Drawing.Size(68, 22)
+        Me.txtDbgRegAddr3.TabIndex = 76
+        '
+        'txtDbgRegVal3
+        '
+        Me.txtDbgRegVal3.AutoCompleteCustomSource.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f"})
+        Me.txtDbgRegVal3.Location = New System.Drawing.Point(119, 103)
+        Me.txtDbgRegVal3.MaxLength = 2
+        Me.txtDbgRegVal3.Name = "txtDbgRegVal3"
+        Me.txtDbgRegVal3.Size = New System.Drawing.Size(71, 22)
+        Me.txtDbgRegVal3.TabIndex = 75
+        '
+        'txtDbgRegReadBack3
+        '
+        Me.txtDbgRegReadBack3.Location = New System.Drawing.Point(212, 103)
+        Me.txtDbgRegReadBack3.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDbgRegReadBack3.Name = "txtDbgRegReadBack3"
+        Me.txtDbgRegReadBack3.ReadOnly = True
+        Me.txtDbgRegReadBack3.Size = New System.Drawing.Size(70, 22)
+        Me.txtDbgRegReadBack3.TabIndex = 74
+        '
+        'txtDbgRegAddr4
+        '
+        Me.txtDbgRegAddr4.Location = New System.Drawing.Point(27, 131)
+        Me.txtDbgRegAddr4.MaxLength = 2
+        Me.txtDbgRegAddr4.Name = "txtDbgRegAddr4"
+        Me.txtDbgRegAddr4.Size = New System.Drawing.Size(68, 22)
+        Me.txtDbgRegAddr4.TabIndex = 71
+        '
+        'txtDbgRegVal4
+        '
+        Me.txtDbgRegVal4.AutoCompleteCustomSource.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f"})
+        Me.txtDbgRegVal4.Location = New System.Drawing.Point(119, 131)
+        Me.txtDbgRegVal4.MaxLength = 2
+        Me.txtDbgRegVal4.Name = "txtDbgRegVal4"
+        Me.txtDbgRegVal4.Size = New System.Drawing.Size(71, 22)
+        Me.txtDbgRegVal4.TabIndex = 70
+        '
+        'txtDbgRegReadBack4
+        '
+        Me.txtDbgRegReadBack4.Location = New System.Drawing.Point(212, 131)
+        Me.txtDbgRegReadBack4.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDbgRegReadBack4.Name = "txtDbgRegReadBack4"
+        Me.txtDbgRegReadBack4.ReadOnly = True
+        Me.txtDbgRegReadBack4.Size = New System.Drawing.Size(70, 22)
+        Me.txtDbgRegReadBack4.TabIndex = 69
+        '
+        'txtDbgRegAddr2
+        '
+        Me.txtDbgRegAddr2.Location = New System.Drawing.Point(27, 75)
+        Me.txtDbgRegAddr2.MaxLength = 2
+        Me.txtDbgRegAddr2.Name = "txtDbgRegAddr2"
+        Me.txtDbgRegAddr2.Size = New System.Drawing.Size(68, 22)
+        Me.txtDbgRegAddr2.TabIndex = 66
+        '
+        'txtDbgRegVal2
+        '
+        Me.txtDbgRegVal2.AutoCompleteCustomSource.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f"})
+        Me.txtDbgRegVal2.Location = New System.Drawing.Point(119, 75)
+        Me.txtDbgRegVal2.MaxLength = 2
+        Me.txtDbgRegVal2.Name = "txtDbgRegVal2"
+        Me.txtDbgRegVal2.Size = New System.Drawing.Size(71, 22)
+        Me.txtDbgRegVal2.TabIndex = 65
+        '
+        'txtDbgRegReadBack2
+        '
+        Me.txtDbgRegReadBack2.Location = New System.Drawing.Point(212, 75)
+        Me.txtDbgRegReadBack2.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDbgRegReadBack2.Name = "txtDbgRegReadBack2"
+        Me.txtDbgRegReadBack2.ReadOnly = True
+        Me.txtDbgRegReadBack2.Size = New System.Drawing.Size(70, 22)
+        Me.txtDbgRegReadBack2.TabIndex = 64
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(209, 27)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(77, 17)
+        Me.Label6.TabIndex = 63
+        Me.Label6.Text = "Read Back"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(125, 27)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(54, 17)
+        Me.Label3.TabIndex = 62
+        Me.Label3.Text = "RegVal"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(31, 27)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(64, 17)
+        Me.Label1.TabIndex = 61
+        Me.Label1.Text = "RegAddr"
+        '
+        'btnDbgRegRead1
+        '
+        Me.btnDbgRegRead1.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegRead1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegRead1.Location = New System.Drawing.Point(398, 47)
+        Me.btnDbgRegRead1.Name = "btnDbgRegRead1"
+        Me.btnDbgRegRead1.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegRead1.TabIndex = 60
+        Me.btnDbgRegRead1.Text = "Read"
+        Me.btnDbgRegRead1.UseVisualStyleBackColor = False
+        '
+        'btnDbgRegSet1
+        '
+        Me.btnDbgRegSet1.BackColor = System.Drawing.SystemColors.Control
+        Me.btnDbgRegSet1.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnDbgRegSet1.Location = New System.Drawing.Point(316, 47)
+        Me.btnDbgRegSet1.Name = "btnDbgRegSet1"
+        Me.btnDbgRegSet1.Size = New System.Drawing.Size(76, 22)
+        Me.btnDbgRegSet1.TabIndex = 59
+        Me.btnDbgRegSet1.Text = "Set"
+        Me.btnDbgRegSet1.UseVisualStyleBackColor = False
+        '
+        'txtDbgRegAddr1
+        '
+        Me.txtDbgRegAddr1.Location = New System.Drawing.Point(27, 47)
+        Me.txtDbgRegAddr1.MaxLength = 2
+        Me.txtDbgRegAddr1.Name = "txtDbgRegAddr1"
+        Me.txtDbgRegAddr1.Size = New System.Drawing.Size(68, 22)
+        Me.txtDbgRegAddr1.TabIndex = 30
+        '
+        'txtDbgRegVal1
+        '
+        Me.txtDbgRegVal1.AutoCompleteCustomSource.AddRange(New String() {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F", "a", "b", "c", "d", "e", "f"})
+        Me.txtDbgRegVal1.Location = New System.Drawing.Point(119, 47)
+        Me.txtDbgRegVal1.MaxLength = 2
+        Me.txtDbgRegVal1.Name = "txtDbgRegVal1"
+        Me.txtDbgRegVal1.Size = New System.Drawing.Size(71, 22)
+        Me.txtDbgRegVal1.TabIndex = 29
+        '
+        'txtDbgRegReadBack1
+        '
+        Me.txtDbgRegReadBack1.Location = New System.Drawing.Point(212, 47)
+        Me.txtDbgRegReadBack1.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtDbgRegReadBack1.Name = "txtDbgRegReadBack1"
+        Me.txtDbgRegReadBack1.ReadOnly = True
+        Me.txtDbgRegReadBack1.Size = New System.Drawing.Size(70, 22)
+        Me.txtDbgRegReadBack1.TabIndex = 28
         '
         'tsbRefresh
         '
@@ -2307,69 +2751,6 @@ Partial Class FrmMain_mp12
         Me.pnlRegisters.TabIndex = 38
         Me.pnlRegisters.Visible = False
         '
-        'txtTimerSts
-        '
-        Me.txtTimerSts.Location = New System.Drawing.Point(38, 191)
-        Me.txtTimerSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtTimerSts.Name = "txtTimerSts"
-        Me.txtTimerSts.ReadOnly = True
-        Me.txtTimerSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtTimerSts.TabIndex = 50
-        '
-        'txtADCDoneSts
-        '
-        Me.txtADCDoneSts.Location = New System.Drawing.Point(38, 162)
-        Me.txtADCDoneSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtADCDoneSts.Name = "txtADCDoneSts"
-        Me.txtADCDoneSts.ReadOnly = True
-        Me.txtADCDoneSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtADCDoneSts.TabIndex = 49
-        '
-        'txtTempRegSts
-        '
-        Me.txtTempRegSts.Location = New System.Drawing.Point(38, 134)
-        Me.txtTempRegSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtTempRegSts.Name = "txtTempRegSts"
-        Me.txtTempRegSts.ReadOnly = True
-        Me.txtTempRegSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtTempRegSts.TabIndex = 48
-        '
-        'txtCtrlLimitSts
-        '
-        Me.txtCtrlLimitSts.Location = New System.Drawing.Point(38, 104)
-        Me.txtCtrlLimitSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtCtrlLimitSts.Name = "txtCtrlLimitSts"
-        Me.txtCtrlLimitSts.ReadOnly = True
-        Me.txtCtrlLimitSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtCtrlLimitSts.TabIndex = 47
-        '
-        'txtChgPhaseSts
-        '
-        Me.txtChgPhaseSts.Location = New System.Drawing.Point(38, 78)
-        Me.txtChgPhaseSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtChgPhaseSts.Name = "txtChgPhaseSts"
-        Me.txtChgPhaseSts.ReadOnly = True
-        Me.txtChgPhaseSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtChgPhaseSts.TabIndex = 46
-        '
-        'txtNtcTempSts
-        '
-        Me.txtNtcTempSts.Location = New System.Drawing.Point(38, 48)
-        Me.txtNtcTempSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtNtcTempSts.Name = "txtNtcTempSts"
-        Me.txtNtcTempSts.ReadOnly = True
-        Me.txtNtcTempSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtNtcTempSts.TabIndex = 45
-        '
-        'txtVOKSts
-        '
-        Me.txtVOKSts.Location = New System.Drawing.Point(38, 22)
-        Me.txtVOKSts.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtVOKSts.Name = "txtVOKSts"
-        Me.txtVOKSts.ReadOnly = True
-        Me.txtVOKSts.Size = New System.Drawing.Size(177, 22)
-        Me.txtVOKSts.TabIndex = 44
-        '
         'FrmMain_mp12
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -2400,7 +2781,6 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSYSB.PerformLayout()
         Me.GrpBoxSTSA.ResumeLayout(False)
         Me.GrpBoxSTSA.PerformLayout()
-        CType(Me.trbSwFreqCfg, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.trbIinCfg, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.trbIchgCfg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpAdc.ResumeLayout(False)
@@ -2427,6 +2807,9 @@ Partial Class FrmMain_mp12
         Me.tbpThermal.ResumeLayout(False)
         Me.tbpThermal.PerformLayout()
         CType(Me.trbNTCThreshold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpMisc.ResumeLayout(False)
+        Me.gbxDebug.ResumeLayout(False)
+        Me.gbxDebug.PerformLayout()
         Me.theToolbar.ResumeLayout(False)
         Me.theToolbar.PerformLayout()
         Me.TheMenu.ResumeLayout(False)
@@ -2461,8 +2844,6 @@ Partial Class FrmMain_mp12
     Friend WithEvents lblAdcOffset As System.Windows.Forms.Label
     Friend WithEvents chkRevCurrentDet As System.Windows.Forms.CheckBox
     Friend WithEvents chkStandbyEn As System.Windows.Forms.CheckBox
-    Friend WithEvents lblSwFreqVal As System.Windows.Forms.Label
-    Friend WithEvents trbSwFreqCfg As System.Windows.Forms.TrackBar
     Friend WithEvents lblSwFreqCfg As System.Windows.Forms.Label
     Friend WithEvents lblIinCfgVal As System.Windows.Forms.Label
     Friend WithEvents trbIinCfg As System.Windows.Forms.TrackBar
@@ -2482,7 +2863,6 @@ Partial Class FrmMain_mp12
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents chkChargerTimerEn As System.Windows.Forms.CheckBox
     Friend WithEvents chkWatchDogEn As System.Windows.Forms.CheckBox
-    Friend WithEvents chkBattMissShutDownEn As System.Windows.Forms.CheckBox
     Friend WithEvents chkMissBatteryDetEn As System.Windows.Forms.CheckBox
     Friend WithEvents chkIinForceIncrementEn As System.Windows.Forms.CheckBox
     Friend WithEvents cmbOVDelta As System.Windows.Forms.ComboBox
@@ -2636,4 +3016,40 @@ Partial Class FrmMain_mp12
     Friend WithEvents txtChgPhaseSts As System.Windows.Forms.TextBox
     Friend WithEvents txtNtcTempSts As System.Windows.Forms.TextBox
     Friend WithEvents txtVOKSts As System.Windows.Forms.TextBox
+    Friend WithEvents tbpMisc As System.Windows.Forms.TabPage
+    Friend WithEvents gbxDebug As System.Windows.Forms.GroupBox
+    Friend WithEvents btnDbgRegRead1 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegSet1 As System.Windows.Forms.Button
+    Friend WithEvents txtDbgRegAddr1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegVal1 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegReadBack1 As System.Windows.Forms.TextBox
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents Label6 As System.Windows.Forms.Label
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents btnDbgRegRead6 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegSet6 As System.Windows.Forms.Button
+    Friend WithEvents txtDbgRegAddr6 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegVal6 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegReadBack6 As System.Windows.Forms.TextBox
+    Friend WithEvents btnDbgRegRead5 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegSet5 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegRead4 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegSet4 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegRead3 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegSet3 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegRead2 As System.Windows.Forms.Button
+    Friend WithEvents btnDbgRegSet2 As System.Windows.Forms.Button
+    Friend WithEvents txtDbgRegAddr5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegVal5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegReadBack5 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegAddr3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegVal3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegReadBack3 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegAddr4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegVal4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegReadBack4 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegAddr2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegVal2 As System.Windows.Forms.TextBox
+    Friend WithEvents txtDbgRegReadBack2 As System.Windows.Forms.TextBox
+    Friend WithEvents cmbSwFreqCfg As System.Windows.Forms.ComboBox
 End Class

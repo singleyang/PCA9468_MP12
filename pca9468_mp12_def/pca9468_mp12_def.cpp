@@ -18,7 +18,7 @@
 #endif
 
 pca_data_bits_t pca_data_bits_default[] = {
-	/* 00 */ 0x18, 0x00, 0x00, 0x00, 
+	/* 00 */ 0x18, 0x00, 0xFF, 0x00, 
 	/* 04 */ 0x00, 0x00, 0x00, 0x00, 
 #ifdef _DEBUG
 	/* 08 */ 0xF3FE, 0x8FF3, 0x3F8F,0xFC3F,
@@ -27,9 +27,9 @@ pca_data_bits_t pca_data_bits_default[] = {
 	/* 08 */ 0x0000, 0x0000, 0x0000, 0x0000,
 	/* 0C */ 0x0000, 0x0000, 0x0000,
 #endif
-	/* 20 */ 0x3C, 0x9E, 0xB0, 0x02,
-	/* 24 */ 0xFF, 0x01, 0x00, 0x7B,
-	/* 28 */ 0x02, 0x03FF
+	/* 20 */ 0x3C, 0x9E, 0xB0, 0x00,
+	/* 24 */ 0xFF, 0x02, 0x00, 0x7D,
+	/* 28 */ 0x02, 0xFFFF
 };
 
 /*************************************************************************************/
@@ -344,16 +344,34 @@ void pca_tf_iin_cfg(char *textbuffer, size_t sz, int index)
 	}
 }
 
-/*sw_freq trackbar*/
+/*sw_freq cmb*/
 void pca_tf_fsw_cfg(char *textbuffer, size_t sz, int index)
 {
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			if (index <= 0x0F)
-				sprintf_s(textbuffer, sz, "%dkHz", 400 + index * 50);
-			else
-				sprintf_s(textbuffer, sz, "%s", "Illegal value");
+			switch (index)
+			{
+			case 0: sprintf_s(textbuffer, sz, "%s", "833KHz"); break;
+			case 1: sprintf_s(textbuffer, sz, "%s", "893KHz"); break;
+			case 2: sprintf_s(textbuffer, sz, "%s", "935KHz"); break;
+			case 3: sprintf_s(textbuffer, sz, "%s", "980KHz"); break;
+			case 4: sprintf_s(textbuffer, sz, "%s", "1020KHz"); break;
+			case 5: sprintf_s(textbuffer, sz, "%s", "1080KHz"); break;
+			case 6: sprintf_s(textbuffer, sz, "%s", "1120KHz"); break;
+			case 7: sprintf_s(textbuffer, sz, "%s", "1160KHz"); break;
+			case 8: sprintf_s(textbuffer, sz, "%s", "440KHz"); break;
+			case 9: sprintf_s(textbuffer, sz, "%s", "490KHz"); break;
+			case 10: sprintf_s(textbuffer, sz, "%s", "540KHz"); break;
+			case 11: sprintf_s(textbuffer, sz, "%s", "590KHz"); break;
+			case 12: sprintf_s(textbuffer, sz, "%s", "630KHz"); break;
+			case 13: sprintf_s(textbuffer, sz, "%s", "680KHz"); break;
+			case 14: sprintf_s(textbuffer, sz, "%s", "730KHz"); break;
+			case 15: sprintf_s(textbuffer, sz, "%s", "780KHz"); break;
+			default:
+				sprintf_s(textbuffer, sz, "%s", "Invalid Value");
+				break;
+			}
 		}
 	}
 }

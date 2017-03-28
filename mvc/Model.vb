@@ -86,6 +86,7 @@ Public Class Model
         m_views.Add(v)
     End Sub
 
+
     Shared Sub New()
         pcaRegisterNotification_hidden(GetCallBack)
     End Sub
@@ -99,5 +100,15 @@ Public Class Model
             pcaSlaveAddress_hidden(m_sla)
         End Set
     End Property
+
+#If DEBUG Then
+    Public Shared Function DbgWriteRegister(regnumber As Integer, regval As Integer) As pca_result_t
+        Return pcaDbgWriteRegister_hidden(regnumber, regval)
+    End Function
+
+    Public Shared Function DbgReadRegister(regnumber As Integer) As Integer
+        Return pcaDbgReadRegister_hidden(regnumber)
+    End Function
+#End If
 
 End Class

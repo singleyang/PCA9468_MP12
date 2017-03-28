@@ -111,6 +111,10 @@ pca_result_t pcaWriteAll();
 pca_result_t pcaSetAndWriteDataField(pca_data_fields_enum_t dataField, int value);
 pca_result_t pcaSetAndWriteRegister(int regNumber, int value);
 
+/*MP12 read/write registers in debug mode*/
+pca_result_t pcaDbgWriteRegister(int regAddr, int val);
+int			 pcaDbgReadRegister(int regAddr);
+
 // Set the device's I2C slave address
 void pcaSlaveAddress(int sla);
 

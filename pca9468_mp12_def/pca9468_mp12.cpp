@@ -330,6 +330,27 @@ pca_result_t pcaWriteRegister(int regNumber) {
 	return result;
 }
 
+/*MP12 write dbg registers*/
+pca_result_t pcaDbgWriteRegister(int regAddr, int val)
+{
+	return (pca_result_t)pc_writeRegister(gSla, regAddr&0xFF, (uint8_t *)&val, 1);
+}
+
+/*MP12 write dbg registers*/
+int pcaDbgReadRegister(int regAddr)
+{
+	uint8_t readRegVal = 0;
+	if ((pca_result_t)pc_readRegister(gSla, regAddr & 0xFF, &readRegVal, 1) == pca_ok)
+	{
+		return readRegVal;
+	}
+	else
+	{ 
+		/*special return code*/
+		return 0xF0F0F000;
+	}
+}
+
 pca_result_t pcaWriteAll() {
 	pca_result_t result = pca_ok;
 	unsigned int idx, offset;

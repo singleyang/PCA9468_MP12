@@ -131,4 +131,14 @@ Friend Module pca9468_mp12_import
     Friend Function pcaReadADCRegisters_hidden(RegNumber As Integer, count As Integer) As pca_result_t
     End Function
 
+    ' Write the specified register to the device in debug mode
+    <DllImportAttribute(DLLname, EntryPoint:="pcaDbgWriteRegister", SetLastError:=False, CharSet:=CharSet.Unicode, ExactSpelling:=True, CallingConvention:=CallingConvention.Cdecl)>
+    Friend Function pcaDbgWriteRegister_hidden(RegNumber As Integer, RegValue As Integer) As pca_result_t
+    End Function
+
+    ' Read the specified register to the device in debug mode
+    <DllImportAttribute(DLLname, EntryPoint:="pcaDbgReadRegister", SetLastError:=False, CharSet:=CharSet.Unicode, ExactSpelling:=True, CallingConvention:=CallingConvention.Cdecl)>
+    Friend Function pcaDbgReadRegister_hidden(RegNumber As Integer) As Integer
+    End Function
+
 End Module

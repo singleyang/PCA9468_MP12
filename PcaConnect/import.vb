@@ -3,7 +3,7 @@ Imports PcaConnect.Connection
 
 Module import
 
-    Private Const dllname As String = "pca9498_com.dll"
+    Private Const dllname As String = "pca9468_com.dll"
 
     'Interface selection
     

@@ -127,8 +127,7 @@ Public Class FrmMain_mp12
         v = New View(lblIinCfgVal, pca_data_fields_enum_t.iin_cfg)
         v = New View(trbIinCfg, pca_data_fields_enum_t.iin_cfg)
         lblSwFreqCfg.Text = Model.Caption(pca_data_fields_enum_t.fsw_cfg)
-        v = New View(lblSwFreqVal, pca_data_fields_enum_t.fsw_cfg)
-        v = New View(trbSwFreqCfg, pca_data_fields_enum_t.fsw_cfg)
+        v = New View(cmbSwFreqCfg, pca_data_fields_enum_t.fsw_cfg)
 
         'ADC View'
         v = New View(chkNtcAdcEn, pca_data_fields_enum_t.ntc_adc_en)
@@ -242,7 +241,6 @@ Public Class FrmMain_mp12
 
         v = New View(chkIinForceIncrementEn, pca_data_fields_enum_t.iin_force_count)
         v = New View(chkMissBatteryDetEn, pca_data_fields_enum_t.bat_miss_det_en)
-        v = New View(chkBattMissShutDownEn, pca_data_fields_enum_t.batt_miss_shdn_en)
         v = New View(chkWatchDogEn, pca_data_fields_enum_t.watchdog_en)
         v = New View(chkChargerTimerEn, pca_data_fields_enum_t.chg_timer_en)
 
@@ -271,6 +269,13 @@ Public Class FrmMain_mp12
         BuildRegisterMap()
         SetView(ViewEnum.ve_Functional)
         SetAutoRefresh(My.Settings.Interval)
+#If DEBUG Then
+        gbxDebug.Visible = True
+#Else
+        gbxDebug.Visible = False
+#End If
+
+
     End Sub
 
     Protected Overrides Sub WndProc(ByRef m As System.Windows.Forms.Message)
@@ -529,5 +534,95 @@ Public Class FrmMain_mp12
 
     Private Sub btnReadADC_Click(sender As Object, e As EventArgs) Handles btnReadADC.Click
         mvc.Model.ReadADCRegisters(8, 9)    'Read ADC 1-9'
+    End Sub
+
+#If DEBUG Then
+    Public Function IsHex(ByVal str As String) As Boolean
+        Try
+            Dim num As Long = CLng("&H" & str)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Sub DdgBtnSetRegister(ByVal RegAddrTxt As TextBox, ByVal RegValTxt As TextBox, ByVal RegReadbackTxt As TextBox)
+        Dim RegAddr As Integer
+        Dim RegVal As Integer
+        Dim RegValReadBack As Integer
+
+        If IsHex(RegAddrTxt.Text) And IsHex(RegValTxt.Text) Then
+            RegAddr = Convert.ToInt32(RegAddrTxt.Text, 16)
+            RegVal = Convert.ToInt32(RegValTxt.Text, 16)
+            mvc.Model.DbgWriteRegister(RegAddr, RegVal)
+            RegValReadBack = mvc.Model.DbgReadRegister(RegAddr)
+            RegReadbackTxt.Text = "0x" + Convert.ToString(Hex(RegValReadBack))
+            UpdateModel()
+        End If
+    End Sub
+
+    Private Sub DgbBtnReadRegister(ByVal RegAddrTxt As TextBox, ByVal RegReadbackTxt As TextBox)
+        Dim RegValReadBack As Integer
+        Dim RegAddr As Integer
+
+        If IsHex(RegAddrTxt.Text) Then
+            RegAddr = Convert.ToInt32(RegAddrTxt.Text, 16)
+            RegValReadBack = mvc.Model.DbgReadRegister(RegAddr)
+            RegReadbackTxt.Text = "0x" + Convert.ToString(Hex(RegValReadBack))
+        End If
+    End Sub
+
+    Private Sub btnDbgRegSet1_Click(sender As Object, e As EventArgs) Handles btnDbgRegSet1.Click
+        DdgBtnSetRegister(txtDbgRegAddr1, txtDbgRegVal1, txtDbgRegReadBack1)
+    End Sub
+
+    Private Sub btnDbgRegRead1_Click(sender As Object, e As EventArgs) Handles btnDbgRegRead1.Click
+        DgbBtnReadRegister(txtDbgRegAddr1, txtDbgRegReadBack1)
+    End Sub
+
+    Private Sub btnDbgRegSet2_Click(sender As Object, e As EventArgs) Handles btnDbgRegSet2.Click
+        DdgBtnSetRegister(txtDbgRegAddr2, txtDbgRegVal2, txtDbgRegReadBack2)
+    End Sub
+
+    Private Sub btnDbgRegRead2_Click(sender As Object, e As EventArgs) Handles btnDbgRegRead2.Click
+        DgbBtnReadRegister(txtDbgRegAddr2, txtDbgRegReadBack2)
+    End Sub
+
+    Private Sub btnDbgRegSet3_Click(sender As Object, e As EventArgs) Handles btnDbgRegSet3.Click
+        DdgBtnSetRegister(txtDbgRegAddr3, txtDbgRegVal3, txtDbgRegReadBack3)
+    End Sub
+
+    Private Sub btnDbgRegRead3_Click(sender As Object, e As EventArgs) Handles btnDbgRegRead3.Click
+        DgbBtnReadRegister(txtDbgRegAddr3, txtDbgRegReadBack3)
+    End Sub
+
+    Private Sub btnDbgRegSet4_Click(sender As Object, e As EventArgs) Handles btnDbgRegSet4.Click
+        DdgBtnSetRegister(txtDbgRegAddr4, txtDbgRegVal4, txtDbgRegReadBack4)
+    End Sub
+
+    Private Sub btnDbgRegRead4_Click(sender As Object, e As EventArgs) Handles btnDbgRegRead4.Click
+        DgbBtnReadRegister(txtDbgRegAddr4, txtDbgRegReadBack4)
+    End Sub
+
+    Private Sub btnDbgRegSet5_Click(sender As Object, e As EventArgs) Handles btnDbgRegSet5.Click
+        DdgBtnSetRegister(txtDbgRegAddr5, txtDbgRegVal5, txtDbgRegReadBack5)
+    End Sub
+
+    Private Sub btnDbgRegRead5_Click(sender As Object, e As EventArgs) Handles btnDbgRegRead5.Click
+        DgbBtnReadRegister(txtDbgRegAddr5, txtDbgRegReadBack5)
+    End Sub
+
+    Private Sub btnDbgRegSet6_Click(sender As Object, e As EventArgs) Handles btnDbgRegSet6.Click
+        DdgBtnSetRegister(txtDbgRegAddr6, txtDbgRegVal6, txtDbgRegReadBack6)
+    End Sub
+
+    Private Sub btnDbgRegRead6_Click(sender As Object, e As EventArgs) Handles btnDbgRegRead6.Click
+        DgbBtnReadRegister(txtDbgRegAddr6, txtDbgRegReadBack6)
+    End Sub
+
+#End If
+    
+    Private Sub tsmAbout_Click(sender As Object, e As EventArgs) Handles tsmAbout.Click
+        frmAbout.Show(Me)
     End Sub
 End Class

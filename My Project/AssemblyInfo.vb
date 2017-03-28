@@ -8,11 +8,11 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("PCA949x")> 
-<Assembly: AssemblyDescription("PCA949x evaluation and demonstration utility")> 
+<Assembly: AssemblyTitle("PCA9468")> 
+<Assembly: AssemblyDescription("PCA9468 evaluation and demonstration utility")> 
 <Assembly: AssemblyCompany("NXP Semiconductors")> 
-<Assembly: AssemblyProduct("PCA949x")> 
-<Assembly: AssemblyCopyright("Copyright ©  2016")> 
+<Assembly: AssemblyProduct("PCA9468")> 
+<Assembly: AssemblyCopyright("Copyright ©  2017")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.2.0.0")> 
-<Assembly: AssemblyFileVersion("1.2.0.0")> 
+<Assembly: AssemblyVersion("0.0.4.0")> 
+<Assembly: AssemblyFileVersion("0.0.4.0")> 

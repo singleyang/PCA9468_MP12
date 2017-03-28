@@ -1,4 +1,4 @@
-LIBRARY pca9498_com.dll
+LIBRARY pca9468_com.dll
 EXPORTS
 	pc_selectInterface
 	pc_claim

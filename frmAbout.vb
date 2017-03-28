@@ -21,7 +21,7 @@
     End Sub
 
     
-    Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs) Handles btnClose.Click
+    Private Sub btnClose_Click(sender As System.Object, e As System.EventArgs)
         Close()
     End Sub
 End Class
