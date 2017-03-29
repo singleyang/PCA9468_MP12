@@ -272,7 +272,7 @@ Public Class FrmMain_mp12
 #If DEBUG Then
         gbxDebug.Visible = True
 #Else
-        gbxDebug.Visible = False
+        TabControl2.TabPages.Remove(tbpMisc)
 #End If
 
 
