@@ -409,7 +409,7 @@ void pca_tf_V_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x1FFF);
+			float val = float(index & 0x1FFF);
 			if ((index & 0x8000) == 0x8000) val *= -1;
 			sprintf_s(textbuffer, sz, "%0.3fV", val / 1000);
 		}
@@ -422,7 +422,7 @@ void pca_tf_A_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = index & 0x1FFF;
+			float val = float(index & 0x1FFF);
 			if ((index & 0x8000) == 0x8000) val *= -1;
 			sprintf_s(textbuffer, sz, "%0.3fA", val / 1000);
 		}
@@ -436,7 +436,7 @@ void pca_tf_T_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = index & 0x0FFF;
+			float val = float(index & 0x0FFF);
 			if ((index & 0x8000) == 0x8000) val *= -1;
 			sprintf_s(textbuffer, sz, "%0.3fV", val / 1000);
 		}
@@ -472,7 +472,7 @@ void pca_tf_VIN_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x3FF);
+			float val = float(index & 0x3FF);
 			/*0.016V per step, 0-16.368V*/
 			sprintf_s(textbuffer, sz, "%0.3fV", val * 0.016);
 		}
@@ -485,7 +485,7 @@ void pca_tf_Vout_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x3FF);
+			float val = float(index & 0x3FF);
 			/*0.005V per step, 0-5.115V*/
 			sprintf_s(textbuffer, sz, "%0.3fV", val * 0.005);
 		}
@@ -499,7 +499,7 @@ void pca_tf_IIN_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x3FF);
+			float val = float(index & 0x3FF);
 			/*4.89mA per step, 0-5000mA*/
 			sprintf_s(textbuffer, sz, "%0.2fmA", val * 4.89);
 		}
@@ -512,7 +512,7 @@ void pca_tf_Iout_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x3FF);
+			float val = float(index & 0x3FF);
 			/*7.81mA per step, 0-8000mA*/
 			sprintf_s(textbuffer, sz, "%0.2fmA", val * 7.82);
 		}
@@ -525,7 +525,7 @@ void pca_tf_DieTemp_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x3FF);
+			float val = float(index & 0x3FF);
 			/*LSB 0.5C with -25C ~ 160C*/
 			sprintf_s(textbuffer, sz, "%0.1f °C", (val*0.5-25));
 		}
@@ -538,7 +538,7 @@ void pca_tf_NTC_adc(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			float val = (index & 0x3FF);
+			float val = float(index & 0x3FF);
 			/*2.4mA per step 2.4V*/
 			sprintf_s(textbuffer, sz, "%0.1fmV", val * 2.4);
 		}
