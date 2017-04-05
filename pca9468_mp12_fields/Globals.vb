@@ -75,6 +75,7 @@ Public Enum pca_data_fields_enum_t
     fsw_cfg
     'REG 0x23, ADC_CTRL (R/W)
     force_adc_mode
+    adc_shutdown_cfg
     hibernate_delay
     adc_offset_cfg
     adc_osr_cfg

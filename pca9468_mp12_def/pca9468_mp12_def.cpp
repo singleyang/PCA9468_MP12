@@ -914,8 +914,9 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x11, 5, 1, 0, standby_en, "Standby Mode", pca_tf_En_Dis },
 	{ 0x11, 4, 1, 0, rev_iin_det, "Reverse Current Detection", pca_tf_En_Dis },
 	{ 0x11, 0, 4, 0x10, fsw_cfg, "Switching Frequency", pca_tf_fsw_cfg },
-	/*REG 0x23, ADC_CTRL (R/W)*/
+	/*REG 0x23, ADC_CTRL (R/W) v0.7*/
 	{ 0x12, 6, 2, 0, force_adc_mode, "ADC Mode Selection", pca_tf_force_ADCmode },
+	{ 0x12, 5, 1, 0, adc_shutdown_cfg, "ADC Shutdown Config", pca_tf_En_Dis },
 	{ 0x12, 3, 2, 0, hibernate_delay, "ADC Hibernate Delay", pca_tf_hib_delay },
 	{ 0x12, 2, 1, 0, adc_offset_cfg, "ADC Offset Configration", pca_tf_adcoffset_cfg },
 	{ 0x12, 1, 1, 0, adc_osr_cfg, "ADC Oscillator Select", pca_tf_adcosr_cfg },

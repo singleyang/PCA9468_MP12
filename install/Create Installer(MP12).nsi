@@ -10,9 +10,9 @@ SetCompressor /SOLID lzma
 !define MUI_HEADERIMAGE_RIGHT
 !define MUI_INSTFILESPAGE_COLORS /windows
 
-!define MUI_WELCOMEPAGE_TITLE "Welcome to the PCA949x installation wizard"
-!define MUI_WELCOMEPAGE_TITLE_3LINES "PCA949x evaluation utility"
-!define MUI_WELCOMEPAGE_TEXT "The PCA949x utility controls and monitors PCA949x boards for evaluation and demonstration purposes. This program will install the PCA949x utility, its libraries and drivers.$\n$\nPrevious versions will be uninstalled first.$\n$\nAdministrator rights are required."
+!define MUI_WELCOMEPAGE_TITLE "Welcome to the PCA9468 installation wizard"
+!define MUI_WELCOMEPAGE_TITLE_3LINES "PCA9468 evaluation utility"
+!define MUI_WELCOMEPAGE_TEXT "The PCA9468 utility controls and monitors PCA9468 boards for evaluation and demonstration purposes. This program will install the PCA9468 utility, its libraries and drivers.$\n$\nPrevious versions will be uninstalled first.$\n$\nAdministrator rights are required."
 
 !define MUI_LICENSEPAGE_TEXT_TOP "License Agreement"
 
@@ -20,11 +20,11 @@ SetCompressor /SOLID lzma
 !define MUI_WELCOMEFINISHPAGE_NOSTRETCH
 
 !define MUI_FINISHPAGE_NOAUTOCLOSE
-!define MUI_FINISHPAGE_RUN $INSTDIR\PCA949x.exe
-!define MUI_FINISHPAGE_RUN_TEXT "Launch PCA949x when this installation wizard closes"
+!define MUI_FINISHPAGE_RUN $INSTDIR\PCA9468_MP12.exe
+!define MUI_FINISHPAGE_RUN_TEXT "Launch PCA9468 when this installation wizard closes"
 !define MUI_FINISHPAGE_RUN_PARAMETERS ""
 
-!define MUI_UNCONFIRMPAGE_TEXT_TOP "You are about to uninstall the PCA949x utility from your system. Press Uninstall if you want to continue."
+!define MUI_UNCONFIRMPAGE_TEXT_TOP "You are about to uninstall the PCA9468 utility from your system. Press Uninstall if you want to continue."
 !define MUI_UNCONFIRMPAGE_TEXT_LOCATION "Uninstaller"
 
 
@@ -73,7 +73,7 @@ SetCompressor /SOLID lzma
 !verbose pop
 !macroend
 
-!insertmacro GetVersionLocal "${localpath}\PCA949x.exe" pca_version
+!insertmacro GetVersionLocal "${localpath}\PCA9468_MP12.exe" pca_version
 !define Vmajor "${pca_version1}"
 !define Vminor "${pca_version2}"
 !define Vrevision "${pca_version3}"
@@ -81,7 +81,7 @@ SetCompressor /SOLID lzma
 
 !define VrequiredDotNet "4.0"
 !define Company "NXP Semiconductors"
-!define Suite "PCA949x"
+!define Suite "PCA9468_MP12"
 !define localAppData "$APPDATA\${Company}\${Suite}\${Vmajor}.${Vminor}"
 
 Name "${Suite}"
@@ -90,10 +90,10 @@ RequestExecutionLevel admin
 Var PreviousVersion
 
 VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "${Suite}"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "PCA949x evaluation software"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "Comments" "PCA9468 evaluation software"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "CompanyName" "${Company}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalTrademarks" ""
-VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "© 2016, ${Company}"
+VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "© 2017, ${Company}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "${Suite} installer"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" "${Vmajor}.${Vminor}.${Vbuild}.${Vrevision}"
 VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" "${Vmajor}.${Vminor}.${Vbuild}.${Vrevision}"
@@ -212,8 +212,8 @@ Function UninstallPreviousVersion
 ;--------------------------------------------------
 ; Dump the contents of the details window to file
 
-!define LVM_GETITEMCOUNT 0x1004
-!define LVM_GETITEMTEXT 0x102D
+;!define LVM_GETITEMCOUNT 0x1004
+;!define LVM_GETITEMTEXT 0x102D
 
 Function DumpLog
   Exch $5
@@ -278,16 +278,16 @@ Section Install
   SetOverwrite on
   AllowSkipFiles off
    
-  DetailPrint "PCA949x.exe"
-  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\PCA949x.exe $INSTDIR\PCA949x.exe $INSTDIR
-  DetailPrint "pca9498_def.dll"
-  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\pca9498_def.dll $INSTDIR\pca9498_def.dll $INSTDIR
-  DetailPrint "pca9498_fields.dll"
-  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\pca9498_fields.dll $INSTDIR\pca9498_fields.dll $INSTDIR
+  DetailPrint "PCA9468_MP12.exe"
+  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\PCA9468_MP12.exe $INSTDIR\PCA9468_MP12.exe $INSTDIR
+  DetailPrint "pca9468_mp12_def.dll"
+  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\pca9468_mp12_def.dll $INSTDIR\pca9468_mp12_def.dll $INSTDIR
+  DetailPrint "pca9468_mp12_fields.dll"
+  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\pca9468_mp12_fields.dll $INSTDIR\pca9468_mp12_fields.dll $INSTDIR
   DetailPrint "mvc.dll"
   !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\mvc.dll $INSTDIR\mvc.dll $INSTDIR
-  DetailPrint "pca9498_com.dll"
-  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\pca9498_com.dll $INSTDIR\pca9498_com.dll $INSTDIR
+  DetailPrint "pca9468_com.dll"
+  !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\pca9468_com.dll $INSTDIR\pca9468_com.dll $INSTDIR
   DetailPrint "PcaConnect.dll"
   !insertmacro InstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED ${localpath}\PcaConnect.dll $INSTDIR\PcaConnect.dll $INSTDIR
   DetailPrint "libMPSSE-I2C.dll"
@@ -313,7 +313,7 @@ Section Install
   
   DetailPrint "Adding shortcuts to Start Menu"
   CreateDirectory "$SMPROGRAMS\${Company}\${Suite}"
-  CreateShortCut "$SMPROGRAMS\${Company}\${Suite}\PCA949x.lnk" "$INSTDIR\PCA949x.exe" "" "" "" SW_SHOWNORMAL "" "Teo"
+  CreateShortCut "$SMPROGRAMS\${Company}\${Suite}\PCA9468_MP12.lnk" "$INSTDIR\PCA9468_MP12.exe" "" "" "" SW_SHOWNORMAL "" "Teo"
     
   DetailPrint "Writing uninstall info"
   WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${Suite}" "DisplayName" "${Suite}"
@@ -346,13 +346,13 @@ SectionEnd
 Section uninstall
 
   DetailPrint "Removing application and libraries"
-  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\PCA949x.exe
+  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\PCA9468_MP12.exe
   !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\mvc.dll
-  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\pca9498_def.dll
-  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\pca9498_com.dll
+  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\pca9468_mp12_def.dll
+  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\pca9468_com.dll
   !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\PcaConnect.dll
   !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\aardvark.dll
-  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\pca9498_fields.dll
+  !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED $INSTDIR\pca9468_mp12_fields.dll
   !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED "$INSTDIR\ftd2xx.dll"
   !insertmacro UninstallLib DLL NOTSHARED NOREBOOT_NOTPROTECTED "$INSTDIR\libMPSSE-I2C.dll"
   

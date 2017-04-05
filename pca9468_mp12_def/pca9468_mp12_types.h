@@ -95,6 +95,7 @@ typedef enum data_fields_enum {
 	fsw_cfg,
 	/*REG 0x23, ADC_CTRL (R/W)*/
 	force_adc_mode,
+	adc_shutdown_cfg,
 	hibernate_delay,
 	adc_offset_cfg,
 	adc_osr_cfg,

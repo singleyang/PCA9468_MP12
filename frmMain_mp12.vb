@@ -150,11 +150,7 @@ Public Class FrmMain_mp12
         v = New View(cmbAdcForceMode, pca_data_fields_enum_t.force_adc_mode)
         lblHiberDelay.Text = Model.Caption(pca_data_fields_enum_t.hibernate_delay)
         v = New View(cmbAdcHibDelay, pca_data_fields_enum_t.hibernate_delay)
-        lblAdcOffset.Text = Model.Caption(pca_data_fields_enum_t.adc_offset_cfg)
-        v = New View(cmbAdcOffset, pca_data_fields_enum_t.adc_offset_cfg)
-        lblOscSel.Text = Model.Caption(pca_data_fields_enum_t.adc_osr_cfg)
-        v = New View(cmbAdcOscSel, pca_data_fields_enum_t.adc_osr_cfg)
-        v = New View(chkAdcEn, pca_data_fields_enum_t.adc_en)
+        v = New View(chkAdcShutDownCfg, pca_data_fields_enum_t.adc_shutdown_cfg)
 
         'Rasied interrrupt View'
         v = New View(chkVOkInt, pca_data_fields_enum_t.v_ok_int)
@@ -268,7 +264,8 @@ Public Class FrmMain_mp12
         AddInterruptChkHandlers()
         BuildRegisterMap()
         SetView(ViewEnum.ve_Functional)
-        SetAutoRefresh(My.Settings.Interval)
+        ' SetAutoRefresh(My.Settings.Interval)
+        SetAutoRefresh(0)
 #If DEBUG Then
         gbxDebug.Visible = True
 #Else
