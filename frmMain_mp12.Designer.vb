@@ -71,6 +71,8 @@ Partial Class FrmMain_mp12
         Me.chkActiveStateSts = New System.Windows.Forms.CheckBox()
         Me.chkShutDownStateSts = New System.Windows.Forms.CheckBox()
         Me.GrpBoxSTSA = New System.Windows.Forms.GroupBox()
+        Me.txtCFlyShortSts = New System.Windows.Forms.TextBox()
+        Me.chkCFlyShortSts = New System.Windows.Forms.CheckBox()
         Me.txtVinUvSts = New System.Windows.Forms.TextBox()
         Me.txtVinOvSts = New System.Windows.Forms.TextBox()
         Me.txtVbatOvSts = New System.Windows.Forms.TextBox()
@@ -97,6 +99,7 @@ Partial Class FrmMain_mp12
         Me.trbIchgCfg = New System.Windows.Forms.TrackBar()
         Me.lblIchgCfg = New System.Windows.Forms.Label()
         Me.tbpAdc = New System.Windows.Forms.TabPage()
+        Me.chkAdcShutDownCfg = New System.Windows.Forms.CheckBox()
         Me.btnAdcEnRead = New System.Windows.Forms.Button()
         Me.btnAdcEnSet = New System.Windows.Forms.Button()
         Me.cmbAdcHibDelay = New System.Windows.Forms.ComboBox()
@@ -253,35 +256,34 @@ Partial Class FrmMain_mp12
         Me.tsmView = New System.Windows.Forms.ToolStripMenuItem()
         Me.TheMenu = New System.Windows.Forms.MenuStrip()
         Me.pnlRegisters = New System.Windows.Forms.Panel()
-        Me.chkAdcShutDownCfg = New System.Windows.Forms.CheckBox()
-        Me.tbpInt.SuspendLayout
-        Me.GroupBox2.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.tbpEvents.SuspendLayout
-        Me.GrpBoxSYSB.SuspendLayout
-        Me.GrpBoxSTSA.SuspendLayout
-        CType(Me.trbIinCfg,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.trbIchgCfg,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tbpAdc.SuspendLayout
-        Me.grpDevice.SuspendLayout
-        Me.StatusStrip1.SuspendLayout
-        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.trbVFloat,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tbpProt.SuspendLayout
-        Me.pnlFunctions.SuspendLayout
-        Me.GrpBoxSTSD.SuspendLayout
-        Me.grpRaised.SuspendLayout
-        Me.GrpBoxSTSC.SuspendLayout
-        Me.grpAdcChannels.SuspendLayout
-        Me.TabControl2.SuspendLayout
-        Me.tbpControl.SuspendLayout
-        Me.tbpThermal.SuspendLayout
-        CType(Me.trbNTCThreshold,System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tbpMisc.SuspendLayout
-        Me.gbxDebug.SuspendLayout
-        Me.theToolbar.SuspendLayout
-        Me.TheMenu.SuspendLayout
-        Me.SuspendLayout
+        Me.tbpInt.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.tbpEvents.SuspendLayout()
+        Me.GrpBoxSYSB.SuspendLayout()
+        Me.GrpBoxSTSA.SuspendLayout()
+        CType(Me.trbIinCfg, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.trbIchgCfg, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpAdc.SuspendLayout()
+        Me.grpDevice.SuspendLayout()
+        Me.StatusStrip1.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.trbVFloat, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpProt.SuspendLayout()
+        Me.pnlFunctions.SuspendLayout()
+        Me.GrpBoxSTSD.SuspendLayout()
+        Me.grpRaised.SuspendLayout()
+        Me.GrpBoxSTSC.SuspendLayout()
+        Me.grpAdcChannels.SuspendLayout()
+        Me.TabControl2.SuspendLayout()
+        Me.tbpControl.SuspendLayout()
+        Me.tbpThermal.SuspendLayout()
+        CType(Me.trbNTCThreshold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpMisc.SuspendLayout()
+        Me.gbxDebug.SuspendLayout()
+        Me.theToolbar.SuspendLayout()
+        Me.TheMenu.SuspendLayout()
+        Me.SuspendLayout()
         '
         'tbpInt
         '
@@ -308,7 +310,7 @@ Partial Class FrmMain_mp12
         Me.btnIntRead.Size = New System.Drawing.Size(76, 26)
         Me.btnIntRead.TabIndex = 59
         Me.btnIntRead.Text = "Read"
-        Me.btnIntRead.UseVisualStyleBackColor = false
+        Me.btnIntRead.UseVisualStyleBackColor = False
         '
         'btnIntSet
         '
@@ -318,7 +320,7 @@ Partial Class FrmMain_mp12
         Me.btnIntSet.Size = New System.Drawing.Size(76, 26)
         Me.btnIntSet.TabIndex = 58
         Me.btnIntSet.Text = "Set"
-        Me.btnIntSet.UseVisualStyleBackColor = false
+        Me.btnIntSet.UseVisualStyleBackColor = False
         '
         'GroupBox2
         '
@@ -338,9 +340,9 @@ Partial Class FrmMain_mp12
         Me.GroupBox2.Controls.Add(Me.chkTempRegSts)
         Me.GroupBox2.Location = New System.Drawing.Point(263, 22)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(234, 228)
+        Me.GroupBox2.Size = New System.Drawing.Size(274, 228)
         Me.GroupBox2.TabIndex = 38
-        Me.GroupBox2.TabStop = false
+        Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Interrupt Status"
         '
         'txtTimerSts
@@ -348,8 +350,8 @@ Partial Class FrmMain_mp12
         Me.txtTimerSts.Location = New System.Drawing.Point(38, 191)
         Me.txtTimerSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTimerSts.Name = "txtTimerSts"
-        Me.txtTimerSts.ReadOnly = true
-        Me.txtTimerSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtTimerSts.ReadOnly = True
+        Me.txtTimerSts.Size = New System.Drawing.Size(218, 22)
         Me.txtTimerSts.TabIndex = 50
         '
         'txtADCDoneSts
@@ -357,8 +359,8 @@ Partial Class FrmMain_mp12
         Me.txtADCDoneSts.Location = New System.Drawing.Point(38, 162)
         Me.txtADCDoneSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCDoneSts.Name = "txtADCDoneSts"
-        Me.txtADCDoneSts.ReadOnly = true
-        Me.txtADCDoneSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtADCDoneSts.ReadOnly = True
+        Me.txtADCDoneSts.Size = New System.Drawing.Size(218, 22)
         Me.txtADCDoneSts.TabIndex = 49
         '
         'txtTempRegSts
@@ -366,8 +368,8 @@ Partial Class FrmMain_mp12
         Me.txtTempRegSts.Location = New System.Drawing.Point(38, 134)
         Me.txtTempRegSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtTempRegSts.Name = "txtTempRegSts"
-        Me.txtTempRegSts.ReadOnly = true
-        Me.txtTempRegSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtTempRegSts.ReadOnly = True
+        Me.txtTempRegSts.Size = New System.Drawing.Size(218, 22)
         Me.txtTempRegSts.TabIndex = 48
         '
         'txtCtrlLimitSts
@@ -375,8 +377,8 @@ Partial Class FrmMain_mp12
         Me.txtCtrlLimitSts.Location = New System.Drawing.Point(38, 104)
         Me.txtCtrlLimitSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCtrlLimitSts.Name = "txtCtrlLimitSts"
-        Me.txtCtrlLimitSts.ReadOnly = true
-        Me.txtCtrlLimitSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtCtrlLimitSts.ReadOnly = True
+        Me.txtCtrlLimitSts.Size = New System.Drawing.Size(218, 22)
         Me.txtCtrlLimitSts.TabIndex = 47
         '
         'txtChgPhaseSts
@@ -384,8 +386,8 @@ Partial Class FrmMain_mp12
         Me.txtChgPhaseSts.Location = New System.Drawing.Point(38, 78)
         Me.txtChgPhaseSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChgPhaseSts.Name = "txtChgPhaseSts"
-        Me.txtChgPhaseSts.ReadOnly = true
-        Me.txtChgPhaseSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtChgPhaseSts.ReadOnly = True
+        Me.txtChgPhaseSts.Size = New System.Drawing.Size(218, 22)
         Me.txtChgPhaseSts.TabIndex = 46
         '
         'txtNtcTempSts
@@ -393,8 +395,8 @@ Partial Class FrmMain_mp12
         Me.txtNtcTempSts.Location = New System.Drawing.Point(38, 48)
         Me.txtNtcTempSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNtcTempSts.Name = "txtNtcTempSts"
-        Me.txtNtcTempSts.ReadOnly = true
-        Me.txtNtcTempSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtNtcTempSts.ReadOnly = True
+        Me.txtNtcTempSts.Size = New System.Drawing.Size(218, 22)
         Me.txtNtcTempSts.TabIndex = 45
         '
         'txtVOKSts
@@ -402,86 +404,86 @@ Partial Class FrmMain_mp12
         Me.txtVOKSts.Location = New System.Drawing.Point(38, 22)
         Me.txtVOKSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtVOKSts.Name = "txtVOKSts"
-        Me.txtVOKSts.ReadOnly = true
-        Me.txtVOKSts.Size = New System.Drawing.Size(177, 22)
+        Me.txtVOKSts.ReadOnly = True
+        Me.txtVOKSts.Size = New System.Drawing.Size(218, 22)
         Me.txtVOKSts.TabIndex = 44
         '
         'chkVOKSts
         '
-        Me.chkVOKSts.AutoSize = true
+        Me.chkVOKSts.AutoSize = True
         Me.chkVOKSts.Location = New System.Drawing.Point(17, 22)
         Me.chkVOKSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVOKSts.Name = "chkVOKSts"
         Me.chkVOKSts.Size = New System.Drawing.Size(95, 21)
         Me.chkVOKSts.TabIndex = 20
         Me.chkVOKSts.Text = "Vbus OVP"
-        Me.chkVOKSts.UseVisualStyleBackColor = true
+        Me.chkVOKSts.UseVisualStyleBackColor = True
         '
         'chkNtcTempSts
         '
-        Me.chkNtcTempSts.AutoSize = true
+        Me.chkNtcTempSts.AutoSize = True
         Me.chkNtcTempSts.Location = New System.Drawing.Point(17, 50)
         Me.chkNtcTempSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkNtcTempSts.Name = "chkNtcTempSts"
         Me.chkNtcTempSts.Size = New System.Drawing.Size(95, 21)
         Me.chkNtcTempSts.TabIndex = 21
         Me.chkNtcTempSts.Text = "Vbus OVP"
-        Me.chkNtcTempSts.UseVisualStyleBackColor = true
+        Me.chkNtcTempSts.UseVisualStyleBackColor = True
         '
         'chkChgPhaseSts
         '
-        Me.chkChgPhaseSts.AutoSize = true
+        Me.chkChgPhaseSts.AutoSize = True
         Me.chkChgPhaseSts.Location = New System.Drawing.Point(17, 78)
         Me.chkChgPhaseSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChgPhaseSts.Name = "chkChgPhaseSts"
         Me.chkChgPhaseSts.Size = New System.Drawing.Size(95, 21)
         Me.chkChgPhaseSts.TabIndex = 22
         Me.chkChgPhaseSts.Text = "Vbus OVP"
-        Me.chkChgPhaseSts.UseVisualStyleBackColor = true
+        Me.chkChgPhaseSts.UseVisualStyleBackColor = True
         '
         'chkTimerSts
         '
-        Me.chkTimerSts.AutoSize = true
+        Me.chkTimerSts.AutoSize = True
         Me.chkTimerSts.Location = New System.Drawing.Point(17, 190)
         Me.chkTimerSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkTimerSts.Name = "chkTimerSts"
         Me.chkTimerSts.Size = New System.Drawing.Size(95, 21)
         Me.chkTimerSts.TabIndex = 26
         Me.chkTimerSts.Text = "Vbus OVP"
-        Me.chkTimerSts.UseVisualStyleBackColor = true
+        Me.chkTimerSts.UseVisualStyleBackColor = True
         '
         'chkCtrlLimitSts
         '
-        Me.chkCtrlLimitSts.AutoSize = true
+        Me.chkCtrlLimitSts.AutoSize = True
         Me.chkCtrlLimitSts.Location = New System.Drawing.Point(17, 106)
         Me.chkCtrlLimitSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkCtrlLimitSts.Name = "chkCtrlLimitSts"
         Me.chkCtrlLimitSts.Size = New System.Drawing.Size(95, 21)
         Me.chkCtrlLimitSts.TabIndex = 23
         Me.chkCtrlLimitSts.Text = "Vbus OVP"
-        Me.chkCtrlLimitSts.UseVisualStyleBackColor = true
+        Me.chkCtrlLimitSts.UseVisualStyleBackColor = True
         '
         'chkADCDoneSts
         '
-        Me.chkADCDoneSts.AutoSize = true
+        Me.chkADCDoneSts.AutoSize = True
         Me.chkADCDoneSts.Location = New System.Drawing.Point(17, 162)
         Me.chkADCDoneSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkADCDoneSts.Name = "chkADCDoneSts"
         Me.chkADCDoneSts.Size = New System.Drawing.Size(95, 21)
         Me.chkADCDoneSts.TabIndex = 25
         Me.chkADCDoneSts.Text = "Vbus OVP"
-        Me.chkADCDoneSts.UseVisualStyleBackColor = true
+        Me.chkADCDoneSts.UseVisualStyleBackColor = True
         '
         'chkTempRegSts
         '
-        Me.chkTempRegSts.AutoSize = true
+        Me.chkTempRegSts.AutoSize = True
         Me.chkTempRegSts.Location = New System.Drawing.Point(17, 134)
         Me.chkTempRegSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkTempRegSts.Name = "chkTempRegSts"
         Me.chkTempRegSts.Size = New System.Drawing.Size(95, 21)
         Me.chkTempRegSts.TabIndex = 24
         Me.chkTempRegSts.Text = "Vbus OVP"
-        Me.chkTempRegSts.UseVisualStyleBackColor = true
+        Me.chkTempRegSts.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
@@ -496,89 +498,89 @@ Partial Class FrmMain_mp12
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(227, 228)
         Me.GroupBox1.TabIndex = 37
-        Me.GroupBox1.TabStop = false
+        Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Interrupt Mask"
         '
         'chkVOkMask
         '
-        Me.chkVOkMask.AutoSize = true
+        Me.chkVOkMask.AutoSize = True
         Me.chkVOkMask.Location = New System.Drawing.Point(17, 22)
         Me.chkVOkMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVOkMask.Name = "chkVOkMask"
         Me.chkVOkMask.Size = New System.Drawing.Size(95, 21)
         Me.chkVOkMask.TabIndex = 20
         Me.chkVOkMask.Text = "Vbus OVP"
-        Me.chkVOkMask.UseVisualStyleBackColor = true
+        Me.chkVOkMask.UseVisualStyleBackColor = True
         '
         'chkNtcTempMask
         '
-        Me.chkNtcTempMask.AutoSize = true
+        Me.chkNtcTempMask.AutoSize = True
         Me.chkNtcTempMask.Location = New System.Drawing.Point(17, 50)
         Me.chkNtcTempMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkNtcTempMask.Name = "chkNtcTempMask"
         Me.chkNtcTempMask.Size = New System.Drawing.Size(95, 21)
         Me.chkNtcTempMask.TabIndex = 21
         Me.chkNtcTempMask.Text = "Vbus OVP"
-        Me.chkNtcTempMask.UseVisualStyleBackColor = true
+        Me.chkNtcTempMask.UseVisualStyleBackColor = True
         '
         'chkTimerMask
         '
-        Me.chkTimerMask.AutoSize = true
+        Me.chkTimerMask.AutoSize = True
         Me.chkTimerMask.Location = New System.Drawing.Point(17, 190)
         Me.chkTimerMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkTimerMask.Name = "chkTimerMask"
         Me.chkTimerMask.Size = New System.Drawing.Size(95, 21)
         Me.chkTimerMask.TabIndex = 27
         Me.chkTimerMask.Text = "Vbus OVP"
-        Me.chkTimerMask.UseVisualStyleBackColor = true
+        Me.chkTimerMask.UseVisualStyleBackColor = True
         '
         'chkChgPhaseMask
         '
-        Me.chkChgPhaseMask.AutoSize = true
+        Me.chkChgPhaseMask.AutoSize = True
         Me.chkChgPhaseMask.Location = New System.Drawing.Point(17, 78)
         Me.chkChgPhaseMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChgPhaseMask.Name = "chkChgPhaseMask"
         Me.chkChgPhaseMask.Size = New System.Drawing.Size(95, 21)
         Me.chkChgPhaseMask.TabIndex = 22
         Me.chkChgPhaseMask.Text = "Vbus OVP"
-        Me.chkChgPhaseMask.UseVisualStyleBackColor = true
+        Me.chkChgPhaseMask.UseVisualStyleBackColor = True
         '
         'chkADCDoneMask
         '
-        Me.chkADCDoneMask.AutoSize = true
+        Me.chkADCDoneMask.AutoSize = True
         Me.chkADCDoneMask.Location = New System.Drawing.Point(17, 162)
         Me.chkADCDoneMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkADCDoneMask.Name = "chkADCDoneMask"
         Me.chkADCDoneMask.Size = New System.Drawing.Size(95, 21)
         Me.chkADCDoneMask.TabIndex = 26
         Me.chkADCDoneMask.Text = "Vbus OVP"
-        Me.chkADCDoneMask.UseVisualStyleBackColor = true
+        Me.chkADCDoneMask.UseVisualStyleBackColor = True
         '
         'chkTempRegMask
         '
-        Me.chkTempRegMask.AutoSize = true
+        Me.chkTempRegMask.AutoSize = True
         Me.chkTempRegMask.Location = New System.Drawing.Point(17, 134)
         Me.chkTempRegMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkTempRegMask.Name = "chkTempRegMask"
         Me.chkTempRegMask.Size = New System.Drawing.Size(95, 21)
         Me.chkTempRegMask.TabIndex = 25
         Me.chkTempRegMask.Text = "Vbus OVP"
-        Me.chkTempRegMask.UseVisualStyleBackColor = true
+        Me.chkTempRegMask.UseVisualStyleBackColor = True
         '
         'chkCtrlLimitMask
         '
-        Me.chkCtrlLimitMask.AutoSize = true
+        Me.chkCtrlLimitMask.AutoSize = True
         Me.chkCtrlLimitMask.Location = New System.Drawing.Point(17, 106)
         Me.chkCtrlLimitMask.Margin = New System.Windows.Forms.Padding(4)
         Me.chkCtrlLimitMask.Name = "chkCtrlLimitMask"
         Me.chkCtrlLimitMask.Size = New System.Drawing.Size(95, 21)
         Me.chkCtrlLimitMask.TabIndex = 24
         Me.chkCtrlLimitMask.Text = "Vbus OVP"
-        Me.chkCtrlLimitMask.UseVisualStyleBackColor = true
+        Me.chkCtrlLimitMask.UseVisualStyleBackColor = True
         '
         'lblForceAdcMode
         '
-        Me.lblForceAdcMode.AutoSize = true
+        Me.lblForceAdcMode.AutoSize = True
         Me.lblForceAdcMode.Location = New System.Drawing.Point(19, 26)
         Me.lblForceAdcMode.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblForceAdcMode.Name = "lblForceAdcMode"
@@ -610,7 +612,7 @@ Partial Class FrmMain_mp12
         Me.btnStsRead.Size = New System.Drawing.Size(76, 26)
         Me.btnStsRead.TabIndex = 59
         Me.btnStsRead.Text = "Read"
-        Me.btnStsRead.UseVisualStyleBackColor = false
+        Me.btnStsRead.UseVisualStyleBackColor = False
         '
         'GrpBoxSYSB
         '
@@ -634,7 +636,7 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSYSB.Name = "GrpBoxSYSB"
         Me.GrpBoxSYSB.Size = New System.Drawing.Size(234, 244)
         Me.GrpBoxSYSB.TabIndex = 36
-        Me.GrpBoxSYSB.TabStop = false
+        Me.GrpBoxSYSB.TabStop = False
         Me.GrpBoxSYSB.Text = "STS_B"
         '
         'txtWatchdogTmrSts
@@ -642,7 +644,7 @@ Partial Class FrmMain_mp12
         Me.txtWatchdogTmrSts.Location = New System.Drawing.Point(38, 217)
         Me.txtWatchdogTmrSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWatchdogTmrSts.Name = "txtWatchdogTmrSts"
-        Me.txtWatchdogTmrSts.ReadOnly = true
+        Me.txtWatchdogTmrSts.ReadOnly = True
         Me.txtWatchdogTmrSts.Size = New System.Drawing.Size(178, 22)
         Me.txtWatchdogTmrSts.TabIndex = 44
         '
@@ -651,7 +653,7 @@ Partial Class FrmMain_mp12
         Me.txtChargeTmrSts.Location = New System.Drawing.Point(38, 191)
         Me.txtChargeTmrSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChargeTmrSts.Name = "txtChargeTmrSts"
-        Me.txtChargeTmrSts.ReadOnly = true
+        Me.txtChargeTmrSts.ReadOnly = True
         Me.txtChargeTmrSts.Size = New System.Drawing.Size(178, 22)
         Me.txtChargeTmrSts.TabIndex = 43
         '
@@ -660,7 +662,7 @@ Partial Class FrmMain_mp12
         Me.txtStandbyStateSts.Location = New System.Drawing.Point(38, 162)
         Me.txtStandbyStateSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStandbyStateSts.Name = "txtStandbyStateSts"
-        Me.txtStandbyStateSts.ReadOnly = true
+        Me.txtStandbyStateSts.ReadOnly = True
         Me.txtStandbyStateSts.Size = New System.Drawing.Size(178, 22)
         Me.txtStandbyStateSts.TabIndex = 42
         '
@@ -669,7 +671,7 @@ Partial Class FrmMain_mp12
         Me.txtShutDownStateSts.Location = New System.Drawing.Point(38, 134)
         Me.txtShutDownStateSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtShutDownStateSts.Name = "txtShutDownStateSts"
-        Me.txtShutDownStateSts.ReadOnly = true
+        Me.txtShutDownStateSts.ReadOnly = True
         Me.txtShutDownStateSts.Size = New System.Drawing.Size(178, 22)
         Me.txtShutDownStateSts.TabIndex = 41
         '
@@ -678,7 +680,7 @@ Partial Class FrmMain_mp12
         Me.txtActiveStateSts.Location = New System.Drawing.Point(38, 104)
         Me.txtActiveStateSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtActiveStateSts.Name = "txtActiveStateSts"
-        Me.txtActiveStateSts.ReadOnly = true
+        Me.txtActiveStateSts.ReadOnly = True
         Me.txtActiveStateSts.Size = New System.Drawing.Size(178, 22)
         Me.txtActiveStateSts.TabIndex = 40
         '
@@ -687,7 +689,7 @@ Partial Class FrmMain_mp12
         Me.txtOcpAvgSts.Location = New System.Drawing.Point(38, 78)
         Me.txtOcpAvgSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtOcpAvgSts.Name = "txtOcpAvgSts"
-        Me.txtOcpAvgSts.ReadOnly = true
+        Me.txtOcpAvgSts.ReadOnly = True
         Me.txtOcpAvgSts.Size = New System.Drawing.Size(178, 22)
         Me.txtOcpAvgSts.TabIndex = 39
         '
@@ -696,7 +698,7 @@ Partial Class FrmMain_mp12
         Me.txtOcpFastSts.Location = New System.Drawing.Point(38, 48)
         Me.txtOcpFastSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtOcpFastSts.Name = "txtOcpFastSts"
-        Me.txtOcpFastSts.ReadOnly = true
+        Me.txtOcpFastSts.ReadOnly = True
         Me.txtOcpFastSts.Size = New System.Drawing.Size(178, 22)
         Me.txtOcpFastSts.TabIndex = 38
         '
@@ -705,100 +707,102 @@ Partial Class FrmMain_mp12
         Me.txtBatteryMissSts.Location = New System.Drawing.Point(38, 22)
         Me.txtBatteryMissSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBatteryMissSts.Name = "txtBatteryMissSts"
-        Me.txtBatteryMissSts.ReadOnly = true
+        Me.txtBatteryMissSts.ReadOnly = True
         Me.txtBatteryMissSts.Size = New System.Drawing.Size(178, 22)
         Me.txtBatteryMissSts.TabIndex = 37
         '
         'chkWatchdogTmrSts
         '
-        Me.chkWatchdogTmrSts.AutoSize = true
+        Me.chkWatchdogTmrSts.AutoSize = True
         Me.chkWatchdogTmrSts.Location = New System.Drawing.Point(17, 218)
         Me.chkWatchdogTmrSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkWatchdogTmrSts.Name = "chkWatchdogTmrSts"
         Me.chkWatchdogTmrSts.Size = New System.Drawing.Size(95, 21)
         Me.chkWatchdogTmrSts.TabIndex = 31
         Me.chkWatchdogTmrSts.Text = "Vbus OVP"
-        Me.chkWatchdogTmrSts.UseVisualStyleBackColor = true
+        Me.chkWatchdogTmrSts.UseVisualStyleBackColor = True
         '
         'chkStandbyStateSts
         '
-        Me.chkStandbyStateSts.AutoSize = true
+        Me.chkStandbyStateSts.AutoSize = True
         Me.chkStandbyStateSts.Location = New System.Drawing.Point(17, 162)
         Me.chkStandbyStateSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkStandbyStateSts.Name = "chkStandbyStateSts"
         Me.chkStandbyStateSts.Size = New System.Drawing.Size(95, 21)
         Me.chkStandbyStateSts.TabIndex = 29
         Me.chkStandbyStateSts.Text = "Vbus OVP"
-        Me.chkStandbyStateSts.UseVisualStyleBackColor = true
+        Me.chkStandbyStateSts.UseVisualStyleBackColor = True
         '
         'chkChargeTmrSts
         '
-        Me.chkChargeTmrSts.AutoSize = true
+        Me.chkChargeTmrSts.AutoSize = True
         Me.chkChargeTmrSts.Location = New System.Drawing.Point(17, 190)
         Me.chkChargeTmrSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChargeTmrSts.Name = "chkChargeTmrSts"
         Me.chkChargeTmrSts.Size = New System.Drawing.Size(95, 21)
         Me.chkChargeTmrSts.TabIndex = 30
         Me.chkChargeTmrSts.Text = "Vbus OVP"
-        Me.chkChargeTmrSts.UseVisualStyleBackColor = true
+        Me.chkChargeTmrSts.UseVisualStyleBackColor = True
         '
         'chkBatteryMissSts
         '
-        Me.chkBatteryMissSts.AutoSize = true
+        Me.chkBatteryMissSts.AutoSize = True
         Me.chkBatteryMissSts.Location = New System.Drawing.Point(17, 22)
         Me.chkBatteryMissSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkBatteryMissSts.Name = "chkBatteryMissSts"
         Me.chkBatteryMissSts.Size = New System.Drawing.Size(95, 21)
         Me.chkBatteryMissSts.TabIndex = 24
         Me.chkBatteryMissSts.Text = "Vbus OVP"
-        Me.chkBatteryMissSts.UseVisualStyleBackColor = true
+        Me.chkBatteryMissSts.UseVisualStyleBackColor = True
         '
         'chkOcpFastSts
         '
-        Me.chkOcpFastSts.AutoSize = true
+        Me.chkOcpFastSts.AutoSize = True
         Me.chkOcpFastSts.Location = New System.Drawing.Point(17, 50)
         Me.chkOcpFastSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkOcpFastSts.Name = "chkOcpFastSts"
         Me.chkOcpFastSts.Size = New System.Drawing.Size(95, 21)
         Me.chkOcpFastSts.TabIndex = 25
         Me.chkOcpFastSts.Text = "Vbus OVP"
-        Me.chkOcpFastSts.UseVisualStyleBackColor = true
+        Me.chkOcpFastSts.UseVisualStyleBackColor = True
         '
         'chkOcpAvgSts
         '
-        Me.chkOcpAvgSts.AutoSize = true
+        Me.chkOcpAvgSts.AutoSize = True
         Me.chkOcpAvgSts.Location = New System.Drawing.Point(17, 78)
         Me.chkOcpAvgSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkOcpAvgSts.Name = "chkOcpAvgSts"
         Me.chkOcpAvgSts.Size = New System.Drawing.Size(95, 21)
         Me.chkOcpAvgSts.TabIndex = 26
         Me.chkOcpAvgSts.Text = "Vbus OVP"
-        Me.chkOcpAvgSts.UseVisualStyleBackColor = true
+        Me.chkOcpAvgSts.UseVisualStyleBackColor = True
         '
         'chkActiveStateSts
         '
-        Me.chkActiveStateSts.AutoSize = true
+        Me.chkActiveStateSts.AutoSize = True
         Me.chkActiveStateSts.Location = New System.Drawing.Point(17, 106)
         Me.chkActiveStateSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkActiveStateSts.Name = "chkActiveStateSts"
         Me.chkActiveStateSts.Size = New System.Drawing.Size(95, 21)
         Me.chkActiveStateSts.TabIndex = 27
         Me.chkActiveStateSts.Text = "Vbus OVP"
-        Me.chkActiveStateSts.UseVisualStyleBackColor = true
+        Me.chkActiveStateSts.UseVisualStyleBackColor = True
         '
         'chkShutDownStateSts
         '
-        Me.chkShutDownStateSts.AutoSize = true
+        Me.chkShutDownStateSts.AutoSize = True
         Me.chkShutDownStateSts.Location = New System.Drawing.Point(17, 134)
         Me.chkShutDownStateSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkShutDownStateSts.Name = "chkShutDownStateSts"
         Me.chkShutDownStateSts.Size = New System.Drawing.Size(95, 21)
         Me.chkShutDownStateSts.TabIndex = 28
         Me.chkShutDownStateSts.Text = "Vbus OVP"
-        Me.chkShutDownStateSts.UseVisualStyleBackColor = true
+        Me.chkShutDownStateSts.UseVisualStyleBackColor = True
         '
         'GrpBoxSTSA
         '
+        Me.GrpBoxSTSA.Controls.Add(Me.txtCFlyShortSts)
+        Me.GrpBoxSTSA.Controls.Add(Me.chkCFlyShortSts)
         Me.GrpBoxSTSA.Controls.Add(Me.txtVinUvSts)
         Me.GrpBoxSTSA.Controls.Add(Me.txtVinOvSts)
         Me.GrpBoxSTSA.Controls.Add(Me.txtVbatOvSts)
@@ -817,42 +821,62 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSTSA.Name = "GrpBoxSTSA"
         Me.GrpBoxSTSA.Size = New System.Drawing.Size(224, 244)
         Me.GrpBoxSTSA.TabIndex = 35
-        Me.GrpBoxSTSA.TabStop = false
+        Me.GrpBoxSTSA.TabStop = False
         Me.GrpBoxSTSA.Text = "STS_A"
+        '
+        'txtCFlyShortSts
+        '
+        Me.txtCFlyShortSts.Location = New System.Drawing.Point(38, 103)
+        Me.txtCFlyShortSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtCFlyShortSts.Name = "txtCFlyShortSts"
+        Me.txtCFlyShortSts.ReadOnly = True
+        Me.txtCFlyShortSts.Size = New System.Drawing.Size(158, 22)
+        Me.txtCFlyShortSts.TabIndex = 38
+        '
+        'chkCFlyShortSts
+        '
+        Me.chkCFlyShortSts.AutoSize = True
+        Me.chkCFlyShortSts.Location = New System.Drawing.Point(17, 105)
+        Me.chkCFlyShortSts.Margin = New System.Windows.Forms.Padding(4)
+        Me.chkCFlyShortSts.Name = "chkCFlyShortSts"
+        Me.chkCFlyShortSts.Size = New System.Drawing.Size(95, 21)
+        Me.chkCFlyShortSts.TabIndex = 37
+        Me.chkCFlyShortSts.Text = "Vbus OVP"
+        Me.chkCFlyShortSts.UseVisualStyleBackColor = True
         '
         'txtVinUvSts
         '
-        Me.txtVinUvSts.Location = New System.Drawing.Point(38, 191)
+        Me.txtVinUvSts.Location = New System.Drawing.Point(38, 218)
         Me.txtVinUvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtVinUvSts.Name = "txtVinUvSts"
-        Me.txtVinUvSts.ReadOnly = true
+        Me.txtVinUvSts.ReadOnly = True
         Me.txtVinUvSts.Size = New System.Drawing.Size(158, 22)
         Me.txtVinUvSts.TabIndex = 36
         '
         'txtVinOvSts
         '
-        Me.txtVinOvSts.Location = New System.Drawing.Point(38, 162)
+        Me.txtVinOvSts.Location = New System.Drawing.Point(38, 189)
         Me.txtVinOvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtVinOvSts.Name = "txtVinOvSts"
-        Me.txtVinOvSts.ReadOnly = true
+        Me.txtVinOvSts.ReadOnly = True
         Me.txtVinOvSts.Size = New System.Drawing.Size(158, 22)
         Me.txtVinOvSts.TabIndex = 35
         '
         'txtVbatOvSts
         '
-        Me.txtVbatOvSts.Location = New System.Drawing.Point(38, 134)
+        Me.txtVbatOvSts.Location = New System.Drawing.Point(38, 161)
         Me.txtVbatOvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtVbatOvSts.Name = "txtVbatOvSts"
-        Me.txtVbatOvSts.ReadOnly = true
+        Me.txtVbatOvSts.ReadOnly = True
         Me.txtVbatOvSts.Size = New System.Drawing.Size(158, 22)
         Me.txtVbatOvSts.TabIndex = 34
         '
         'txtVoutUvSts
         '
-        Me.txtVoutUvSts.Location = New System.Drawing.Point(38, 104)
+        Me.txtVoutUvSts.Location = New System.Drawing.Point(38, 131)
         Me.txtVoutUvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtVoutUvSts.Name = "txtVoutUvSts"
-        Me.txtVoutUvSts.ReadOnly = true
+        Me.txtVoutUvSts.ReadOnly = True
         Me.txtVoutUvSts.Size = New System.Drawing.Size(158, 22)
         Me.txtVoutUvSts.TabIndex = 33
         '
@@ -861,7 +885,7 @@ Partial Class FrmMain_mp12
         Me.txtVFLTLoopSts.Location = New System.Drawing.Point(38, 78)
         Me.txtVFLTLoopSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtVFLTLoopSts.Name = "txtVFLTLoopSts"
-        Me.txtVFLTLoopSts.ReadOnly = true
+        Me.txtVFLTLoopSts.ReadOnly = True
         Me.txtVFLTLoopSts.Size = New System.Drawing.Size(158, 22)
         Me.txtVFLTLoopSts.TabIndex = 32
         '
@@ -870,7 +894,7 @@ Partial Class FrmMain_mp12
         Me.txtChgLoopSts.Location = New System.Drawing.Point(38, 48)
         Me.txtChgLoopSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChgLoopSts.Name = "txtChgLoopSts"
-        Me.txtChgLoopSts.ReadOnly = true
+        Me.txtChgLoopSts.ReadOnly = True
         Me.txtChgLoopSts.Size = New System.Drawing.Size(158, 22)
         Me.txtChgLoopSts.TabIndex = 31
         '
@@ -879,90 +903,90 @@ Partial Class FrmMain_mp12
         Me.txtIinLoopSts.Location = New System.Drawing.Point(38, 22)
         Me.txtIinLoopSts.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIinLoopSts.Name = "txtIinLoopSts"
-        Me.txtIinLoopSts.ReadOnly = true
+        Me.txtIinLoopSts.ReadOnly = True
         Me.txtIinLoopSts.Size = New System.Drawing.Size(158, 22)
         Me.txtIinLoopSts.TabIndex = 28
         '
         'chkVinOvSts
         '
-        Me.chkVinOvSts.AutoSize = true
-        Me.chkVinOvSts.Location = New System.Drawing.Point(17, 162)
+        Me.chkVinOvSts.AutoSize = True
+        Me.chkVinOvSts.Location = New System.Drawing.Point(17, 189)
         Me.chkVinOvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVinOvSts.Name = "chkVinOvSts"
         Me.chkVinOvSts.Size = New System.Drawing.Size(95, 21)
         Me.chkVinOvSts.TabIndex = 29
         Me.chkVinOvSts.Text = "Vbus OVP"
-        Me.chkVinOvSts.UseVisualStyleBackColor = true
+        Me.chkVinOvSts.UseVisualStyleBackColor = True
         '
         'chkVinUvSts
         '
-        Me.chkVinUvSts.AutoSize = true
-        Me.chkVinUvSts.Location = New System.Drawing.Point(17, 190)
+        Me.chkVinUvSts.AutoSize = True
+        Me.chkVinUvSts.Location = New System.Drawing.Point(17, 217)
         Me.chkVinUvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVinUvSts.Name = "chkVinUvSts"
         Me.chkVinUvSts.Size = New System.Drawing.Size(95, 21)
         Me.chkVinUvSts.TabIndex = 30
         Me.chkVinUvSts.Text = "Vbus OVP"
-        Me.chkVinUvSts.UseVisualStyleBackColor = true
+        Me.chkVinUvSts.UseVisualStyleBackColor = True
         '
         'chkIinLoopSts
         '
-        Me.chkIinLoopSts.AutoSize = true
+        Me.chkIinLoopSts.AutoSize = True
         Me.chkIinLoopSts.Location = New System.Drawing.Point(17, 22)
         Me.chkIinLoopSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkIinLoopSts.Name = "chkIinLoopSts"
         Me.chkIinLoopSts.Size = New System.Drawing.Size(95, 21)
         Me.chkIinLoopSts.TabIndex = 24
         Me.chkIinLoopSts.Text = "Vbus OVP"
-        Me.chkIinLoopSts.UseVisualStyleBackColor = true
+        Me.chkIinLoopSts.UseVisualStyleBackColor = True
         '
         'chkChgLoopSts
         '
-        Me.chkChgLoopSts.AutoSize = true
+        Me.chkChgLoopSts.AutoSize = True
         Me.chkChgLoopSts.Location = New System.Drawing.Point(17, 50)
         Me.chkChgLoopSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChgLoopSts.Name = "chkChgLoopSts"
         Me.chkChgLoopSts.Size = New System.Drawing.Size(95, 21)
         Me.chkChgLoopSts.TabIndex = 25
         Me.chkChgLoopSts.Text = "Vbus OVP"
-        Me.chkChgLoopSts.UseVisualStyleBackColor = true
+        Me.chkChgLoopSts.UseVisualStyleBackColor = True
         '
         'chkVFLTLoopSts
         '
-        Me.chkVFLTLoopSts.AutoSize = true
+        Me.chkVFLTLoopSts.AutoSize = True
         Me.chkVFLTLoopSts.Location = New System.Drawing.Point(17, 78)
         Me.chkVFLTLoopSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVFLTLoopSts.Name = "chkVFLTLoopSts"
         Me.chkVFLTLoopSts.Size = New System.Drawing.Size(95, 21)
         Me.chkVFLTLoopSts.TabIndex = 26
         Me.chkVFLTLoopSts.Text = "Vbus OVP"
-        Me.chkVFLTLoopSts.UseVisualStyleBackColor = true
+        Me.chkVFLTLoopSts.UseVisualStyleBackColor = True
         '
         'chkVoutUvSts
         '
-        Me.chkVoutUvSts.AutoSize = true
-        Me.chkVoutUvSts.Location = New System.Drawing.Point(17, 106)
+        Me.chkVoutUvSts.AutoSize = True
+        Me.chkVoutUvSts.Location = New System.Drawing.Point(17, 133)
         Me.chkVoutUvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVoutUvSts.Name = "chkVoutUvSts"
         Me.chkVoutUvSts.Size = New System.Drawing.Size(95, 21)
         Me.chkVoutUvSts.TabIndex = 27
         Me.chkVoutUvSts.Text = "Vbus OVP"
-        Me.chkVoutUvSts.UseVisualStyleBackColor = true
+        Me.chkVoutUvSts.UseVisualStyleBackColor = True
         '
         'chkVbatOvSts
         '
-        Me.chkVbatOvSts.AutoSize = true
-        Me.chkVbatOvSts.Location = New System.Drawing.Point(17, 134)
+        Me.chkVbatOvSts.AutoSize = True
+        Me.chkVbatOvSts.Location = New System.Drawing.Point(17, 161)
         Me.chkVbatOvSts.Margin = New System.Windows.Forms.Padding(4)
         Me.chkVbatOvSts.Name = "chkVbatOvSts"
         Me.chkVbatOvSts.Size = New System.Drawing.Size(95, 21)
         Me.chkVbatOvSts.TabIndex = 28
         Me.chkVbatOvSts.Text = "Vbus OVP"
-        Me.chkVbatOvSts.UseVisualStyleBackColor = true
+        Me.chkVbatOvSts.UseVisualStyleBackColor = True
         '
         'lblHiberDelay
         '
-        Me.lblHiberDelay.AutoSize = true
+        Me.lblHiberDelay.AutoSize = True
         Me.lblHiberDelay.Location = New System.Drawing.Point(19, 63)
         Me.lblHiberDelay.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblHiberDelay.Name = "lblHiberDelay"
@@ -972,7 +996,7 @@ Partial Class FrmMain_mp12
         '
         'cmbAdcForceMode
         '
-        Me.cmbAdcForceMode.FormattingEnabled = true
+        Me.cmbAdcForceMode.FormattingEnabled = True
         Me.cmbAdcForceMode.Location = New System.Drawing.Point(183, 24)
         Me.cmbAdcForceMode.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbAdcForceMode.Name = "cmbAdcForceMode"
@@ -981,29 +1005,29 @@ Partial Class FrmMain_mp12
         '
         'chkRevCurrentDet
         '
-        Me.chkRevCurrentDet.AutoSize = true
+        Me.chkRevCurrentDet.AutoSize = True
         Me.chkRevCurrentDet.Location = New System.Drawing.Point(327, 86)
         Me.chkRevCurrentDet.Margin = New System.Windows.Forms.Padding(4)
         Me.chkRevCurrentDet.Name = "chkRevCurrentDet"
         Me.chkRevCurrentDet.Size = New System.Drawing.Size(124, 21)
         Me.chkRevCurrentDet.TabIndex = 54
         Me.chkRevCurrentDet.Text = "RevCurrentDet"
-        Me.chkRevCurrentDet.UseVisualStyleBackColor = true
+        Me.chkRevCurrentDet.UseVisualStyleBackColor = True
         '
         'chkStandbyEn
         '
-        Me.chkStandbyEn.AutoSize = true
+        Me.chkStandbyEn.AutoSize = True
         Me.chkStandbyEn.Location = New System.Drawing.Point(327, 56)
         Me.chkStandbyEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkStandbyEn.Name = "chkStandbyEn"
         Me.chkStandbyEn.Size = New System.Drawing.Size(103, 21)
         Me.chkStandbyEn.TabIndex = 53
         Me.chkStandbyEn.Text = "Standby En"
-        Me.chkStandbyEn.UseVisualStyleBackColor = true
+        Me.chkStandbyEn.UseVisualStyleBackColor = True
         '
         'lblSwFreqCfg
         '
-        Me.lblSwFreqCfg.AutoSize = true
+        Me.lblSwFreqCfg.AutoSize = True
         Me.lblSwFreqCfg.Location = New System.Drawing.Point(19, 129)
         Me.lblSwFreqCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSwFreqCfg.Name = "lblSwFreqCfg"
@@ -1013,7 +1037,7 @@ Partial Class FrmMain_mp12
         '
         'lblIinCfgVal
         '
-        Me.lblIinCfgVal.AutoSize = true
+        Me.lblIinCfgVal.AutoSize = True
         Me.lblIinCfgVal.Location = New System.Drawing.Point(433, 228)
         Me.lblIinCfgVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIinCfgVal.Name = "lblIinCfgVal"
@@ -1023,7 +1047,7 @@ Partial Class FrmMain_mp12
         '
         'trbIinCfg
         '
-        Me.trbIinCfg.AutoSize = false
+        Me.trbIinCfg.AutoSize = False
         Me.trbIinCfg.Location = New System.Drawing.Point(177, 225)
         Me.trbIinCfg.Margin = New System.Windows.Forms.Padding(4)
         Me.trbIinCfg.Name = "trbIinCfg"
@@ -1032,7 +1056,7 @@ Partial Class FrmMain_mp12
         '
         'lblIinCfg
         '
-        Me.lblIinCfg.AutoSize = true
+        Me.lblIinCfg.AutoSize = True
         Me.lblIinCfg.Location = New System.Drawing.Point(21, 228)
         Me.lblIinCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIinCfg.Name = "lblIinCfg"
@@ -1042,7 +1066,7 @@ Partial Class FrmMain_mp12
         '
         'lblIchgCfgVal
         '
-        Me.lblIchgCfgVal.AutoSize = true
+        Me.lblIchgCfgVal.AutoSize = True
         Me.lblIchgCfgVal.Location = New System.Drawing.Point(433, 192)
         Me.lblIchgCfgVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIchgCfgVal.Name = "lblIchgCfgVal"
@@ -1052,7 +1076,7 @@ Partial Class FrmMain_mp12
         '
         'trbIchgCfg
         '
-        Me.trbIchgCfg.AutoSize = false
+        Me.trbIchgCfg.AutoSize = False
         Me.trbIchgCfg.Location = New System.Drawing.Point(177, 190)
         Me.trbIchgCfg.Margin = New System.Windows.Forms.Padding(4)
         Me.trbIchgCfg.Name = "trbIchgCfg"
@@ -1061,7 +1085,7 @@ Partial Class FrmMain_mp12
         '
         'lblIchgCfg
         '
-        Me.lblIchgCfg.AutoSize = true
+        Me.lblIchgCfg.AutoSize = True
         Me.lblIchgCfg.Location = New System.Drawing.Point(21, 192)
         Me.lblIchgCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIchgCfg.Name = "lblIchgCfg"
@@ -1087,6 +1111,16 @@ Partial Class FrmMain_mp12
         Me.tbpAdc.TabIndex = 2
         Me.tbpAdc.Text = "ADC"
         '
+        'chkAdcShutDownCfg
+        '
+        Me.chkAdcShutDownCfg.AutoSize = True
+        Me.chkAdcShutDownCfg.Location = New System.Drawing.Point(18, 98)
+        Me.chkAdcShutDownCfg.Name = "chkAdcShutDownCfg"
+        Me.chkAdcShutDownCfg.Size = New System.Drawing.Size(158, 21)
+        Me.chkAdcShutDownCfg.TabIndex = 60
+        Me.chkAdcShutDownCfg.Text = "ADC ShutDown CFG"
+        Me.chkAdcShutDownCfg.UseVisualStyleBackColor = True
+        '
         'btnAdcEnRead
         '
         Me.btnAdcEnRead.BackColor = System.Drawing.SystemColors.Control
@@ -1096,7 +1130,7 @@ Partial Class FrmMain_mp12
         Me.btnAdcEnRead.Size = New System.Drawing.Size(76, 26)
         Me.btnAdcEnRead.TabIndex = 59
         Me.btnAdcEnRead.Text = "Read"
-        Me.btnAdcEnRead.UseVisualStyleBackColor = false
+        Me.btnAdcEnRead.UseVisualStyleBackColor = False
         '
         'btnAdcEnSet
         '
@@ -1106,11 +1140,11 @@ Partial Class FrmMain_mp12
         Me.btnAdcEnSet.Size = New System.Drawing.Size(76, 26)
         Me.btnAdcEnSet.TabIndex = 58
         Me.btnAdcEnSet.Text = "Set"
-        Me.btnAdcEnSet.UseVisualStyleBackColor = false
+        Me.btnAdcEnSet.UseVisualStyleBackColor = False
         '
         'cmbAdcHibDelay
         '
-        Me.cmbAdcHibDelay.FormattingEnabled = true
+        Me.cmbAdcHibDelay.FormattingEnabled = True
         Me.cmbAdcHibDelay.Location = New System.Drawing.Point(183, 58)
         Me.cmbAdcHibDelay.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbAdcHibDelay.Name = "cmbAdcHibDelay"
@@ -1131,12 +1165,12 @@ Partial Class FrmMain_mp12
         Me.grpDevice.Padding = New System.Windows.Forms.Padding(4)
         Me.grpDevice.Size = New System.Drawing.Size(439, 59)
         Me.grpDevice.TabIndex = 35
-        Me.grpDevice.TabStop = false
+        Me.grpDevice.TabStop = False
         Me.grpDevice.Text = "Device"
         '
         'lblRev
         '
-        Me.lblRev.AutoSize = true
+        Me.lblRev.AutoSize = True
         Me.lblRev.Location = New System.Drawing.Point(376, 28)
         Me.lblRev.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblRev.Name = "lblRev"
@@ -1146,7 +1180,7 @@ Partial Class FrmMain_mp12
         '
         'lblId
         '
-        Me.lblId.AutoSize = true
+        Me.lblId.AutoSize = True
         Me.lblId.Location = New System.Drawing.Point(237, 28)
         Me.lblId.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblId.Name = "lblId"
@@ -1156,7 +1190,7 @@ Partial Class FrmMain_mp12
         '
         'Label5
         '
-        Me.Label5.AutoSize = true
+        Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(304, 28)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
@@ -1166,7 +1200,7 @@ Partial Class FrmMain_mp12
         '
         'Label4
         '
-        Me.Label4.AutoSize = true
+        Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(205, 28)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
@@ -1176,7 +1210,7 @@ Partial Class FrmMain_mp12
         '
         'lblAddr
         '
-        Me.lblAddr.AutoSize = true
+        Me.lblAddr.AutoSize = True
         Me.lblAddr.Location = New System.Drawing.Point(99, 28)
         Me.lblAddr.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblAddr.Name = "lblAddr"
@@ -1186,7 +1220,7 @@ Partial Class FrmMain_mp12
         '
         'Label2
         '
-        Me.Label2.AutoSize = true
+        Me.Label2.AutoSize = True
         Me.Label2.Location = New System.Drawing.Point(31, 28)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
@@ -1196,51 +1230,51 @@ Partial Class FrmMain_mp12
         '
         'chkChargerTimerEn
         '
-        Me.chkChargerTimerEn.AutoSize = true
+        Me.chkChargerTimerEn.AutoSize = True
         Me.chkChargerTimerEn.Location = New System.Drawing.Point(327, 117)
         Me.chkChargerTimerEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChargerTimerEn.Name = "chkChargerTimerEn"
         Me.chkChargerTimerEn.Size = New System.Drawing.Size(95, 21)
         Me.chkChargerTimerEn.TabIndex = 55
         Me.chkChargerTimerEn.Text = "Vbus OVP"
-        Me.chkChargerTimerEn.UseVisualStyleBackColor = true
+        Me.chkChargerTimerEn.UseVisualStyleBackColor = True
         '
         'chkWatchDogEn
         '
-        Me.chkWatchDogEn.AutoSize = true
+        Me.chkWatchDogEn.AutoSize = True
         Me.chkWatchDogEn.Location = New System.Drawing.Point(327, 86)
         Me.chkWatchDogEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkWatchDogEn.Name = "chkWatchDogEn"
         Me.chkWatchDogEn.Size = New System.Drawing.Size(95, 21)
         Me.chkWatchDogEn.TabIndex = 54
         Me.chkWatchDogEn.Text = "Vbus OVP"
-        Me.chkWatchDogEn.UseVisualStyleBackColor = true
+        Me.chkWatchDogEn.UseVisualStyleBackColor = True
         '
         'chkMissBatteryDetEn
         '
-        Me.chkMissBatteryDetEn.AutoSize = true
+        Me.chkMissBatteryDetEn.AutoSize = True
         Me.chkMissBatteryDetEn.Location = New System.Drawing.Point(327, 56)
         Me.chkMissBatteryDetEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkMissBatteryDetEn.Name = "chkMissBatteryDetEn"
         Me.chkMissBatteryDetEn.Size = New System.Drawing.Size(95, 21)
         Me.chkMissBatteryDetEn.TabIndex = 52
         Me.chkMissBatteryDetEn.Text = "Vbus OVP"
-        Me.chkMissBatteryDetEn.UseVisualStyleBackColor = true
+        Me.chkMissBatteryDetEn.UseVisualStyleBackColor = True
         '
         'chkIinForceIncrementEn
         '
-        Me.chkIinForceIncrementEn.AutoSize = true
+        Me.chkIinForceIncrementEn.AutoSize = True
         Me.chkIinForceIncrementEn.Location = New System.Drawing.Point(327, 26)
         Me.chkIinForceIncrementEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkIinForceIncrementEn.Name = "chkIinForceIncrementEn"
         Me.chkIinForceIncrementEn.Size = New System.Drawing.Size(95, 21)
         Me.chkIinForceIncrementEn.TabIndex = 51
         Me.chkIinForceIncrementEn.Text = "Vbus OVP"
-        Me.chkIinForceIncrementEn.UseVisualStyleBackColor = true
+        Me.chkIinForceIncrementEn.UseVisualStyleBackColor = True
         '
         'cmbOVDelta
         '
-        Me.cmbOVDelta.FormattingEnabled = true
+        Me.cmbOVDelta.FormattingEnabled = True
         Me.cmbOVDelta.Location = New System.Drawing.Point(183, 58)
         Me.cmbOVDelta.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbOVDelta.Name = "cmbOVDelta"
@@ -1249,7 +1283,7 @@ Partial Class FrmMain_mp12
         '
         'lblOVDelta
         '
-        Me.lblOVDelta.AutoSize = true
+        Me.lblOVDelta.AutoSize = True
         Me.lblOVDelta.Location = New System.Drawing.Point(19, 61)
         Me.lblOVDelta.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblOVDelta.Name = "lblOVDelta"
@@ -1259,7 +1293,7 @@ Partial Class FrmMain_mp12
         '
         'cmbChargerTimer
         '
-        Me.cmbChargerTimer.FormattingEnabled = true
+        Me.cmbChargerTimer.FormattingEnabled = True
         Me.cmbChargerTimer.Location = New System.Drawing.Point(183, 92)
         Me.cmbChargerTimer.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbChargerTimer.Name = "cmbChargerTimer"
@@ -1268,7 +1302,7 @@ Partial Class FrmMain_mp12
         '
         'cmbWatchdogCfg
         '
-        Me.cmbWatchdogCfg.FormattingEnabled = true
+        Me.cmbWatchdogCfg.FormattingEnabled = True
         Me.cmbWatchdogCfg.Location = New System.Drawing.Point(183, 126)
         Me.cmbWatchdogCfg.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbWatchdogCfg.Name = "cmbWatchdogCfg"
@@ -1277,7 +1311,7 @@ Partial Class FrmMain_mp12
         '
         'lblWatchdogCfg
         '
-        Me.lblWatchdogCfg.AutoSize = true
+        Me.lblWatchdogCfg.AutoSize = True
         Me.lblWatchdogCfg.Location = New System.Drawing.Point(19, 129)
         Me.lblWatchdogCfg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWatchdogCfg.Name = "lblWatchdogCfg"
@@ -1293,13 +1327,13 @@ Partial Class FrmMain_mp12
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Padding = New System.Windows.Forms.Padding(1, 0, 19, 0)
         Me.StatusStrip1.Size = New System.Drawing.Size(819, 25)
-        Me.StatusStrip1.SizingGrip = false
+        Me.StatusStrip1.SizingGrip = False
         Me.StatusStrip1.TabIndex = 37
         Me.StatusStrip1.Text = "StatusStrip1"
         '
         'tslConnection
         '
-        Me.tslConnection.Image = CType(resources.GetObject("tslConnection.Image"),System.Drawing.Image)
+        Me.tslConnection.Image = CType(resources.GetObject("tslConnection.Image"), System.Drawing.Image)
         Me.tslConnection.Name = "tslConnection"
         Me.tslConnection.Size = New System.Drawing.Size(119, 20)
         Me.tslConnection.Text = "Disconnected"
@@ -1308,7 +1342,7 @@ Partial Class FrmMain_mp12
         '
         Me.tslInterface.Name = "tslInterface"
         Me.tslInterface.Size = New System.Drawing.Size(680, 20)
-        Me.tslInterface.Spring = true
+        Me.tslInterface.Spring = True
         Me.tslInterface.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'PictureBox1
@@ -1319,11 +1353,11 @@ Partial Class FrmMain_mp12
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(133, 62)
         Me.PictureBox1.TabIndex = 36
-        Me.PictureBox1.TabStop = false
+        Me.PictureBox1.TabStop = False
         '
         'lblChargerTimer
         '
-        Me.lblChargerTimer.AutoSize = true
+        Me.lblChargerTimer.AutoSize = True
         Me.lblChargerTimer.Location = New System.Drawing.Point(19, 95)
         Me.lblChargerTimer.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblChargerTimer.Name = "lblChargerTimer"
@@ -1336,7 +1370,7 @@ Partial Class FrmMain_mp12
         '
         'lblVFloatVal
         '
-        Me.lblVFloatVal.AutoSize = true
+        Me.lblVFloatVal.AutoSize = True
         Me.lblVFloatVal.Location = New System.Drawing.Point(443, 198)
         Me.lblVFloatVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVFloatVal.Name = "lblVFloatVal"
@@ -1346,7 +1380,7 @@ Partial Class FrmMain_mp12
         '
         'trbVFloat
         '
-        Me.trbVFloat.AutoSize = false
+        Me.trbVFloat.AutoSize = False
         Me.trbVFloat.Location = New System.Drawing.Point(183, 198)
         Me.trbVFloat.Margin = New System.Windows.Forms.Padding(4)
         Me.trbVFloat.Name = "trbVFloat"
@@ -1355,7 +1389,7 @@ Partial Class FrmMain_mp12
         '
         'lblVFloat
         '
-        Me.lblVFloat.AutoSize = true
+        Me.lblVFloat.AutoSize = True
         Me.lblVFloat.Location = New System.Drawing.Point(19, 198)
         Me.lblVFloat.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblVFloat.Name = "lblVFloat"
@@ -1365,7 +1399,7 @@ Partial Class FrmMain_mp12
         '
         'cmbUVDelta
         '
-        Me.cmbUVDelta.FormattingEnabled = true
+        Me.cmbUVDelta.FormattingEnabled = True
         Me.cmbUVDelta.Location = New System.Drawing.Point(183, 24)
         Me.cmbUVDelta.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbUVDelta.Name = "cmbUVDelta"
@@ -1398,7 +1432,7 @@ Partial Class FrmMain_mp12
         Me.tbpProt.Size = New System.Drawing.Size(546, 304)
         Me.tbpProt.TabIndex = 4
         Me.tbpProt.Text = "Protection"
-        Me.tbpProt.UseVisualStyleBackColor = true
+        Me.tbpProt.UseVisualStyleBackColor = True
         '
         'btnProtectRead
         '
@@ -1409,7 +1443,7 @@ Partial Class FrmMain_mp12
         Me.btnProtectRead.Size = New System.Drawing.Size(76, 26)
         Me.btnProtectRead.TabIndex = 59
         Me.btnProtectRead.Text = "Read"
-        Me.btnProtectRead.UseVisualStyleBackColor = false
+        Me.btnProtectRead.UseVisualStyleBackColor = False
         '
         'btnProtectSet
         '
@@ -1419,11 +1453,11 @@ Partial Class FrmMain_mp12
         Me.btnProtectSet.Size = New System.Drawing.Size(76, 26)
         Me.btnProtectSet.TabIndex = 58
         Me.btnProtectSet.Text = "Set"
-        Me.btnProtectSet.UseVisualStyleBackColor = false
+        Me.btnProtectSet.UseVisualStyleBackColor = False
         '
         'lblUVDelta
         '
-        Me.lblUVDelta.AutoSize = true
+        Me.lblUVDelta.AutoSize = True
         Me.lblUVDelta.Location = New System.Drawing.Point(19, 26)
         Me.lblUVDelta.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblUVDelta.Name = "lblUVDelta"
@@ -1433,14 +1467,14 @@ Partial Class FrmMain_mp12
         '
         'chkCfgEn
         '
-        Me.chkCfgEn.AutoSize = true
+        Me.chkCfgEn.AutoSize = True
         Me.chkCfgEn.Location = New System.Drawing.Point(327, 26)
         Me.chkCfgEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkCfgEn.Name = "chkCfgEn"
         Me.chkCfgEn.Size = New System.Drawing.Size(66, 21)
         Me.chkCfgEn.TabIndex = 15
         Me.chkCfgEn.Text = "cfgEn"
-        Me.chkCfgEn.UseVisualStyleBackColor = true
+        Me.chkCfgEn.UseVisualStyleBackColor = True
         '
         'pnlFunctions
         '
@@ -1464,7 +1498,7 @@ Partial Class FrmMain_mp12
         Me.btnCurrentADCRead.Size = New System.Drawing.Size(76, 26)
         Me.btnCurrentADCRead.TabIndex = 60
         Me.btnCurrentADCRead.Text = "Read"
-        Me.btnCurrentADCRead.UseVisualStyleBackColor = false
+        Me.btnCurrentADCRead.UseVisualStyleBackColor = False
         '
         'GrpBoxSTSD
         '
@@ -1473,7 +1507,7 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSTSD.Name = "GrpBoxSTSD"
         Me.GrpBoxSTSD.Size = New System.Drawing.Size(106, 71)
         Me.GrpBoxSTSD.TabIndex = 38
-        Me.GrpBoxSTSD.TabStop = false
+        Me.GrpBoxSTSD.TabStop = False
         Me.GrpBoxSTSD.Text = "I Charge"
         '
         'txtIchgStatus
@@ -1481,7 +1515,7 @@ Partial Class FrmMain_mp12
         Me.txtIchgStatus.Location = New System.Drawing.Point(7, 35)
         Me.txtIchgStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIchgStatus.Name = "txtIchgStatus"
-        Me.txtIchgStatus.ReadOnly = true
+        Me.txtIchgStatus.ReadOnly = True
         Me.txtIchgStatus.Size = New System.Drawing.Size(90, 22)
         Me.txtIchgStatus.TabIndex = 27
         '
@@ -1501,7 +1535,7 @@ Partial Class FrmMain_mp12
         Me.grpRaised.Padding = New System.Windows.Forms.Padding(4)
         Me.grpRaised.Size = New System.Drawing.Size(229, 336)
         Me.grpRaised.TabIndex = 28
-        Me.grpRaised.TabStop = false
+        Me.grpRaised.TabStop = False
         Me.grpRaised.Text = "Raised interrupts"
         '
         'btnRaisedIntRead
@@ -1512,7 +1546,7 @@ Partial Class FrmMain_mp12
         Me.btnRaisedIntRead.Size = New System.Drawing.Size(76, 26)
         Me.btnRaisedIntRead.TabIndex = 59
         Me.btnRaisedIntRead.Text = "Read"
-        Me.btnRaisedIntRead.UseVisualStyleBackColor = false
+        Me.btnRaisedIntRead.UseVisualStyleBackColor = False
         '
         'chkTimerInt
         '
@@ -1523,7 +1557,7 @@ Partial Class FrmMain_mp12
         Me.chkTimerInt.Size = New System.Drawing.Size(192, 21)
         Me.chkTimerInt.TabIndex = 43
         Me.chkTimerInt.Text = "Vbus OVP"
-        Me.chkTimerInt.UseVisualStyleBackColor = true
+        Me.chkTimerInt.UseVisualStyleBackColor = True
         '
         'chkADCDoneInt
         '
@@ -1534,7 +1568,7 @@ Partial Class FrmMain_mp12
         Me.chkADCDoneInt.Size = New System.Drawing.Size(192, 21)
         Me.chkADCDoneInt.TabIndex = 42
         Me.chkADCDoneInt.Text = "Vbus OVP"
-        Me.chkADCDoneInt.UseVisualStyleBackColor = true
+        Me.chkADCDoneInt.UseVisualStyleBackColor = True
         '
         'chkTempRegInt
         '
@@ -1545,7 +1579,7 @@ Partial Class FrmMain_mp12
         Me.chkTempRegInt.Size = New System.Drawing.Size(192, 21)
         Me.chkTempRegInt.TabIndex = 41
         Me.chkTempRegInt.Text = "Vbus OVP"
-        Me.chkTempRegInt.UseVisualStyleBackColor = true
+        Me.chkTempRegInt.UseVisualStyleBackColor = True
         '
         'chkCtrlLimitInt
         '
@@ -1556,7 +1590,7 @@ Partial Class FrmMain_mp12
         Me.chkCtrlLimitInt.Size = New System.Drawing.Size(192, 21)
         Me.chkCtrlLimitInt.TabIndex = 40
         Me.chkCtrlLimitInt.Text = "Vbus OVP"
-        Me.chkCtrlLimitInt.UseVisualStyleBackColor = true
+        Me.chkCtrlLimitInt.UseVisualStyleBackColor = True
         '
         'chkChgPhaseInt
         '
@@ -1567,7 +1601,7 @@ Partial Class FrmMain_mp12
         Me.chkChgPhaseInt.Size = New System.Drawing.Size(192, 21)
         Me.chkChgPhaseInt.TabIndex = 38
         Me.chkChgPhaseInt.Text = "Vbus OVP"
-        Me.chkChgPhaseInt.UseVisualStyleBackColor = true
+        Me.chkChgPhaseInt.UseVisualStyleBackColor = True
         '
         'chkNTCtempInt
         '
@@ -1578,7 +1612,7 @@ Partial Class FrmMain_mp12
         Me.chkNTCtempInt.Size = New System.Drawing.Size(192, 21)
         Me.chkNTCtempInt.TabIndex = 37
         Me.chkNTCtempInt.Text = "Vbus OVP"
-        Me.chkNTCtempInt.UseVisualStyleBackColor = true
+        Me.chkNTCtempInt.UseVisualStyleBackColor = True
         '
         'chkVOkInt
         '
@@ -1589,7 +1623,7 @@ Partial Class FrmMain_mp12
         Me.chkVOkInt.Size = New System.Drawing.Size(192, 21)
         Me.chkVOkInt.TabIndex = 36
         Me.chkVOkInt.Text = "V OK Int"
-        Me.chkVOkInt.UseVisualStyleBackColor = true
+        Me.chkVOkInt.UseVisualStyleBackColor = True
         '
         'GrpBoxSTSC
         '
@@ -1598,7 +1632,7 @@ Partial Class FrmMain_mp12
         Me.GrpBoxSTSC.Name = "GrpBoxSTSC"
         Me.GrpBoxSTSC.Size = New System.Drawing.Size(108, 71)
         Me.GrpBoxSTSC.TabIndex = 37
-        Me.GrpBoxSTSC.TabStop = false
+        Me.GrpBoxSTSC.TabStop = False
         Me.GrpBoxSTSC.Text = "I Input"
         '
         'txtIinStatus
@@ -1606,7 +1640,7 @@ Partial Class FrmMain_mp12
         Me.txtIinStatus.Location = New System.Drawing.Point(16, 35)
         Me.txtIinStatus.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIinStatus.Name = "txtIinStatus"
-        Me.txtIinStatus.ReadOnly = true
+        Me.txtIinStatus.ReadOnly = True
         Me.txtIinStatus.Size = New System.Drawing.Size(79, 22)
         Me.txtIinStatus.TabIndex = 27
         '
@@ -1633,7 +1667,7 @@ Partial Class FrmMain_mp12
         Me.grpAdcChannels.Padding = New System.Windows.Forms.Padding(4)
         Me.grpAdcChannels.Size = New System.Drawing.Size(546, 141)
         Me.grpAdcChannels.TabIndex = 30
-        Me.grpAdcChannels.TabStop = false
+        Me.grpAdcChannels.TabStop = False
         Me.grpAdcChannels.Text = "ADC channels"
         '
         'btnReadADC
@@ -1645,14 +1679,14 @@ Partial Class FrmMain_mp12
         Me.btnReadADC.Size = New System.Drawing.Size(76, 26)
         Me.btnReadADC.TabIndex = 58
         Me.btnReadADC.Text = "Read"
-        Me.btnReadADC.UseVisualStyleBackColor = false
+        Me.btnReadADC.UseVisualStyleBackColor = False
         '
         'txtBatteryVoltage
         '
         Me.txtBatteryVoltage.Location = New System.Drawing.Point(417, 17)
         Me.txtBatteryVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBatteryVoltage.Name = "txtBatteryVoltage"
-        Me.txtBatteryVoltage.ReadOnly = true
+        Me.txtBatteryVoltage.ReadOnly = True
         Me.txtBatteryVoltage.Size = New System.Drawing.Size(103, 22)
         Me.txtBatteryVoltage.TabIndex = 26
         '
@@ -1661,7 +1695,7 @@ Partial Class FrmMain_mp12
         Me.txtInputVoltage.Location = New System.Drawing.Point(417, 49)
         Me.txtInputVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtInputVoltage.Name = "txtInputVoltage"
-        Me.txtInputVoltage.ReadOnly = true
+        Me.txtInputVoltage.ReadOnly = True
         Me.txtInputVoltage.Size = New System.Drawing.Size(103, 22)
         Me.txtInputVoltage.TabIndex = 26
         '
@@ -1670,7 +1704,7 @@ Partial Class FrmMain_mp12
         Me.txtChargeCurrent.Location = New System.Drawing.Point(163, 113)
         Me.txtChargeCurrent.Margin = New System.Windows.Forms.Padding(4)
         Me.txtChargeCurrent.Name = "txtChargeCurrent"
-        Me.txtChargeCurrent.ReadOnly = true
+        Me.txtChargeCurrent.ReadOnly = True
         Me.txtChargeCurrent.Size = New System.Drawing.Size(95, 22)
         Me.txtChargeCurrent.TabIndex = 25
         '
@@ -1679,7 +1713,7 @@ Partial Class FrmMain_mp12
         Me.txtInputCurrent.Location = New System.Drawing.Point(417, 84)
         Me.txtInputCurrent.Margin = New System.Windows.Forms.Padding(4)
         Me.txtInputCurrent.Name = "txtInputCurrent"
-        Me.txtInputCurrent.ReadOnly = true
+        Me.txtInputCurrent.ReadOnly = True
         Me.txtInputCurrent.Size = New System.Drawing.Size(103, 22)
         Me.txtInputCurrent.TabIndex = 25
         '
@@ -1688,7 +1722,7 @@ Partial Class FrmMain_mp12
         Me.txtDieTemp.Location = New System.Drawing.Point(163, 81)
         Me.txtDieTemp.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDieTemp.Name = "txtDieTemp"
-        Me.txtDieTemp.ReadOnly = true
+        Me.txtDieTemp.ReadOnly = True
         Me.txtDieTemp.Size = New System.Drawing.Size(95, 22)
         Me.txtDieTemp.TabIndex = 24
         '
@@ -1697,7 +1731,7 @@ Partial Class FrmMain_mp12
         Me.txtSysVoltage.Location = New System.Drawing.Point(163, 49)
         Me.txtSysVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSysVoltage.Name = "txtSysVoltage"
-        Me.txtSysVoltage.ReadOnly = true
+        Me.txtSysVoltage.ReadOnly = True
         Me.txtSysVoltage.Size = New System.Drawing.Size(95, 22)
         Me.txtSysVoltage.TabIndex = 23
         '
@@ -1706,86 +1740,86 @@ Partial Class FrmMain_mp12
         Me.txtNtcAdc.Location = New System.Drawing.Point(163, 17)
         Me.txtNtcAdc.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNtcAdc.Name = "txtNtcAdc"
-        Me.txtNtcAdc.ReadOnly = true
+        Me.txtNtcAdc.ReadOnly = True
         Me.txtNtcAdc.Size = New System.Drawing.Size(95, 22)
         Me.txtNtcAdc.TabIndex = 22
         '
         'chkInputVoltageAdcEn
         '
-        Me.chkInputVoltageAdcEn.AutoSize = true
+        Me.chkInputVoltageAdcEn.AutoSize = True
         Me.chkInputVoltageAdcEn.Location = New System.Drawing.Point(286, 49)
         Me.chkInputVoltageAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkInputVoltageAdcEn.Name = "chkInputVoltageAdcEn"
         Me.chkInputVoltageAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkInputVoltageAdcEn.TabIndex = 19
         Me.chkInputVoltageAdcEn.Text = "Vbus OVP"
-        Me.chkInputVoltageAdcEn.UseVisualStyleBackColor = true
+        Me.chkInputVoltageAdcEn.UseVisualStyleBackColor = True
         '
         'chkBatteryVoltageAdcEn
         '
-        Me.chkBatteryVoltageAdcEn.AutoSize = true
+        Me.chkBatteryVoltageAdcEn.AutoSize = True
         Me.chkBatteryVoltageAdcEn.Location = New System.Drawing.Point(286, 17)
         Me.chkBatteryVoltageAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkBatteryVoltageAdcEn.Name = "chkBatteryVoltageAdcEn"
         Me.chkBatteryVoltageAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkBatteryVoltageAdcEn.TabIndex = 18
         Me.chkBatteryVoltageAdcEn.Text = "Vbus OVP"
-        Me.chkBatteryVoltageAdcEn.UseVisualStyleBackColor = true
+        Me.chkBatteryVoltageAdcEn.UseVisualStyleBackColor = True
         '
         'chkInputCurrentAdcEn
         '
-        Me.chkInputCurrentAdcEn.AutoSize = true
+        Me.chkInputCurrentAdcEn.AutoSize = True
         Me.chkInputCurrentAdcEn.Location = New System.Drawing.Point(286, 81)
         Me.chkInputCurrentAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkInputCurrentAdcEn.Name = "chkInputCurrentAdcEn"
         Me.chkInputCurrentAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkInputCurrentAdcEn.TabIndex = 17
         Me.chkInputCurrentAdcEn.Text = "Vbus OVP"
-        Me.chkInputCurrentAdcEn.UseVisualStyleBackColor = true
+        Me.chkInputCurrentAdcEn.UseVisualStyleBackColor = True
         '
         'chkChrageCurrentAdcEn
         '
-        Me.chkChrageCurrentAdcEn.AutoSize = true
+        Me.chkChrageCurrentAdcEn.AutoSize = True
         Me.chkChrageCurrentAdcEn.Location = New System.Drawing.Point(19, 117)
         Me.chkChrageCurrentAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkChrageCurrentAdcEn.Name = "chkChrageCurrentAdcEn"
         Me.chkChrageCurrentAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkChrageCurrentAdcEn.TabIndex = 16
         Me.chkChrageCurrentAdcEn.Text = "Vbus OVP"
-        Me.chkChrageCurrentAdcEn.UseVisualStyleBackColor = true
+        Me.chkChrageCurrentAdcEn.UseVisualStyleBackColor = True
         '
         'chkDieTempAdcEn
         '
-        Me.chkDieTempAdcEn.AutoSize = true
+        Me.chkDieTempAdcEn.AutoSize = True
         Me.chkDieTempAdcEn.Location = New System.Drawing.Point(19, 85)
         Me.chkDieTempAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkDieTempAdcEn.Name = "chkDieTempAdcEn"
         Me.chkDieTempAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkDieTempAdcEn.TabIndex = 15
         Me.chkDieTempAdcEn.Text = "Vbus OVP"
-        Me.chkDieTempAdcEn.UseVisualStyleBackColor = true
+        Me.chkDieTempAdcEn.UseVisualStyleBackColor = True
         '
         'chkSysVoltageAdcEn
         '
-        Me.chkSysVoltageAdcEn.AutoSize = true
+        Me.chkSysVoltageAdcEn.AutoSize = True
         Me.chkSysVoltageAdcEn.Location = New System.Drawing.Point(19, 53)
         Me.chkSysVoltageAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkSysVoltageAdcEn.Name = "chkSysVoltageAdcEn"
         Me.chkSysVoltageAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkSysVoltageAdcEn.TabIndex = 14
         Me.chkSysVoltageAdcEn.Text = "Vbus OVP"
-        Me.chkSysVoltageAdcEn.UseVisualStyleBackColor = true
+        Me.chkSysVoltageAdcEn.UseVisualStyleBackColor = True
         '
         'chkNtcAdcEn
         '
-        Me.chkNtcAdcEn.AutoSize = true
+        Me.chkNtcAdcEn.AutoSize = True
         Me.chkNtcAdcEn.Location = New System.Drawing.Point(19, 21)
         Me.chkNtcAdcEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkNtcAdcEn.Name = "chkNtcAdcEn"
         Me.chkNtcAdcEn.Size = New System.Drawing.Size(95, 21)
         Me.chkNtcAdcEn.TabIndex = 13
         Me.chkNtcAdcEn.Text = "Vbus OVP"
-        Me.chkNtcAdcEn.UseVisualStyleBackColor = true
+        Me.chkNtcAdcEn.UseVisualStyleBackColor = True
         '
         'TabControl2
         '
@@ -1838,7 +1872,7 @@ Partial Class FrmMain_mp12
         '
         'cmbSwFreqCfg
         '
-        Me.cmbSwFreqCfg.FormattingEnabled = true
+        Me.cmbSwFreqCfg.FormattingEnabled = True
         Me.cmbSwFreqCfg.Location = New System.Drawing.Point(183, 126)
         Me.cmbSwFreqCfg.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbSwFreqCfg.Name = "cmbSwFreqCfg"
@@ -1854,7 +1888,7 @@ Partial Class FrmMain_mp12
         Me.btnCtlRead.Size = New System.Drawing.Size(76, 26)
         Me.btnCtlRead.TabIndex = 57
         Me.btnCtlRead.Text = "Read"
-        Me.btnCtlRead.UseVisualStyleBackColor = false
+        Me.btnCtlRead.UseVisualStyleBackColor = False
         '
         'btnCtlSet
         '
@@ -1864,22 +1898,22 @@ Partial Class FrmMain_mp12
         Me.btnCtlSet.Size = New System.Drawing.Size(76, 26)
         Me.btnCtlSet.TabIndex = 56
         Me.btnCtlSet.Text = "Set"
-        Me.btnCtlSet.UseVisualStyleBackColor = false
+        Me.btnCtlSet.UseVisualStyleBackColor = False
         '
         'chkLimitIncrementEn
         '
-        Me.chkLimitIncrementEn.AutoSize = true
+        Me.chkLimitIncrementEn.AutoSize = True
         Me.chkLimitIncrementEn.Location = New System.Drawing.Point(327, 116)
         Me.chkLimitIncrementEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkLimitIncrementEn.Name = "chkLimitIncrementEn"
         Me.chkLimitIncrementEn.Size = New System.Drawing.Size(181, 21)
         Me.chkLimitIncrementEn.TabIndex = 55
         Me.chkLimitIncrementEn.Text = "Limit Increment Enabled"
-        Me.chkLimitIncrementEn.UseVisualStyleBackColor = true
+        Me.chkLimitIncrementEn.UseVisualStyleBackColor = True
         '
         'cmbIinSoftStep
         '
-        Me.cmbIinSoftStep.FormattingEnabled = true
+        Me.cmbIinSoftStep.FormattingEnabled = True
         Me.cmbIinSoftStep.Location = New System.Drawing.Point(183, 92)
         Me.cmbIinSoftStep.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbIinSoftStep.Name = "cmbIinSoftStep"
@@ -1888,7 +1922,7 @@ Partial Class FrmMain_mp12
         '
         'lblIinSoftStep
         '
-        Me.lblIinSoftStep.AutoSize = true
+        Me.lblIinSoftStep.AutoSize = True
         Me.lblIinSoftStep.Location = New System.Drawing.Point(19, 95)
         Me.lblIinSoftStep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblIinSoftStep.Name = "lblIinSoftStep"
@@ -1898,7 +1932,7 @@ Partial Class FrmMain_mp12
         '
         'cmbChgSoftStep
         '
-        Me.cmbChgSoftStep.FormattingEnabled = true
+        Me.cmbChgSoftStep.FormattingEnabled = True
         Me.cmbChgSoftStep.Location = New System.Drawing.Point(183, 58)
         Me.cmbChgSoftStep.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbChgSoftStep.Name = "cmbChgSoftStep"
@@ -1907,7 +1941,7 @@ Partial Class FrmMain_mp12
         '
         'lblchgSoftStep
         '
-        Me.lblchgSoftStep.AutoSize = true
+        Me.lblchgSoftStep.AutoSize = True
         Me.lblchgSoftStep.Location = New System.Drawing.Point(19, 61)
         Me.lblchgSoftStep.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblchgSoftStep.Name = "lblchgSoftStep"
@@ -1917,7 +1951,7 @@ Partial Class FrmMain_mp12
         '
         'cmbSenseR
         '
-        Me.cmbSenseR.FormattingEnabled = true
+        Me.cmbSenseR.FormattingEnabled = True
         Me.cmbSenseR.Location = New System.Drawing.Point(183, 24)
         Me.cmbSenseR.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbSenseR.Name = "cmbSenseR"
@@ -1926,7 +1960,7 @@ Partial Class FrmMain_mp12
         '
         'lblSenseR
         '
-        Me.lblSenseR.AutoSize = true
+        Me.lblSenseR.AutoSize = True
         Me.lblSenseR.Location = New System.Drawing.Point(19, 26)
         Me.lblSenseR.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblSenseR.Name = "lblSenseR"
@@ -1955,7 +1989,7 @@ Partial Class FrmMain_mp12
         Me.tbpThermal.Size = New System.Drawing.Size(546, 304)
         Me.tbpThermal.TabIndex = 5
         Me.tbpThermal.Text = "Thermal"
-        Me.tbpThermal.UseVisualStyleBackColor = true
+        Me.tbpThermal.UseVisualStyleBackColor = True
         '
         'btnThermalRead
         '
@@ -1966,7 +2000,7 @@ Partial Class FrmMain_mp12
         Me.btnThermalRead.Size = New System.Drawing.Size(76, 26)
         Me.btnThermalRead.TabIndex = 64
         Me.btnThermalRead.Text = "Read"
-        Me.btnThermalRead.UseVisualStyleBackColor = false
+        Me.btnThermalRead.UseVisualStyleBackColor = False
         '
         'btnThermalSet
         '
@@ -1976,44 +2010,44 @@ Partial Class FrmMain_mp12
         Me.btnThermalSet.Size = New System.Drawing.Size(76, 26)
         Me.btnThermalSet.TabIndex = 63
         Me.btnThermalSet.Text = "Set"
-        Me.btnThermalSet.UseVisualStyleBackColor = false
+        Me.btnThermalSet.UseVisualStyleBackColor = False
         '
         'chkTempMaxEn
         '
-        Me.chkTempMaxEn.AutoSize = true
+        Me.chkTempMaxEn.AutoSize = True
         Me.chkTempMaxEn.Location = New System.Drawing.Point(327, 86)
         Me.chkTempMaxEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkTempMaxEn.Name = "chkTempMaxEn"
         Me.chkTempMaxEn.Size = New System.Drawing.Size(95, 21)
         Me.chkTempMaxEn.TabIndex = 62
         Me.chkTempMaxEn.Text = "Vbus OVP"
-        Me.chkTempMaxEn.UseVisualStyleBackColor = true
+        Me.chkTempMaxEn.UseVisualStyleBackColor = True
         '
         'chkNtcProtectionEn
         '
-        Me.chkNtcProtectionEn.AutoSize = true
+        Me.chkNtcProtectionEn.AutoSize = True
         Me.chkNtcProtectionEn.Location = New System.Drawing.Point(327, 56)
         Me.chkNtcProtectionEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkNtcProtectionEn.Name = "chkNtcProtectionEn"
         Me.chkNtcProtectionEn.Size = New System.Drawing.Size(95, 21)
         Me.chkNtcProtectionEn.TabIndex = 61
         Me.chkNtcProtectionEn.Text = "Vbus OVP"
-        Me.chkNtcProtectionEn.UseVisualStyleBackColor = true
+        Me.chkNtcProtectionEn.UseVisualStyleBackColor = True
         '
         'chkTempRegEn
         '
-        Me.chkTempRegEn.AutoSize = true
+        Me.chkTempRegEn.AutoSize = True
         Me.chkTempRegEn.Location = New System.Drawing.Point(327, 26)
         Me.chkTempRegEn.Margin = New System.Windows.Forms.Padding(4)
         Me.chkTempRegEn.Name = "chkTempRegEn"
         Me.chkTempRegEn.Size = New System.Drawing.Size(95, 21)
         Me.chkTempRegEn.TabIndex = 60
         Me.chkTempRegEn.Text = "Vbus OVP"
-        Me.chkTempRegEn.UseVisualStyleBackColor = true
+        Me.chkTempRegEn.UseVisualStyleBackColor = True
         '
         'cmbTempReg
         '
-        Me.cmbTempReg.FormattingEnabled = true
+        Me.cmbTempReg.FormattingEnabled = True
         Me.cmbTempReg.Location = New System.Drawing.Point(183, 24)
         Me.cmbTempReg.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbTempReg.Name = "cmbTempReg"
@@ -2022,7 +2056,7 @@ Partial Class FrmMain_mp12
         '
         'lblTempReg
         '
-        Me.lblTempReg.AutoSize = true
+        Me.lblTempReg.AutoSize = True
         Me.lblTempReg.Location = New System.Drawing.Point(19, 26)
         Me.lblTempReg.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTempReg.Name = "lblTempReg"
@@ -2032,7 +2066,7 @@ Partial Class FrmMain_mp12
         '
         'cmbTempDelta
         '
-        Me.cmbTempDelta.FormattingEnabled = true
+        Me.cmbTempDelta.FormattingEnabled = True
         Me.cmbTempDelta.Location = New System.Drawing.Point(183, 58)
         Me.cmbTempDelta.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbTempDelta.Name = "cmbTempDelta"
@@ -2041,7 +2075,7 @@ Partial Class FrmMain_mp12
         '
         'lblTempDelta
         '
-        Me.lblTempDelta.AutoSize = true
+        Me.lblTempDelta.AutoSize = True
         Me.lblTempDelta.Location = New System.Drawing.Point(19, 61)
         Me.lblTempDelta.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTempDelta.Name = "lblTempDelta"
@@ -2051,7 +2085,7 @@ Partial Class FrmMain_mp12
         '
         'lblNTCThresholdVal
         '
-        Me.lblNTCThresholdVal.AutoSize = true
+        Me.lblNTCThresholdVal.AutoSize = True
         Me.lblNTCThresholdVal.Location = New System.Drawing.Point(432, 198)
         Me.lblNTCThresholdVal.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNTCThresholdVal.Name = "lblNTCThresholdVal"
@@ -2061,7 +2095,7 @@ Partial Class FrmMain_mp12
         '
         'trbNTCThreshold
         '
-        Me.trbNTCThreshold.AutoSize = false
+        Me.trbNTCThreshold.AutoSize = False
         Me.trbNTCThreshold.Location = New System.Drawing.Point(183, 198)
         Me.trbNTCThreshold.Margin = New System.Windows.Forms.Padding(4)
         Me.trbNTCThreshold.Name = "trbNTCThreshold"
@@ -2070,7 +2104,7 @@ Partial Class FrmMain_mp12
         '
         'lblNTCThreshold
         '
-        Me.lblNTCThreshold.AutoSize = true
+        Me.lblNTCThreshold.AutoSize = True
         Me.lblNTCThreshold.Location = New System.Drawing.Point(19, 198)
         Me.lblNTCThreshold.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNTCThreshold.Name = "lblNTCThreshold"
@@ -2088,7 +2122,7 @@ Partial Class FrmMain_mp12
         Me.tbpMisc.Size = New System.Drawing.Size(546, 304)
         Me.tbpMisc.TabIndex = 6
         Me.tbpMisc.Text = "Misc"
-        Me.tbpMisc.UseVisualStyleBackColor = true
+        Me.tbpMisc.UseVisualStyleBackColor = True
         '
         'gbxDebug
         '
@@ -2129,7 +2163,7 @@ Partial Class FrmMain_mp12
         Me.gbxDebug.Name = "gbxDebug"
         Me.gbxDebug.Size = New System.Drawing.Size(502, 255)
         Me.gbxDebug.TabIndex = 31
-        Me.gbxDebug.TabStop = false
+        Me.gbxDebug.TabStop = False
         Me.gbxDebug.Text = "Debug Registers"
         '
         'btnDbgRegRead6
@@ -2141,7 +2175,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegRead6.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegRead6.TabIndex = 94
         Me.btnDbgRegRead6.Text = "Read"
-        Me.btnDbgRegRead6.UseVisualStyleBackColor = false
+        Me.btnDbgRegRead6.UseVisualStyleBackColor = False
         '
         'btnDbgRegSet6
         '
@@ -2152,7 +2186,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegSet6.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegSet6.TabIndex = 93
         Me.btnDbgRegSet6.Text = "Set"
-        Me.btnDbgRegSet6.UseVisualStyleBackColor = false
+        Me.btnDbgRegSet6.UseVisualStyleBackColor = False
         '
         'txtDbgRegAddr6
         '
@@ -2176,7 +2210,7 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegReadBack6.Location = New System.Drawing.Point(212, 189)
         Me.txtDbgRegReadBack6.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDbgRegReadBack6.Name = "txtDbgRegReadBack6"
-        Me.txtDbgRegReadBack6.ReadOnly = true
+        Me.txtDbgRegReadBack6.ReadOnly = True
         Me.txtDbgRegReadBack6.Size = New System.Drawing.Size(70, 22)
         Me.txtDbgRegReadBack6.TabIndex = 90
         '
@@ -2189,7 +2223,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegRead5.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegRead5.TabIndex = 89
         Me.btnDbgRegRead5.Text = "Read"
-        Me.btnDbgRegRead5.UseVisualStyleBackColor = false
+        Me.btnDbgRegRead5.UseVisualStyleBackColor = False
         '
         'btnDbgRegSet5
         '
@@ -2200,7 +2234,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegSet5.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegSet5.TabIndex = 88
         Me.btnDbgRegSet5.Text = "Set"
-        Me.btnDbgRegSet5.UseVisualStyleBackColor = false
+        Me.btnDbgRegSet5.UseVisualStyleBackColor = False
         '
         'btnDbgRegRead4
         '
@@ -2211,7 +2245,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegRead4.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegRead4.TabIndex = 87
         Me.btnDbgRegRead4.Text = "Read"
-        Me.btnDbgRegRead4.UseVisualStyleBackColor = false
+        Me.btnDbgRegRead4.UseVisualStyleBackColor = False
         '
         'btnDbgRegSet4
         '
@@ -2222,7 +2256,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegSet4.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegSet4.TabIndex = 86
         Me.btnDbgRegSet4.Text = "Set"
-        Me.btnDbgRegSet4.UseVisualStyleBackColor = false
+        Me.btnDbgRegSet4.UseVisualStyleBackColor = False
         '
         'btnDbgRegRead3
         '
@@ -2233,7 +2267,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegRead3.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegRead3.TabIndex = 85
         Me.btnDbgRegRead3.Text = "Read"
-        Me.btnDbgRegRead3.UseVisualStyleBackColor = false
+        Me.btnDbgRegRead3.UseVisualStyleBackColor = False
         '
         'btnDbgRegSet3
         '
@@ -2244,7 +2278,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegSet3.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegSet3.TabIndex = 84
         Me.btnDbgRegSet3.Text = "Set"
-        Me.btnDbgRegSet3.UseVisualStyleBackColor = false
+        Me.btnDbgRegSet3.UseVisualStyleBackColor = False
         '
         'btnDbgRegRead2
         '
@@ -2255,7 +2289,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegRead2.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegRead2.TabIndex = 83
         Me.btnDbgRegRead2.Text = "Read"
-        Me.btnDbgRegRead2.UseVisualStyleBackColor = false
+        Me.btnDbgRegRead2.UseVisualStyleBackColor = False
         '
         'btnDbgRegSet2
         '
@@ -2266,7 +2300,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegSet2.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegSet2.TabIndex = 82
         Me.btnDbgRegSet2.Text = "Set"
-        Me.btnDbgRegSet2.UseVisualStyleBackColor = false
+        Me.btnDbgRegSet2.UseVisualStyleBackColor = False
         '
         'txtDbgRegAddr5
         '
@@ -2290,7 +2324,7 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegReadBack5.Location = New System.Drawing.Point(212, 161)
         Me.txtDbgRegReadBack5.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDbgRegReadBack5.Name = "txtDbgRegReadBack5"
-        Me.txtDbgRegReadBack5.ReadOnly = true
+        Me.txtDbgRegReadBack5.ReadOnly = True
         Me.txtDbgRegReadBack5.Size = New System.Drawing.Size(70, 22)
         Me.txtDbgRegReadBack5.TabIndex = 79
         '
@@ -2316,7 +2350,7 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegReadBack3.Location = New System.Drawing.Point(212, 103)
         Me.txtDbgRegReadBack3.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDbgRegReadBack3.Name = "txtDbgRegReadBack3"
-        Me.txtDbgRegReadBack3.ReadOnly = true
+        Me.txtDbgRegReadBack3.ReadOnly = True
         Me.txtDbgRegReadBack3.Size = New System.Drawing.Size(70, 22)
         Me.txtDbgRegReadBack3.TabIndex = 74
         '
@@ -2342,7 +2376,7 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegReadBack4.Location = New System.Drawing.Point(212, 131)
         Me.txtDbgRegReadBack4.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDbgRegReadBack4.Name = "txtDbgRegReadBack4"
-        Me.txtDbgRegReadBack4.ReadOnly = true
+        Me.txtDbgRegReadBack4.ReadOnly = True
         Me.txtDbgRegReadBack4.Size = New System.Drawing.Size(70, 22)
         Me.txtDbgRegReadBack4.TabIndex = 69
         '
@@ -2368,13 +2402,13 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegReadBack2.Location = New System.Drawing.Point(212, 75)
         Me.txtDbgRegReadBack2.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDbgRegReadBack2.Name = "txtDbgRegReadBack2"
-        Me.txtDbgRegReadBack2.ReadOnly = true
+        Me.txtDbgRegReadBack2.ReadOnly = True
         Me.txtDbgRegReadBack2.Size = New System.Drawing.Size(70, 22)
         Me.txtDbgRegReadBack2.TabIndex = 64
         '
         'Label6
         '
-        Me.Label6.AutoSize = true
+        Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(209, 27)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(77, 17)
@@ -2383,7 +2417,7 @@ Partial Class FrmMain_mp12
         '
         'Label3
         '
-        Me.Label3.AutoSize = true
+        Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(125, 27)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(54, 17)
@@ -2392,7 +2426,7 @@ Partial Class FrmMain_mp12
         '
         'Label1
         '
-        Me.Label1.AutoSize = true
+        Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(31, 27)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(64, 17)
@@ -2408,7 +2442,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegRead1.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegRead1.TabIndex = 60
         Me.btnDbgRegRead1.Text = "Read"
-        Me.btnDbgRegRead1.UseVisualStyleBackColor = false
+        Me.btnDbgRegRead1.UseVisualStyleBackColor = False
         '
         'btnDbgRegSet1
         '
@@ -2419,7 +2453,7 @@ Partial Class FrmMain_mp12
         Me.btnDbgRegSet1.Size = New System.Drawing.Size(76, 22)
         Me.btnDbgRegSet1.TabIndex = 59
         Me.btnDbgRegSet1.Text = "Set"
-        Me.btnDbgRegSet1.UseVisualStyleBackColor = false
+        Me.btnDbgRegSet1.UseVisualStyleBackColor = False
         '
         'txtDbgRegAddr1
         '
@@ -2443,7 +2477,7 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegReadBack1.Location = New System.Drawing.Point(212, 47)
         Me.txtDbgRegReadBack1.Margin = New System.Windows.Forms.Padding(4)
         Me.txtDbgRegReadBack1.Name = "txtDbgRegReadBack1"
-        Me.txtDbgRegReadBack1.ReadOnly = true
+        Me.txtDbgRegReadBack1.ReadOnly = True
         Me.txtDbgRegReadBack1.Size = New System.Drawing.Size(70, 22)
         Me.txtDbgRegReadBack1.TabIndex = 28
         '
@@ -2473,7 +2507,7 @@ Partial Class FrmMain_mp12
         'tsbFunctions
         '
         Me.tsbFunctions.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.tsbFunctions.Image = CType(resources.GetObject("tsbFunctions.Image"),System.Drawing.Image)
+        Me.tsbFunctions.Image = CType(resources.GetObject("tsbFunctions.Image"), System.Drawing.Image)
         Me.tsbFunctions.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbFunctions.Name = "tsbFunctions"
         Me.tsbFunctions.Size = New System.Drawing.Size(24, 25)
@@ -2494,7 +2528,7 @@ Partial Class FrmMain_mp12
         Me.tsbReset.Name = "tsbReset"
         Me.tsbReset.Size = New System.Drawing.Size(24, 25)
         Me.tsbReset.Text = "Reset device"
-        Me.tsbReset.ToolTipText = "Reset PCA949x"
+        Me.tsbReset.ToolTipText = "Reset PCA9468"
         '
         'ToolStripSeparator4
         '
@@ -2568,7 +2602,7 @@ Partial Class FrmMain_mp12
         'tsmInterval4
         '
         Me.tsmInterval4.Name = "tsmInterval4"
-        Me.tsmInterval4.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D4),System.Windows.Forms.Keys)
+        Me.tsmInterval4.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D4), System.Windows.Forms.Keys)
         Me.tsmInterval4.Size = New System.Drawing.Size(260, 24)
         Me.tsmInterval4.Text = "&Four times a second"
         Me.tsmInterval4.ToolTipText = "Read ADC and interrupts four times a second"
@@ -2576,7 +2610,7 @@ Partial Class FrmMain_mp12
         'tsmInterval1
         '
         Me.tsmInterval1.Name = "tsmInterval1"
-        Me.tsmInterval1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D1),System.Windows.Forms.Keys)
+        Me.tsmInterval1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D1), System.Windows.Forms.Keys)
         Me.tsmInterval1.Size = New System.Drawing.Size(260, 24)
         Me.tsmInterval1.Text = "&Once a second"
         Me.tsmInterval1.ToolTipText = "Read ADC and interrupts once a second"
@@ -2589,7 +2623,7 @@ Partial Class FrmMain_mp12
         'tsmInterval0
         '
         Me.tsmInterval0.Name = "tsmInterval0"
-        Me.tsmInterval0.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D0),System.Windows.Forms.Keys)
+        Me.tsmInterval0.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D0), System.Windows.Forms.Keys)
         Me.tsmInterval0.Size = New System.Drawing.Size(260, 24)
         Me.tsmInterval0.Text = "&Disabled"
         Me.tsmInterval0.ToolTipText = "Registers are read manually"
@@ -2605,7 +2639,7 @@ Partial Class FrmMain_mp12
         'tsmInterval2
         '
         Me.tsmInterval2.Name = "tsmInterval2"
-        Me.tsmInterval2.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D2),System.Windows.Forms.Keys)
+        Me.tsmInterval2.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D2), System.Windows.Forms.Keys)
         Me.tsmInterval2.Size = New System.Drawing.Size(260, 24)
         Me.tsmInterval2.Text = "&Twice a second"
         Me.tsmInterval2.ToolTipText = "Read ADC and interrupts twice a second"
@@ -2692,21 +2726,11 @@ Partial Class FrmMain_mp12
         Me.pnlRegisters.Name = "pnlRegisters"
         Me.pnlRegisters.Size = New System.Drawing.Size(814, 497)
         Me.pnlRegisters.TabIndex = 38
-        Me.pnlRegisters.Visible = false
-        '
-        'chkAdcShutDownCfg
-        '
-        Me.chkAdcShutDownCfg.AutoSize = true
-        Me.chkAdcShutDownCfg.Location = New System.Drawing.Point(18, 98)
-        Me.chkAdcShutDownCfg.Name = "chkAdcShutDownCfg"
-        Me.chkAdcShutDownCfg.Size = New System.Drawing.Size(158, 21)
-        Me.chkAdcShutDownCfg.TabIndex = 60
-        Me.chkAdcShutDownCfg.Text = "ADC ShutDown CFG"
-        Me.chkAdcShutDownCfg.UseVisualStyleBackColor = true
+        Me.pnlRegisters.Visible = False
         '
         'FrmMain_mp12
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8!, 16!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(819, 642)
         Me.Controls.Add(Me.pnlFunctions)
@@ -2717,60 +2741,60 @@ Partial Class FrmMain_mp12
         Me.Controls.Add(Me.TheMenu)
         Me.Controls.Add(Me.pnlRegisters)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.TheMenu
-        Me.MaximizeBox = false
-        Me.MinimizeBox = false
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "FrmMain_mp12"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.Text = "PCA9468 (MP12)"
-        Me.tbpInt.ResumeLayout(false)
-        Me.GroupBox2.ResumeLayout(false)
-        Me.GroupBox2.PerformLayout
-        Me.GroupBox1.ResumeLayout(false)
-        Me.GroupBox1.PerformLayout
-        Me.tbpEvents.ResumeLayout(false)
-        Me.GrpBoxSYSB.ResumeLayout(false)
-        Me.GrpBoxSYSB.PerformLayout
-        Me.GrpBoxSTSA.ResumeLayout(false)
-        Me.GrpBoxSTSA.PerformLayout
-        CType(Me.trbIinCfg,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.trbIchgCfg,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tbpAdc.ResumeLayout(false)
-        Me.tbpAdc.PerformLayout
-        Me.grpDevice.ResumeLayout(false)
-        Me.grpDevice.PerformLayout
-        Me.StatusStrip1.ResumeLayout(false)
-        Me.StatusStrip1.PerformLayout
-        CType(Me.PictureBox1,System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.trbVFloat,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tbpProt.ResumeLayout(false)
-        Me.tbpProt.PerformLayout
-        Me.pnlFunctions.ResumeLayout(false)
-        Me.GrpBoxSTSD.ResumeLayout(false)
-        Me.GrpBoxSTSD.PerformLayout
-        Me.grpRaised.ResumeLayout(false)
-        Me.GrpBoxSTSC.ResumeLayout(false)
-        Me.GrpBoxSTSC.PerformLayout
-        Me.grpAdcChannels.ResumeLayout(false)
-        Me.grpAdcChannels.PerformLayout
-        Me.TabControl2.ResumeLayout(false)
-        Me.tbpControl.ResumeLayout(false)
-        Me.tbpControl.PerformLayout
-        Me.tbpThermal.ResumeLayout(false)
-        Me.tbpThermal.PerformLayout
-        CType(Me.trbNTCThreshold,System.ComponentModel.ISupportInitialize).EndInit
-        Me.tbpMisc.ResumeLayout(false)
-        Me.gbxDebug.ResumeLayout(false)
-        Me.gbxDebug.PerformLayout
-        Me.theToolbar.ResumeLayout(false)
-        Me.theToolbar.PerformLayout
-        Me.TheMenu.ResumeLayout(false)
-        Me.TheMenu.PerformLayout
-        Me.ResumeLayout(false)
-        Me.PerformLayout
+        Me.tbpInt.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        Me.tbpEvents.ResumeLayout(False)
+        Me.GrpBoxSYSB.ResumeLayout(False)
+        Me.GrpBoxSYSB.PerformLayout()
+        Me.GrpBoxSTSA.ResumeLayout(False)
+        Me.GrpBoxSTSA.PerformLayout()
+        CType(Me.trbIinCfg, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.trbIchgCfg, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpAdc.ResumeLayout(False)
+        Me.tbpAdc.PerformLayout()
+        Me.grpDevice.ResumeLayout(False)
+        Me.grpDevice.PerformLayout()
+        Me.StatusStrip1.ResumeLayout(False)
+        Me.StatusStrip1.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.trbVFloat, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpProt.ResumeLayout(False)
+        Me.tbpProt.PerformLayout()
+        Me.pnlFunctions.ResumeLayout(False)
+        Me.GrpBoxSTSD.ResumeLayout(False)
+        Me.GrpBoxSTSD.PerformLayout()
+        Me.grpRaised.ResumeLayout(False)
+        Me.GrpBoxSTSC.ResumeLayout(False)
+        Me.GrpBoxSTSC.PerformLayout()
+        Me.grpAdcChannels.ResumeLayout(False)
+        Me.grpAdcChannels.PerformLayout()
+        Me.TabControl2.ResumeLayout(False)
+        Me.tbpControl.ResumeLayout(False)
+        Me.tbpControl.PerformLayout()
+        Me.tbpThermal.ResumeLayout(False)
+        Me.tbpThermal.PerformLayout()
+        CType(Me.trbNTCThreshold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpMisc.ResumeLayout(False)
+        Me.gbxDebug.ResumeLayout(False)
+        Me.gbxDebug.PerformLayout()
+        Me.theToolbar.ResumeLayout(False)
+        Me.theToolbar.PerformLayout()
+        Me.TheMenu.ResumeLayout(False)
+        Me.TheMenu.PerformLayout()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
 
-End Sub
+    End Sub
     Friend WithEvents tbpInt As System.Windows.Forms.TabPage
     Friend WithEvents chkTimerMask As System.Windows.Forms.CheckBox
     Friend WithEvents chkADCDoneMask As System.Windows.Forms.CheckBox
@@ -3001,4 +3025,6 @@ End Sub
     Friend WithEvents txtDbgRegReadBack2 As System.Windows.Forms.TextBox
     Friend WithEvents cmbSwFreqCfg As System.Windows.Forms.ComboBox
     Friend WithEvents chkAdcShutDownCfg As System.Windows.Forms.CheckBox
+    Friend WithEvents txtCFlyShortSts As System.Windows.Forms.TextBox
+    Friend WithEvents chkCFlyShortSts As System.Windows.Forms.CheckBox
 End Class

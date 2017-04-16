@@ -21,13 +21,13 @@ pca_data_bits_t pca_data_bits_default[] = {
 	/* 00 */ 0x18, 0x00, 0xFF, 0x00, 
 	/* 04 */ 0x00, 0x00, 0x00, 0x00, 
 #ifdef _DEBUG
-	/* 08 */ 0xF3FE, 0x8FF3, 0x3F8F,0xFC3F,
-	/* 0C */ 0x03E0, 0x0F03, 0x380F,
-#else
 	/* 08 */ 0x0000, 0x0000, 0x0000, 0x0000,
 	/* 0C */ 0x0000, 0x0000, 0x0000,
+#else
+	/* 08 */ 0xF3FE, 0x8FF3, 0x3F8F, 0xFC3F,
+	/* 0C */ 0x03E0, 0x0F03, 0x380F,
 #endif
-	/* 20 */ 0x3C, 0x9E, 0xB0, 0x00,
+	/* 20 */ 0x3C, 0x9E, 0x38, 0x00,
 	/* 24 */ 0xFF, 0x02, 0x00, 0x7D,
 	/* 28 */ 0x02, 0xFFFF
 };
@@ -119,16 +119,18 @@ void pca_tf_force_ADCmode(char *textbuffer, size_t sz, int index)
 			switch (index)
 			{
 			case 0:
-				sprintf_s(textbuffer, sz, "%s", "Do Not Force");
+				sprintf_s(textbuffer, sz, "%s", "Auto Mode");
 				break;
 			case 1:
-				sprintf_s(textbuffer, sz, "%s", "Force Normal Mode");
+				sprintf_s(textbuffer, sz, "%s", "Force ShutDown Mode");
 				break;
 			case 2:
 				sprintf_s(textbuffer, sz, "%s", "Force Hibernate Mode");
 				break;
+			case 3:
+				sprintf_s(textbuffer, sz, "%s", "Force Normal Mode");
+				break;
 			default:
-				sprintf_s(textbuffer, sz, "%s", "Force ShutDown Mode");
 				break;
 			}
 		}
@@ -222,16 +224,16 @@ void pca_tf_wtdogtmr_cfg(char *textbuffer, size_t sz, int index)
 			switch (index)
 			{
 			case 0:
-				sprintf_s(textbuffer, sz, "%s", "400ms");
+				sprintf_s(textbuffer, sz, "%s", "1s");
 				break;
 			case 1:
-				sprintf_s(textbuffer, sz, "%s", "800ms");
+				sprintf_s(textbuffer, sz, "%s", "2s");
 				break;
 			case 2:
-				sprintf_s(textbuffer, sz, "%s", "1600ms");
+				sprintf_s(textbuffer, sz, "%s", "4s");
 				break;
 			default:
-				sprintf_s(textbuffer, sz, "%s", "3200ms");
+				sprintf_s(textbuffer, sz, "%s", "8s");
 				break;
 			}
 		}
@@ -335,9 +337,9 @@ void pca_tf_iin_cfg(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 10) {
 			if (index <= 5)
-				sprintf_s(textbuffer, sz, "%smA", "500");
+				sprintf_s(textbuffer, sz, "%smA", "400");
 			else if (index > 5 && index <= 0x32)
-				sprintf_s(textbuffer, sz, "%dmA", index * 100);
+				sprintf_s(textbuffer, sz, "%dmA", (index-1) * 100);
 			else
 				sprintf_s(textbuffer, sz, "%s", "Illegal value");
 		}
@@ -513,8 +515,15 @@ void pca_tf_Iout_adc(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 10) {
 			float val = float(index & 0x3FF);
-			/*7.81mA per step, 0-8000mA*/
-			sprintf_s(textbuffer, sz, "%0.2fmA", val * 7.82);
+			/*first check whether it's 5mohm or 10mOhm*/
+			if (pca_data_bits_default[17] & 0x0080)
+			{
+				/*I = V/R*/
+				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489)*100);
+			}
+			else{
+				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489)*200);
+			}
 		}
 	}
 }
@@ -527,7 +536,17 @@ void pca_tf_DieTemp_adc(char *textbuffer, size_t sz, int index)
 		if (sz >= 10) {
 			float val = float(index & 0x3FF);
 			/*LSB 0.5C with -25C ~ 160C*/
-			sprintf_s(textbuffer, sz, "%0.1f °C", (val*0.5-25));
+			if (val > 951)
+			{	
+				sprintf_s(textbuffer, sz, "-25°C");
+			}
+			else if (val <= 500)
+			{
+				sprintf_s(textbuffer, sz, "160°C");
+			}
+			else{ 
+				sprintf_s(textbuffer, sz, "%0.1f °C", (891 - val)*0.41); 
+			}
 		}
 	}
 }
@@ -751,9 +770,9 @@ void pca_tf_VOK_sts(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 25) {
 			if (index)
-				sprintf_s(textbuffer, sz, "Vin Status Not OK");
+				sprintf_s(textbuffer, sz, "VOK is valid");
 			else
-				sprintf_s(textbuffer, sz, "Vin Status OK");
+				sprintf_s(textbuffer, sz, "VOK is invalid");
 		}
 	}
 }
@@ -777,9 +796,9 @@ void pca_tf_ChgPhrase_sts(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 25) {
 			if (index)
-				sprintf_s(textbuffer, sz, "Phrase Changed");
+				sprintf_s(textbuffer, sz, "Any of loop is activated");
 			else
-				sprintf_s(textbuffer, sz, "No Phrase Change");
+				sprintf_s(textbuffer, sz, "No loop is activated");
 		}
 	}
 }
@@ -790,9 +809,9 @@ void pca_tf_CtrlLimit_sts(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 30) {
 			if (index)
-				sprintf_s(textbuffer, sz, "Duty Cycle or Freq reached limit");
+				sprintf_s(textbuffer, sz, "No loop is active or OCP");
 			else
-				sprintf_s(textbuffer, sz, "Normal Operation");
+				sprintf_s(textbuffer, sz, "A loop is active and No OCP");
 		}
 	}
 }
@@ -830,9 +849,23 @@ void pca_tf_Timer_sts(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 35) {
 			if (index)
-				sprintf_s(textbuffer, sz, "Watchdog or ChargerTimer has expired");
+				sprintf_s(textbuffer, sz, "Watchdog or Charge Cycle expired");
 			else
 				sprintf_s(textbuffer, sz, "No Timer is expired");
+		}
+	}
+}
+
+/*Added by YY 16/04/17 according to spec v1.0*/
+void pca_tf_CFlyShort_sts(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 35) {
+			if (index)
+				sprintf_s(textbuffer, sz, "Flying Cap Shorted to GND");
+			else
+				sprintf_s(textbuffer, sz, "Flying Cap Not Shorted to GND");
 		}
 	}
 }
@@ -875,7 +908,7 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x04, 7, 1, 0, iin_loop_sts, "IIN loop status", pca_tf_iinloop_sts },
 	{ 0x04, 6, 1, 0, chg_loop_sts, "ICHG loop status", pca_tf_ichgloop_sts },
 	{ 0x04, 5, 1, 0, vflt_loop_sts, "V_Float loop status", pca_tf_Vfltloop_sts },
-	{ 0x04, 4, 1, 0, rsvd_1, "Reserved", pca_tf_En_Dis },
+	{ 0x04, 4, 1, 0, cfly_short_sts, "Flying cap short status", pca_tf_CFlyShort_sts },
 	{ 0x04, 3, 1, 0, vout_uv_sts, "VOut below V_OK", pca_tf_VoutUV_sts },
 	{ 0x04, 2, 1, 0, vbat_ov_sts, "VBat above VBat_OVLO  ", pca_tf_VbatOV_sts },
 	{ 0x04, 1, 1, 0, vin_ov_sts, "VIn above VIn_OVLO", pca_tf_VinOV_sts },
@@ -922,13 +955,14 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x12, 1, 1, 0, adc_osr_cfg, "ADC Oscillator Select", pca_tf_adcosr_cfg },
 	{ 0x12, 0, 1, 0, adc_en, "ADC Enable", pca_tf_En_Dis },
 	/*REG 0x24, ADCCH_CFG (R/W)*/
+	/*modified according to v1.0 spec*/
 	{ 0x13, 7, 1, 0, ch7_en, "NTC Voltage", pca_tf_En_Dis },
-	{ 0x13, 6, 1, 0, ch6_en, "Sys Voltage", pca_tf_En_Dis },
-	{ 0x13, 5, 1, 0, ch5_en, "Die Temp", pca_tf_En_Dis },
+	{ 0x13, 6, 1, 0, ch6_en, "Die Temp", pca_tf_En_Dis },
+	{ 0x13, 5, 1, 0, ch5_en, "Input Current", pca_tf_En_Dis },
 	{ 0x13, 4, 1, 0, ch4_en, "Charge Current", pca_tf_En_Dis },
-	{ 0x13, 3, 1, 0, ch3_en, "Input Current", pca_tf_En_Dis },
-	{ 0x13, 2, 1, 0, ch2_en, "Battery Voltage", pca_tf_En_Dis },
-	{ 0x13, 1, 1, 0, ch1_en, "Input Voltage", pca_tf_En_Dis },
+	{ 0x13, 3, 1, 0, ch3_en, "Battery Voltage", pca_tf_En_Dis },
+	{ 0x13, 2, 1, 0, ch2_en, "Input Voltage", pca_tf_En_Dis },
+	{ 0x13, 1, 1, 0, ch1_en, "Output Voltage", pca_tf_En_Dis },
 	/*REG 0x25, TEMP_CTRL (R/W)*/
 	{ 0x14, 6, 2, 0, temp_reg, "DieTemp Regulation", pca_tf_temp_reg },
 	{ 0x14, 4, 2, 0, temp_delta, "DieTemp Regulation Delta", pca_tf_temp_delta },

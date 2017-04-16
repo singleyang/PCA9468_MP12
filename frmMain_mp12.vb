@@ -190,6 +190,7 @@ Public Class FrmMain_mp12
         v = New View(chkIinLoopSts, pca_data_fields_enum_t.iin_loop_sts)
         v = New View(chkChgLoopSts, pca_data_fields_enum_t.chg_loop_sts)
         v = New View(chkVFLTLoopSts, pca_data_fields_enum_t.vflt_loop_sts)
+        v = New View(chkCFlyShortSts, pca_data_fields_enum_t.cfly_short_sts)
         v = New View(chkVoutUvSts, pca_data_fields_enum_t.vout_uv_sts)
         v = New View(chkVbatOvSts, pca_data_fields_enum_t.vbat_ov_sts)
         v = New View(chkVinOvSts, pca_data_fields_enum_t.vin_ov_sts)
@@ -208,6 +209,7 @@ Public Class FrmMain_mp12
         v = New View(txtIinLoopSts, pca_data_fields_enum_t.iin_loop_sts)
         v = New View(txtChgLoopSts, pca_data_fields_enum_t.chg_loop_sts)
         v = New View(txtVFLTLoopSts, pca_data_fields_enum_t.vflt_loop_sts)
+        v = New View(txtCFlyShortSts, pca_data_fields_enum_t.cfly_short_sts)
         v = New View(txtVoutUvSts, pca_data_fields_enum_t.vout_uv_sts)
         v = New View(txtVbatOvSts, pca_data_fields_enum_t.vbat_ov_sts)
         v = New View(txtVinOvSts, pca_data_fields_enum_t.vin_ov_sts)
@@ -464,6 +466,10 @@ Public Class FrmMain_mp12
         UpdateModel()
     End Sub
 
+    Private Sub ResetDevice()
+        UpdateModel()
+    End Sub
+
     Private Sub ReadAll()
         UpdateModel()
     End Sub
@@ -621,5 +627,9 @@ Public Class FrmMain_mp12
     
     Private Sub tsmAbout_Click(sender As Object, e As EventArgs) Handles tsmAbout.Click
         frmAbout.Show(Me)
+    End Sub
+
+    Private Sub tsbReset_Click(sender As Object, e As EventArgs) Handles tsbReset.Click
+        ResetDevice()
     End Sub
 End Class

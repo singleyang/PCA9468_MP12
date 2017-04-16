@@ -54,7 +54,7 @@ typedef enum data_fields_enum {
 	iin_loop_sts,
 	chg_loop_sts,
 	vflt_loop_sts,
-	rsvd_1,
+	cfly_short_sts,
 	vout_uv_sts,
 	vbat_ov_sts,
 	vin_ov_sts,

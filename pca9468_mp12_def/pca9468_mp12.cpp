@@ -241,8 +241,8 @@ pca_result_t pcaReadADCRegisters(int regNumber, int count) {
 		data[4] =  0xEE;
 		data[5] =  0xFF;
 		data[6] =  0x11;
-		data[7] =  0x22;
-		data[8] =  0x33;
+		data[7] =  0xCC;
+		data[8] =  0xBC;
 #else
 	/*Check whether auto incremental(0x80) need to to changed */
 	if ((result = (pca_result_t)pc_readRegister(gSla, pca_registers[regNumber].offset, (uint8_t *)&data, bytecount)) == pca_ok)
