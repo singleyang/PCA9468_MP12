@@ -34,7 +34,7 @@ Public Enum pca_data_fields_enum_t
     iin_loop_sts
     chg_loop_sts
     vflt_loop_sts
-    rsvd_1
+    cfly_short_sts
     vout_uv_sts
     vbat_ov_sts
     vin_ov_sts
@@ -80,14 +80,15 @@ Public Enum pca_data_fields_enum_t
     adc_offset_cfg
     adc_osr_cfg
     adc_en
-    'REG 0x24, ADCCH_CFG (R/W)
+    'REG 0x24, ADCCH_CFG (R/W) 
+    'modified according to v1.0 spec
     ntc_adc_en
-    sysV_adc_en
     dietemp_adc_en
-    chgcurrent_adc_en
     iin_adc_en
+    chgcurrent_adc_en
     vbat_adc_en
     vin_adc_en
+    sysV_adc_en
     'REG 0x25, TEMP_CTRL (R/W)
     temp_reg
     temp_delta
