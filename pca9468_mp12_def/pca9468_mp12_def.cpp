@@ -21,16 +21,18 @@ pca_data_bits_t pca_data_bits_default[] = {
 	/* 00 */ 0x18, 0x00, 0xFF, 0x00, 
 	/* 04 */ 0x00, 0x00, 0x00, 0x00, 
 #ifdef _DEBUG
-	/* 08 */ 0x0000, 0x0000, 0x0000, 0x0000,
-	/* 0C */ 0x0000, 0x0000, 0x0000,
+	/* 08 */ 0x0000, 0x9044, 0x0000, 0x0000,
+	/* 0C */ 0x0000, 0x4D9F, 0x0000,
 #else
 	/* 08 */ 0xF3FE, 0x8FF3, 0x3F8F, 0xFC3F,
-	/* 0C */ 0x03E0, 0x0F03, 0x380F,
+	/* 0C */ 0x03E0, 0x4D9F, 0x380F,
 #endif
-	/* 20 */ 0x3C, 0x9E, 0x38, 0x00,
+	/* 20 */ 0x3C, 0x1E, 0x88, 0x00,
 	/* 24 */ 0xFF, 0x02, 0x00, 0x7D,
 	/* 28 */ 0x02, 0xFFFF
 };
+
+pca_register_t pca_registers[];
 
 /*************************************************************************************/
 /*        Text feed functions for PCA9468(mp12)
@@ -516,13 +518,13 @@ void pca_tf_Iout_adc(char *textbuffer, size_t sz, int index)
 		if (sz >= 10) {
 			float val = float(index & 0x3FF);
 			/*first check whether it's 5mohm or 10mOhm*/
-			if (pca_data_bits_default[17] & 0x0080)
+			if (pca_registers[17].data_bits & 0x0080)
 			{
 				/*I = V/R*/
 				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489)*100);
 			}
 			else{
-				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489)*200);
+				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489) * 200);
 			}
 		}
 	}
@@ -545,7 +547,8 @@ void pca_tf_DieTemp_adc(char *textbuffer, size_t sz, int index)
 				sprintf_s(textbuffer, sz, "160°C");
 			}
 			else{ 
-				sprintf_s(textbuffer, sz, "%0.1f °C", (891 - val)*0.41); 
+				//sprintf_s(textbuffer, sz, "%0.1f °C", (891 - val)*0.41); 
+				sprintf_s(textbuffer, sz, "%0.1f °C", (922 - val)*0.52);  /*according to Dennis*/
 			}
 		}
 	}
@@ -1027,13 +1030,13 @@ pca_register_t pca_registers[] = {
 	{ true,  PCA9468_MP12_AUTO_INC | 0x06, 8, pca_data_bits_default[6] },
 	{ true,  PCA9468_MP12_AUTO_INC | 0x07, 8, pca_data_bits_default[7] },
 	/*Special 16 bytes for ADC storage*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x08, 16, pca_data_bits_default[8] },	/*STS_ADC_2|STS_ADC_1*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x09, 16, pca_data_bits_default[9] },	/*STS_ADC_3|STS_ADC_2*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x0A, 16, pca_data_bits_default[10] },	/*STS_ADC_4|STS_ADC_3*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x0B, 16, pca_data_bits_default[11] },	/*STS_ADC_5|STS_ADC_4*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x0D, 16, pca_data_bits_default[12] },	/*STS_ADC_7|STS_ADC_6*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x0E, 16, pca_data_bits_default[13] },	/*STS_ADC_8|STS_ADC_7*/
-	{ true,  PCA9468_MP12_AUTO_INC | 0x0F, 16, pca_data_bits_default[14] },	/*STS_ADC_9|STS_ADC_8*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x08, 16, pca_data_bits_default[8] },	/*STS_ADC_2|STS_ADC_1*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x09, 16, pca_data_bits_default[9] },	/*STS_ADC_3|STS_ADC_2*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x0A, 16, pca_data_bits_default[10] },	/*STS_ADC_4|STS_ADC_3*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x0B, 16, pca_data_bits_default[11] },	/*STS_ADC_5|STS_ADC_4*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x0D, 16, pca_data_bits_default[12] },	/*STS_ADC_7|STS_ADC_6*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x0E, 16, pca_data_bits_default[13] },	/*STS_ADC_8|STS_ADC_7*/
+	{ true, PCA9468_MP12_AUTO_INC | 0x0F, 16, pca_data_bits_default[14] },	/*STS_ADC_9|STS_ADC_8*/
 	/*Control Registers*/
 	{ false, PCA9468_MP12_AUTO_INC | 0x20, 8, pca_data_bits_default[15] },
 	{ false, PCA9468_MP12_AUTO_INC | 0x21, 8, pca_data_bits_default[16] },

@@ -41,6 +41,10 @@ Public Class Model
         Return pcaReadADCRegisters_hidden(regnumber, count)
     End Function
 
+    Public Shared Function GetRegisterValue(RegNubmer As Integer) As Integer
+        Return CUShort(pcaGetRegisterValue_hidden(RegNubmer))
+    End Function
+
     Public Shared Property RegisterValue(RegNumber As Integer) As UInt16
         Get
             Return CUShort(pcaGetRegisterValue_hidden(RegNumber))

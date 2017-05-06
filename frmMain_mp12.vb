@@ -2,6 +2,7 @@
 Imports PcaConnect
 Imports mvc
 
+
 Public Class FrmMain_mp12
 
     Private Enum ViewEnum
@@ -270,8 +271,12 @@ Public Class FrmMain_mp12
         SetAutoRefresh(0)
 #If DEBUG Then
         gbxDebug.Visible = True
+        'Write default value'
+        cmbADCTestRepeats.SelectedIndex = 1
+        txtXslFileName.Text = "C:\Users\nxp29394\Desktop\ADCTestResult1.xlsx"
 #Else
         TabControl2.TabPages.Remove(tbpMisc)
+        TabControl2.TabPages.Remove(tbpADCTest)
 #End If
 
 
@@ -539,6 +544,14 @@ Public Class FrmMain_mp12
         mvc.Model.ReadADCRegisters(8, 9)    'Read ADC 1-9'
     End Sub
 
+    Private Sub tsmAbout_Click(sender As Object, e As EventArgs) Handles tsmAbout.Click
+        frmAbout.Show(Me)
+    End Sub
+
+    Private Sub tsbReset_Click(sender As Object, e As EventArgs) Handles tsbReset.Click
+        ResetDevice()
+    End Sub
+
 #If DEBUG Then
     Public Function IsHex(ByVal str As String) As Boolean
         Try
@@ -623,13 +636,55 @@ Public Class FrmMain_mp12
         DgbBtnReadRegister(txtDbgRegAddr6, txtDbgRegReadBack6)
     End Sub
 
-#End If
-    
-    Private Sub tsmAbout_Click(sender As Object, e As EventArgs) Handles tsmAbout.Click
-        frmAbout.Show(Me)
+    Private numRepeat As Integer
+    Private ADCDataMatrix(7, 100) As Integer
+
+    Private Sub btnSaveADC_Click(sender As Object, e As EventArgs) Handles btnSaveADC.Click
+        Dim xls As Microsoft.Office.Interop.Excel.Application
+        Dim xlsWorkBook As Microsoft.Office.Interop.Excel.Workbook
+        Dim xlsWorkSheet As Microsoft.Office.Interop.Excel.Worksheet
+        Dim misValue As Object = System.Reflection.Missing.Value
+
+        xls = New Microsoft.Office.Interop.Excel.Application
+        xlsWorkBook = xls.Workbooks.Add(misValue)
+        xlsWorkSheet = CType(xlsWorkBook.Sheets("sheet1"), Microsoft.Office.Interop.Excel.Worksheet)
+
+        'create the xsl header'
+        For xlsCol As Integer = 1 To 7
+            xlsWorkSheet.Cells(1, xlsCol) = "ADC" + CStr(xlsCol)
+        Next
+
+        For xlsRow As Integer = 1 To numRepeat
+            For xlsCol As Integer = 1 To 7
+                xlsWorkSheet.Cells(xlsRow + 1, xlsCol) = Hex(ADCDataMatrix(xlsCol, xlsRow))
+            Next
+        Next
+
+        If String.IsNullOrEmpty(txtXslFileName.Text) Then
+            xlsWorkBook.SaveAs("C:\Users\nxp29394\Desktop\ADCTestResult1.xlsx")
+        Else
+            xlsWorkBook.SaveAs(txtXslFileName.Text)
+        End If
+        xlsWorkBook.Close()
+        xls.Quit()
+
     End Sub
 
-    Private Sub tsbReset_Click(sender As Object, e As EventArgs) Handles tsbReset.Click
-        ResetDevice()
+    Private Sub btnADCTestStart_Click(sender As Object, e As EventArgs) Handles btnADCTestStart.Click
+
+        numRepeat = CInt(cmbADCTestRepeats.SelectedItem)
+
+        For fld As Integer = 1 To numRepeat
+            mvc.Model.ReadADCRegisters(8, 9)
+            For adcCh As Integer = 1 To 7
+                ADCDataMatrix(adcCh, fld) = mvc.Model.GetRegisterValue(7 + adcCh)
+            Next
+        Next
     End Sub
+
+    Private Sub ADC_Accuracy_Calcuation()
+        'T.B.D'
+    End Sub
+
+#End If
 End Class
