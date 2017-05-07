@@ -43,6 +43,7 @@ Public Class FrmMain_mp12
                     tslConnection.Text = "Connected"
                     UpdateModel()
                     ScheduleStatusRead()
+
                 Else
                     m_scheduleStatusRead = 0
                     tslConnection.Image = My.Resources.plug_disconnect
