@@ -273,8 +273,9 @@ Public Class FrmMain_mp12
 #If DEBUG Then
         gbxDebug.Visible = True
         'Write default value'
-        cmbADCTestRepeats.SelectedIndex = 1
-        txtXslFileName.Text = "C:\Users\nxp29394\Desktop\ADCTestResult1.xlsx"
+        cmbADCTestRepeats.SelectedIndex = 0
+        cmbADCAccDelay.SelectedIndex = 0
+        txtXslFileName.Text = "C:\Users\nxp29394\Desktop\Result_" + DateTime.Now.Date.ToString("MMddyy ") + DateTime.Now.ToString("HH_mm") + ".xlsx"
 #Else
         TabControl2.TabPages.Remove(tbpMisc)
         TabControl2.TabPages.Remove(tbpADCTest)
@@ -638,7 +639,9 @@ Public Class FrmMain_mp12
     End Sub
 
     Private numRepeat As Integer
-    Private ADCDataMatrix(7, 100) As Integer
+    Private ADCDataMatrix(9, 500) As Integer
+    Private ADCValMatrix(7, 500) As Integer
+    Private ADCReadDelayCnt As Integer = 1
 
     Private Sub btnSaveADC_Click(sender As Object, e As EventArgs) Handles btnSaveADC.Click
         Dim xls As Microsoft.Office.Interop.Excel.Application
@@ -651,21 +654,72 @@ Public Class FrmMain_mp12
         xlsWorkSheet = CType(xlsWorkBook.Sheets("sheet1"), Microsoft.Office.Interop.Excel.Worksheet)
 
         'create the xsl header'
-        For xlsCol As Integer = 1 To 7
+        For xlsCol As Integer = 1 To 9
             xlsWorkSheet.Cells(1, xlsCol) = "ADC" + CStr(xlsCol)
         Next
 
         For xlsRow As Integer = 1 To numRepeat
-            For xlsCol As Integer = 1 To 7
+            For xlsCol As Integer = 1 To 9
                 xlsWorkSheet.Cells(xlsRow + 1, xlsCol) = Hex(ADCDataMatrix(xlsCol, xlsRow))
             Next
         Next
 
-        If String.IsNullOrEmpty(txtXslFileName.Text) Then
-            xlsWorkBook.SaveAs("C:\Users\nxp29394\Desktop\ADCTestResult1.xlsx")
-        Else
-            xlsWorkBook.SaveAs(txtXslFileName.Text)
-        End If
+        'summary'
+        xlsWorkSheet.Cells(1, 11) = "ADC Channel"
+        xlsWorkSheet.Cells(1, 12) = "Max Reading"
+        xlsWorkSheet.Cells(1, 13) = "Min Reading"
+        xlsWorkSheet.Cells(1, 14) = "Delta Reading"
+        xlsWorkSheet.Cells(1, 15) = "Lsb Difference"
+
+        xlsWorkSheet.Cells(1, 11) = "ADC Channel"
+        xlsWorkSheet.Cells(2, 11) = "Input Current"
+        xlsWorkSheet.Cells(3, 11) = "Output Current"
+        xlsWorkSheet.Cells(4, 11) = "Input Voltage"
+        xlsWorkSheet.Cells(5, 11) = "Output Voltage"
+        xlsWorkSheet.Cells(6, 11) = "Battery Voltage"
+        xlsWorkSheet.Cells(7, 11) = "Die Tempearture"
+        xlsWorkSheet.Cells(8, 11) = "NTC voltage"
+
+        xlsWorkSheet.Cells(2, 12) = txtADCAccIINMax.Text
+        xlsWorkSheet.Cells(3, 12) = txtADCAccIoutMax.Text
+        xlsWorkSheet.Cells(4, 12) = txtADCAccVinMax.Text
+        xlsWorkSheet.Cells(5, 12) = txtADCAccVoutMax.Text
+        xlsWorkSheet.Cells(6, 12) = txtADCAccVbatMax.Text
+        xlsWorkSheet.Cells(7, 12) = txtADCAccDieTempMax.Text
+        xlsWorkSheet.Cells(8, 12) = txtADCAccNtcMax.Text
+        xlsWorkSheet.Cells(2, 13) = txtADCAccIINMin.Text
+        xlsWorkSheet.Cells(3, 13) = txtADCAccIoutMin.Text
+        xlsWorkSheet.Cells(4, 13) = txtADCAccVinMin.Text
+        xlsWorkSheet.Cells(5, 13) = txtADCAccVoutMin.Text
+        xlsWorkSheet.Cells(6, 13) = txtADCAccVbatMin.Text
+        xlsWorkSheet.Cells(7, 13) = txtADCAccDieTempMin.Text
+        xlsWorkSheet.Cells(8, 13) = txtADCAccNTCMin.Text
+        xlsWorkSheet.Cells(2, 14) = txtADCAccIINDelta.Text
+        xlsWorkSheet.Cells(3, 14) = txtADCAccIoutDelta.Text
+        xlsWorkSheet.Cells(4, 14) = txtADCAccVinDelta.Text
+        xlsWorkSheet.Cells(5, 14) = txtADCAccVoutDelta.Text
+        xlsWorkSheet.Cells(6, 14) = txtADCAccVbatDelta.Text
+        xlsWorkSheet.Cells(7, 14) = txtADCAccDieTempDelta.Text
+        xlsWorkSheet.Cells(8, 14) = txtADCAccNTCDelta.Text
+        xlsWorkSheet.Cells(2, 15) = txtADCAccInputCurrent.Text
+        xlsWorkSheet.Cells(3, 15) = txtADCAccOutputCurrent.Text
+        xlsWorkSheet.Cells(4, 15) = txtADCAccInputVoltage.Text
+        xlsWorkSheet.Cells(5, 15) = txtADCAccOutputVoltage.Text
+        xlsWorkSheet.Cells(6, 15) = txtADCAccBattVoltage.Text
+        xlsWorkSheet.Cells(7, 15) = txtADCAccDieTemp.Text
+        xlsWorkSheet.Cells(8, 15) = txtADCAccNTCVoltage.Text
+
+        '     If String.IsNullOrEmpty(txtXslFileName.Text) Then
+        txtXslFileName.Text = "C:\Users\nxp29394\Desktop\Result_" + DateTime.Now.Date.ToString("MMddyy ") + DateTime.Now.ToString("HH_mmss") + ".xlsx"
+        xlsWorkBook.SaveAs(txtXslFileName.Text)
+        'Else
+        'Try
+        ' xlsWorkBook.SaveAs(txtXslFileName.Text)
+        'Catch ex As Exception
+        'xlsWorkBook.Close()
+        'xls.Quit()
+        'End Try
+        'End If
         xlsWorkBook.Close()
         xls.Quit()
 
@@ -674,18 +728,193 @@ Public Class FrmMain_mp12
     Private Sub btnADCTestStart_Click(sender As Object, e As EventArgs) Handles btnADCTestStart.Click
 
         numRepeat = CInt(cmbADCTestRepeats.SelectedItem)
+        Dim RegValReadBack(7) As Integer
+        Dim ADCRegVal(9) As Integer
 
+        ADC_ReadDelay()
+
+        If tmrADCTest.Enabled = True Then
+            'processe the subrountine in timer
+            Return
+        End If
+        
         For fld As Integer = 1 To numRepeat
             mvc.Model.ReadADCRegisters(8, 9)
-            For adcCh As Integer = 1 To 7
-                ADCDataMatrix(adcCh, fld) = mvc.Model.GetRegisterValue(7 + adcCh)
+            For adcValCh As Integer = 1 To 7
+                RegValReadBack(adcValCh) = mvc.Model.GetRegisterValue(7 + adcValCh)
+                ADCValMatrix(adcValCh, fld) = RegValReadBack(adcValCh)
             Next
+            'Retrieve ADC RegVal from low level registers'
+            ADCRegVal(1) = RegValReadBack(1) And &HFF
+            ADCRegVal(2) = RegValReadBack(2) And &HFF
+            ADCRegVal(3) = RegValReadBack(3) And &HFF
+            ADCRegVal(4) = RegValReadBack(4) And &HFF
+            ADCRegVal(5) = (RegValReadBack(4) And &HFF00) >> 8
+            ADCRegVal(6) = RegValReadBack(5) And &HFF
+            ADCRegVal(7) = RegValReadBack(6) And &HFF
+            ADCRegVal(8) = RegValReadBack(7) And &HFF
+            ADCRegVal(9) = (RegValReadBack(7) And &HFF00) >> 8
+            For adcCh As Integer = 1 To 9
+                ADCDataMatrix(adcCh, fld) = ADCRegVal(adcCh)
+            Next
+            If chkADCEnDis.Checked = True Then
+                'Disable/Enable ADC reading everytime before read the ADC'
+                mvc.Model.DbgWriteRegister(&H24, &H0)
+                mvc.Model.DbgWriteRegister(&H24, &HFF)
+            End If
         Next
+        ADC_Accuracy_Calcuation()
+
+    End Sub
+
+    Private Sub ADC_ReadDelay()
+        If cmbADCAccDelay.SelectedIndex = 0 Then
+            tmrADCTest.Enabled = False
+            tmrADCTest.Stop()
+        ElseIf cmbADCAccDelay.SelectedIndex = 1 Then
+            tmrADCTest.Interval = 50
+            tmrADCTest.Enabled = True
+            tmrADCTest.Start()
+        ElseIf cmbADCAccDelay.SelectedIndex = 2 Then
+            tmrADCTest.Interval = 100
+            tmrADCTest.Enabled = True
+            tmrADCTest.Start()
+        End If
+        btnADCTestStart.Text = "Test"
+    End Sub
+
+    Private Sub tmrADCTest_Tick(sender As Object, e As EventArgs) Handles tmrADCTest.Tick
+        numRepeat = CInt(cmbADCTestRepeats.SelectedItem)
+        Dim RegValReadBack(7) As Integer
+        Dim ADCRegVal(9) As Integer
+
+        If ADCReadDelayCnt <= numRepeat Then
+            If chkADCEnDis.Checked = True Then
+                'Disable ADC reading everytime before read the ADC'
+                mvc.Model.DbgWriteRegister(&H24, &H0)
+                ' mvc.Model.DbgWriteRegister(&H24, &HFF)
+            End If
+            mvc.Model.ReadADCRegisters(8, 9)
+            If chkADCEnDis.Checked = True Then
+                'Enable ADC reading everytime before read the ADC'
+                ' mvc.Model.DbgWriteRegister(&H24, &H0)
+                mvc.Model.DbgWriteRegister(&H24, &HFF)
+            End If
+            For adcValCh As Integer = 1 To 7
+                RegValReadBack(adcValCh) = mvc.Model.GetRegisterValue(7 + adcValCh)
+                ADCValMatrix(adcValCh, ADCReadDelayCnt) = RegValReadBack(adcValCh)
+            Next
+            'Retrieve ADC RegVal from low level registers'
+            ADCRegVal(1) = RegValReadBack(1) And &HFF
+            ADCRegVal(2) = RegValReadBack(2) And &HFF
+            ADCRegVal(3) = RegValReadBack(3) And &HFF
+            ADCRegVal(4) = RegValReadBack(4) And &HFF
+            ADCRegVal(5) = (RegValReadBack(4) And &HFF00) >> 8
+            ADCRegVal(6) = RegValReadBack(5) And &HFF
+            ADCRegVal(7) = RegValReadBack(6) And &HFF
+            ADCRegVal(8) = RegValReadBack(7) And &HFF
+            ADCRegVal(9) = (RegValReadBack(7) And &HFF00) >> 8
+            For adcCh As Integer = 1 To 9
+                ADCDataMatrix(adcCh, ADCReadDelayCnt) = ADCRegVal(adcCh)
+            Next
+            ADCReadDelayCnt = ADCReadDelayCnt + 1
+            btnADCTestStart.Text = "Wait..."
+        Else
+            ADC_Accuracy_Calcuation()
+            tmrADCTest.Stop()
+            ADCReadDelayCnt = 1
+            btnADCTestStart.Text = "Done"
+        End If
     End Sub
 
     Private Sub ADC_Accuracy_Calcuation()
-        'T.B.D'
+        'T.B.D'  'Have issue here, to be continued'
+        Dim IINMax As Integer = 0
+        Dim IINMin As Integer = ADCValMatrix(1, 1) And &H3FF
+        Dim IoutMax As Integer = 0
+        Dim IoutMin As Integer = (ADCValMatrix(2, 1) And &HFFC) >> 2
+        Dim VinMax As Integer = 0
+        Dim VinMin As Integer = (ADCValMatrix(3, 1) And &H3FF0) >> 4
+        Dim VoutMax As Integer = 0
+        Dim VoutMin As Integer = (ADCValMatrix(4, 1) And &HFFC0) >> 6
+        Dim VbatMax As Integer = 0
+        Dim VbatMin As Integer = (ADCValMatrix(5, 1) And &H3FF)
+        Dim DieTempMax As Integer = 0
+        Dim DieTempMin As Integer = (ADCValMatrix(6, 1) And &HFFC) >> 2
+        Dim NTCMax As Integer = 0
+        Dim NTCMin As Integer = (ADCValMatrix(7, 1) And &H3FF0) >> 4
+
+        'Find the max and min value for each reading
+        For fld As Integer = 1 To numRepeat
+            'IIN
+            ADCValMatrix(1, fld) = ADCValMatrix(1, fld) And &H3FF
+            IINMax = Math.Max(ADCValMatrix(1, fld), IINMax)
+            IINMin = Math.Min(IINMin, ADCValMatrix(1, fld))
+            'Iout
+            ADCValMatrix(2, fld) = (ADCValMatrix(2, fld) And &HFFC) >> 2
+            IoutMax = Math.Max(ADCValMatrix(2, fld), IoutMax)
+            IoutMin = Math.Min(IoutMin, ADCValMatrix(2, fld))
+            'Vin
+            ADCValMatrix(3, fld) = (ADCValMatrix(3, fld) And &H3FF0) >> 4
+            VinMax = Math.Max(ADCValMatrix(3, fld), VinMax)
+            VinMin = Math.Min(VinMin, ADCValMatrix(3, fld))
+            'Vout
+            ADCValMatrix(4, fld) = (ADCValMatrix(4, fld) And &HFFC0) >> 6
+            VoutMax = Math.Max(ADCValMatrix(4, fld), VoutMax)
+            VoutMin = Math.Min(VoutMin, ADCValMatrix(4, fld))
+            'Vbat
+            ADCValMatrix(5, fld) = (ADCValMatrix(5, fld) And &H3FF)
+            VbatMax = Math.Max(ADCValMatrix(5, fld), VbatMax)
+            VbatMin = Math.Min(VbatMin, ADCValMatrix(5, fld))
+            'DieTemp
+            ADCValMatrix(6, fld) = (ADCValMatrix(6, fld) And &HFFC) >> 2
+            DieTempMax = Math.Max(ADCValMatrix(6, fld), DieTempMax)
+            DieTempMin = Math.Min(DieTempMin, ADCValMatrix(6, fld))
+            'Ntc
+            ADCValMatrix(7, fld) = (ADCValMatrix(7, fld) And &H3FF0) >> 4
+            NTCMax = Math.Max(ADCValMatrix(7, fld), NTCMax)
+            NTCMin = Math.Min(NTCMin, ADCValMatrix(7, fld))
+        Next
+
+        'IIN Max/Min/Delta'
+        txtADCAccIINMax.Text = CStr(IINMax * 4.89)
+        txtADCAccIINMin.Text = CStr(IINMin * 4.89)
+        txtADCAccIINDelta.Text = CStr((IINMax - IINMin) * 4.89)
+        txtADCAccInputCurrent.Text = CStr(IINMax - IINMin)
+        'Iout'
+        txtADCAccIoutMax.Text = CStr(IoutMax * 48.9 * 2)
+        txtADCAccIoutMin.Text = CStr(IoutMin * 48.9 * 2)
+        txtADCAccIoutDelta.Text = CStr((IoutMax - IoutMin) * 48.9 * 2)
+        txtADCAccOutputCurrent.Text = CStr(IoutMax - IoutMin)
+        'Vin'
+        txtADCAccVinMax.Text = CStr(VinMax * 0.016)
+        txtADCAccVinMin.Text = CStr(VinMin * 0.016)
+        txtADCAccVinDelta.Text = CStr((VinMax - VinMin) * 0.016)
+        txtADCAccInputVoltage.Text = CStr(VinMax - VinMin)
+        'Vout'
+        txtADCAccVoutMax.Text = CStr(VoutMax * 0.005)
+        txtADCAccVoutMin.Text = CStr(VoutMin * 0.005)
+        txtADCAccVoutDelta.Text = CStr((VoutMax - VoutMin) * 0.005)
+        txtADCAccOutputVoltage.Text = CStr(VoutMax - VoutMin)
+        'VBat'
+        txtADCAccVbatMax.Text = CStr(VbatMax * 0.005)
+        txtADCAccVbatMin.Text = CStr(VbatMin * 0.005)
+        txtADCAccVbatDelta.Text = CStr((VbatMax - VbatMin) * 0.005)
+        txtADCAccBattVoltage.Text = CStr(VbatMax - VbatMin)
+        'DietTemp'
+        txtADCAccDieTempMax.Text = CStr((922 - DieTempMin) * 0.52)
+        txtADCAccDieTempMin.Text = CStr((922 - DieTempMax) * 0.52)
+        txtADCAccDieTempDelta.Text = CStr((DieTempMax - DieTempMin) * 0.52)
+        txtADCAccDieTemp.Text = CStr(DieTempMax - DieTempMin)
+        'NTC'
+        txtADCAccNtcMax.Text = CStr(NTCMax * 2.346)
+        txtADCAccNTCMin.Text = CStr(NTCMin * 2.346)
+        txtADCAccNTCDelta.Text = CStr((NTCMax - NTCMin) * 2.346)
+        txtADCAccNTCVoltage.Text = CStr(NTCMax - NTCMin)
+
     End Sub
 
 #End If
+
+   
 End Class

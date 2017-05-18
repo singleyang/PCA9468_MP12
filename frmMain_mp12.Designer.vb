@@ -226,10 +226,37 @@ Partial Class FrmMain_mp12
         Me.txtDbgRegVal1 = New System.Windows.Forms.TextBox()
         Me.txtDbgRegReadBack1 = New System.Windows.Forms.TextBox()
         Me.tbpADCTest = New System.Windows.Forms.TabPage()
-        Me.btnADCTestStart = New System.Windows.Forms.Button()
-        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.cmbADCAccDelay = New System.Windows.Forms.ComboBox()
+        Me.chkADCEnDis = New System.Windows.Forms.CheckBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.txtADCAccNTCDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccDieTempDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVbatDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVoutDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVinDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccIoutDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccIINDelta = New System.Windows.Forms.TextBox()
+        Me.txtADCAccNTCMin = New System.Windows.Forms.TextBox()
+        Me.txtADCAccDieTempMin = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVbatMin = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVoutMin = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVinMin = New System.Windows.Forms.TextBox()
+        Me.txtADCAccIoutMin = New System.Windows.Forms.TextBox()
+        Me.txtADCAccIINMin = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtADCAccNtcMax = New System.Windows.Forms.TextBox()
+        Me.txtADCAccDieTempMax = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVbatMax = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVoutMax = New System.Windows.Forms.TextBox()
+        Me.txtADCAccVinMax = New System.Windows.Forms.TextBox()
+        Me.txtADCAccIoutMax = New System.Windows.Forms.TextBox()
+        Me.txtADCAccIINMax = New System.Windows.Forms.TextBox()
         Me.txtADCAccNTCVoltage = New System.Windows.Forms.TextBox()
         Me.txtADCAccDieTemp = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.txtADCAccBattVoltage = New System.Windows.Forms.TextBox()
         Me.txtADCAccOutputVoltage = New System.Windows.Forms.TextBox()
         Me.txtADCAccInputVoltage = New System.Windows.Forms.TextBox()
@@ -243,17 +270,10 @@ Partial Class FrmMain_mp12
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.txtADCTestNTCVoltage = New System.Windows.Forms.TextBox()
-        Me.txtADCTestDieTemp = New System.Windows.Forms.TextBox()
-        Me.txtADCTestBattVoltage = New System.Windows.Forms.TextBox()
-        Me.txtADCTestOutputVoltage = New System.Windows.Forms.TextBox()
-        Me.txtADCTestInputVoltage = New System.Windows.Forms.TextBox()
-        Me.txtADCTestOutputCurrent = New System.Windows.Forms.TextBox()
-        Me.txtADCTestIIN = New System.Windows.Forms.TextBox()
+        Me.btnADCTestStart = New System.Windows.Forms.Button()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtXslFileName = New System.Windows.Forms.TextBox()
         Me.btnSaveADC = New System.Windows.Forms.Button()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.cmbADCTestRepeats = New System.Windows.Forms.ComboBox()
         Me.tsbRefresh = New System.Windows.Forms.ToolStripLabel()
@@ -287,6 +307,7 @@ Partial Class FrmMain_mp12
         Me.tsmView = New System.Windows.Forms.ToolStripMenuItem()
         Me.TheMenu = New System.Windows.Forms.MenuStrip()
         Me.pnlRegisters = New System.Windows.Forms.Panel()
+        Me.tmrADCTest = New System.Windows.Forms.Timer(Me.components)
         Me.tbpInt.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -313,6 +334,7 @@ Partial Class FrmMain_mp12
         Me.tbpMisc.SuspendLayout()
         Me.gbxDebug.SuspendLayout()
         Me.tbpADCTest.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.theToolbar.SuspendLayout()
         Me.TheMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -2517,34 +2539,14 @@ Partial Class FrmMain_mp12
         'tbpADCTest
         '
         Me.tbpADCTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tbpADCTest.Controls.Add(Me.Label21)
+        Me.tbpADCTest.Controls.Add(Me.cmbADCAccDelay)
+        Me.tbpADCTest.Controls.Add(Me.chkADCEnDis)
+        Me.tbpADCTest.Controls.Add(Me.GroupBox3)
         Me.tbpADCTest.Controls.Add(Me.btnADCTestStart)
-        Me.tbpADCTest.Controls.Add(Me.Label18)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccNTCVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccDieTemp)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccBattVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccOutputVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccInputVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccOutputCurrent)
-        Me.tbpADCTest.Controls.Add(Me.txtADCAccInputCurrent)
-        Me.tbpADCTest.Controls.Add(Me.Label17)
-        Me.tbpADCTest.Controls.Add(Me.Label16)
-        Me.tbpADCTest.Controls.Add(Me.Label15)
-        Me.tbpADCTest.Controls.Add(Me.Label14)
-        Me.tbpADCTest.Controls.Add(Me.Label13)
-        Me.tbpADCTest.Controls.Add(Me.Label12)
-        Me.tbpADCTest.Controls.Add(Me.Label11)
-        Me.tbpADCTest.Controls.Add(Me.Label10)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestNTCVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestDieTemp)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestBattVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestOutputVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestInputVoltage)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestOutputCurrent)
-        Me.tbpADCTest.Controls.Add(Me.txtADCTestIIN)
         Me.tbpADCTest.Controls.Add(Me.Label9)
         Me.tbpADCTest.Controls.Add(Me.txtXslFileName)
         Me.tbpADCTest.Controls.Add(Me.btnSaveADC)
-        Me.tbpADCTest.Controls.Add(Me.Label8)
         Me.tbpADCTest.Controls.Add(Me.Label7)
         Me.tbpADCTest.Controls.Add(Me.cmbADCTestRepeats)
         Me.tbpADCTest.Location = New System.Drawing.Point(4, 28)
@@ -2555,93 +2557,376 @@ Partial Class FrmMain_mp12
         Me.tbpADCTest.Text = "ADC Test"
         Me.tbpADCTest.UseVisualStyleBackColor = True
         '
-        'btnADCTestStart
+        'Label21
         '
-        Me.btnADCTestStart.BackColor = System.Drawing.SystemColors.Control
-        Me.btnADCTestStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.btnADCTestStart.Location = New System.Drawing.Point(462, 103)
-        Me.btnADCTestStart.Name = "btnADCTestStart"
-        Me.btnADCTestStart.Size = New System.Drawing.Size(76, 26)
-        Me.btnADCTestStart.TabIndex = 85
-        Me.btnADCTestStart.Text = "Test"
-        Me.btnADCTestStart.UseVisualStyleBackColor = False
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(362, 12)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(180, 17)
+        Me.Label21.TabIndex = 88
+        Me.Label21.Text = "Samples Taking Frequency"
         '
-        'Label18
+        'cmbADCAccDelay
         '
-        Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(282, 80)
-        Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(136, 17)
-        Me.Label18.TabIndex = 84
-        Me.Label18.Text = "Calculated Accuracy"
+        Me.cmbADCAccDelay.FormattingEnabled = True
+        Me.cmbADCAccDelay.Items.AddRange(New Object() {"Disabled", "50ms", "100ms"})
+        Me.cmbADCAccDelay.Location = New System.Drawing.Point(380, 34)
+        Me.cmbADCAccDelay.Name = "cmbADCAccDelay"
+        Me.cmbADCAccDelay.Size = New System.Drawing.Size(96, 24)
+        Me.cmbADCAccDelay.TabIndex = 87
+        '
+        'chkADCEnDis
+        '
+        Me.chkADCEnDis.Location = New System.Drawing.Point(466, 44)
+        Me.chkADCEnDis.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.chkADCEnDis.Name = "chkADCEnDis"
+        Me.chkADCEnDis.Padding = New System.Windows.Forms.Padding(1, 0, 0, 0)
+        Me.chkADCEnDis.Size = New System.Drawing.Size(83, 79)
+        Me.chkADCEnDis.TabIndex = 60
+        Me.chkADCEnDis.Text = "ADC AutoEn/Dis"
+        Me.chkADCEnDis.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.Label20)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccNTCDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccDieTempDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVbatDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVoutDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVinDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccIoutDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccIINDelta)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccNTCMin)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccDieTempMin)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVbatMin)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVoutMin)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVinMin)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccIoutMin)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccIINMin)
+        Me.GroupBox3.Controls.Add(Me.Label19)
+        Me.GroupBox3.Controls.Add(Me.Label8)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccNtcMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccDieTempMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVbatMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVoutMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccVinMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccIoutMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccIINMax)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccNTCVoltage)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccDieTemp)
+        Me.GroupBox3.Controls.Add(Me.Label18)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccBattVoltage)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccOutputVoltage)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccInputVoltage)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccOutputCurrent)
+        Me.GroupBox3.Controls.Add(Me.txtADCAccInputCurrent)
+        Me.GroupBox3.Controls.Add(Me.Label17)
+        Me.GroupBox3.Controls.Add(Me.Label16)
+        Me.GroupBox3.Controls.Add(Me.Label15)
+        Me.GroupBox3.Controls.Add(Me.Label14)
+        Me.GroupBox3.Controls.Add(Me.Label13)
+        Me.GroupBox3.Controls.Add(Me.Label12)
+        Me.GroupBox3.Controls.Add(Me.Label11)
+        Me.GroupBox3.Controls.Add(Me.Label10)
+        Me.GroupBox3.Location = New System.Drawing.Point(6, 69)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(450, 231)
+        Me.GroupBox3.TabIndex = 86
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "GroupBox3"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(310, 0)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(41, 17)
+        Me.Label20.TabIndex = 115
+        Me.Label20.Text = "Delta"
+        '
+        'txtADCAccNTCDelta
+        '
+        Me.txtADCAccNTCDelta.Location = New System.Drawing.Point(294, 200)
+        Me.txtADCAccNTCDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccNTCDelta.Name = "txtADCAccNTCDelta"
+        Me.txtADCAccNTCDelta.ReadOnly = True
+        Me.txtADCAccNTCDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccNTCDelta.TabIndex = 114
+        '
+        'txtADCAccDieTempDelta
+        '
+        Me.txtADCAccDieTempDelta.Location = New System.Drawing.Point(294, 173)
+        Me.txtADCAccDieTempDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccDieTempDelta.Name = "txtADCAccDieTempDelta"
+        Me.txtADCAccDieTempDelta.ReadOnly = True
+        Me.txtADCAccDieTempDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccDieTempDelta.TabIndex = 113
+        '
+        'txtADCAccVbatDelta
+        '
+        Me.txtADCAccVbatDelta.Location = New System.Drawing.Point(294, 147)
+        Me.txtADCAccVbatDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVbatDelta.Name = "txtADCAccVbatDelta"
+        Me.txtADCAccVbatDelta.ReadOnly = True
+        Me.txtADCAccVbatDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVbatDelta.TabIndex = 112
+        '
+        'txtADCAccVoutDelta
+        '
+        Me.txtADCAccVoutDelta.Location = New System.Drawing.Point(294, 117)
+        Me.txtADCAccVoutDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVoutDelta.Name = "txtADCAccVoutDelta"
+        Me.txtADCAccVoutDelta.ReadOnly = True
+        Me.txtADCAccVoutDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVoutDelta.TabIndex = 111
+        '
+        'txtADCAccVinDelta
+        '
+        Me.txtADCAccVinDelta.Location = New System.Drawing.Point(294, 89)
+        Me.txtADCAccVinDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVinDelta.Name = "txtADCAccVinDelta"
+        Me.txtADCAccVinDelta.ReadOnly = True
+        Me.txtADCAccVinDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVinDelta.TabIndex = 110
+        '
+        'txtADCAccIoutDelta
+        '
+        Me.txtADCAccIoutDelta.Location = New System.Drawing.Point(294, 61)
+        Me.txtADCAccIoutDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccIoutDelta.Name = "txtADCAccIoutDelta"
+        Me.txtADCAccIoutDelta.ReadOnly = True
+        Me.txtADCAccIoutDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccIoutDelta.TabIndex = 109
+        '
+        'txtADCAccIINDelta
+        '
+        Me.txtADCAccIINDelta.Location = New System.Drawing.Point(294, 32)
+        Me.txtADCAccIINDelta.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccIINDelta.Name = "txtADCAccIINDelta"
+        Me.txtADCAccIINDelta.ReadOnly = True
+        Me.txtADCAccIINDelta.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccIINDelta.TabIndex = 108
+        '
+        'txtADCAccNTCMin
+        '
+        Me.txtADCAccNTCMin.Location = New System.Drawing.Point(208, 200)
+        Me.txtADCAccNTCMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccNTCMin.Name = "txtADCAccNTCMin"
+        Me.txtADCAccNTCMin.ReadOnly = True
+        Me.txtADCAccNTCMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccNTCMin.TabIndex = 107
+        '
+        'txtADCAccDieTempMin
+        '
+        Me.txtADCAccDieTempMin.Location = New System.Drawing.Point(208, 173)
+        Me.txtADCAccDieTempMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccDieTempMin.Name = "txtADCAccDieTempMin"
+        Me.txtADCAccDieTempMin.ReadOnly = True
+        Me.txtADCAccDieTempMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccDieTempMin.TabIndex = 106
+        '
+        'txtADCAccVbatMin
+        '
+        Me.txtADCAccVbatMin.Location = New System.Drawing.Point(208, 147)
+        Me.txtADCAccVbatMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVbatMin.Name = "txtADCAccVbatMin"
+        Me.txtADCAccVbatMin.ReadOnly = True
+        Me.txtADCAccVbatMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVbatMin.TabIndex = 105
+        '
+        'txtADCAccVoutMin
+        '
+        Me.txtADCAccVoutMin.Location = New System.Drawing.Point(208, 117)
+        Me.txtADCAccVoutMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVoutMin.Name = "txtADCAccVoutMin"
+        Me.txtADCAccVoutMin.ReadOnly = True
+        Me.txtADCAccVoutMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVoutMin.TabIndex = 104
+        '
+        'txtADCAccVinMin
+        '
+        Me.txtADCAccVinMin.Location = New System.Drawing.Point(208, 89)
+        Me.txtADCAccVinMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVinMin.Name = "txtADCAccVinMin"
+        Me.txtADCAccVinMin.ReadOnly = True
+        Me.txtADCAccVinMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVinMin.TabIndex = 103
+        '
+        'txtADCAccIoutMin
+        '
+        Me.txtADCAccIoutMin.Location = New System.Drawing.Point(208, 61)
+        Me.txtADCAccIoutMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccIoutMin.Name = "txtADCAccIoutMin"
+        Me.txtADCAccIoutMin.ReadOnly = True
+        Me.txtADCAccIoutMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccIoutMin.TabIndex = 102
+        '
+        'txtADCAccIINMin
+        '
+        Me.txtADCAccIINMin.Location = New System.Drawing.Point(208, 32)
+        Me.txtADCAccIINMin.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccIINMin.Name = "txtADCAccIINMin"
+        Me.txtADCAccIINMin.ReadOnly = True
+        Me.txtADCAccIINMin.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccIINMin.TabIndex = 101
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(205, 0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(87, 17)
+        Me.Label19.TabIndex = 100
+        Me.Label19.Text = "Min Reading"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(117, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(90, 17)
+        Me.Label8.TabIndex = 99
+        Me.Label8.Text = "Max Reading"
+        '
+        'txtADCAccNtcMax
+        '
+        Me.txtADCAccNtcMax.Location = New System.Drawing.Point(120, 200)
+        Me.txtADCAccNtcMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccNtcMax.Name = "txtADCAccNtcMax"
+        Me.txtADCAccNtcMax.ReadOnly = True
+        Me.txtADCAccNtcMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccNtcMax.TabIndex = 91
+        '
+        'txtADCAccDieTempMax
+        '
+        Me.txtADCAccDieTempMax.Location = New System.Drawing.Point(120, 173)
+        Me.txtADCAccDieTempMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccDieTempMax.Name = "txtADCAccDieTempMax"
+        Me.txtADCAccDieTempMax.ReadOnly = True
+        Me.txtADCAccDieTempMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccDieTempMax.TabIndex = 90
+        '
+        'txtADCAccVbatMax
+        '
+        Me.txtADCAccVbatMax.Location = New System.Drawing.Point(120, 147)
+        Me.txtADCAccVbatMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVbatMax.Name = "txtADCAccVbatMax"
+        Me.txtADCAccVbatMax.ReadOnly = True
+        Me.txtADCAccVbatMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVbatMax.TabIndex = 89
+        '
+        'txtADCAccVoutMax
+        '
+        Me.txtADCAccVoutMax.Location = New System.Drawing.Point(120, 117)
+        Me.txtADCAccVoutMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVoutMax.Name = "txtADCAccVoutMax"
+        Me.txtADCAccVoutMax.ReadOnly = True
+        Me.txtADCAccVoutMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVoutMax.TabIndex = 88
+        '
+        'txtADCAccVinMax
+        '
+        Me.txtADCAccVinMax.Location = New System.Drawing.Point(120, 89)
+        Me.txtADCAccVinMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccVinMax.Name = "txtADCAccVinMax"
+        Me.txtADCAccVinMax.ReadOnly = True
+        Me.txtADCAccVinMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccVinMax.TabIndex = 87
+        '
+        'txtADCAccIoutMax
+        '
+        Me.txtADCAccIoutMax.Location = New System.Drawing.Point(120, 61)
+        Me.txtADCAccIoutMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccIoutMax.Name = "txtADCAccIoutMax"
+        Me.txtADCAccIoutMax.ReadOnly = True
+        Me.txtADCAccIoutMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccIoutMax.TabIndex = 86
+        '
+        'txtADCAccIINMax
+        '
+        Me.txtADCAccIINMax.Location = New System.Drawing.Point(120, 32)
+        Me.txtADCAccIINMax.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtADCAccIINMax.Name = "txtADCAccIINMax"
+        Me.txtADCAccIINMax.ReadOnly = True
+        Me.txtADCAccIINMax.Size = New System.Drawing.Size(80, 22)
+        Me.txtADCAccIINMax.TabIndex = 85
         '
         'txtADCAccNTCVoltage
         '
-        Me.txtADCAccNTCVoltage.Location = New System.Drawing.Point(285, 274)
+        Me.txtADCAccNTCVoltage.Location = New System.Drawing.Point(382, 200)
         Me.txtADCAccNTCVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccNTCVoltage.Name = "txtADCAccNTCVoltage"
         Me.txtADCAccNTCVoltage.ReadOnly = True
-        Me.txtADCAccNTCVoltage.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccNTCVoltage.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccNTCVoltage.TabIndex = 83
         '
         'txtADCAccDieTemp
         '
-        Me.txtADCAccDieTemp.Location = New System.Drawing.Point(285, 250)
+        Me.txtADCAccDieTemp.Location = New System.Drawing.Point(382, 176)
         Me.txtADCAccDieTemp.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccDieTemp.Name = "txtADCAccDieTemp"
         Me.txtADCAccDieTemp.ReadOnly = True
-        Me.txtADCAccDieTemp.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccDieTemp.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccDieTemp.TabIndex = 82
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(373, 0)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(71, 17)
+        Me.Label18.TabIndex = 84
+        Me.Label18.Text = "LSB Delta"
         '
         'txtADCAccBattVoltage
         '
-        Me.txtADCAccBattVoltage.Location = New System.Drawing.Point(285, 221)
+        Me.txtADCAccBattVoltage.Location = New System.Drawing.Point(382, 147)
         Me.txtADCAccBattVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccBattVoltage.Name = "txtADCAccBattVoltage"
         Me.txtADCAccBattVoltage.ReadOnly = True
-        Me.txtADCAccBattVoltage.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccBattVoltage.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccBattVoltage.TabIndex = 81
         '
         'txtADCAccOutputVoltage
         '
-        Me.txtADCAccOutputVoltage.Location = New System.Drawing.Point(285, 191)
+        Me.txtADCAccOutputVoltage.Location = New System.Drawing.Point(382, 117)
         Me.txtADCAccOutputVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccOutputVoltage.Name = "txtADCAccOutputVoltage"
         Me.txtADCAccOutputVoltage.ReadOnly = True
-        Me.txtADCAccOutputVoltage.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccOutputVoltage.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccOutputVoltage.TabIndex = 80
         '
         'txtADCAccInputVoltage
         '
-        Me.txtADCAccInputVoltage.Location = New System.Drawing.Point(285, 163)
+        Me.txtADCAccInputVoltage.Location = New System.Drawing.Point(382, 89)
         Me.txtADCAccInputVoltage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccInputVoltage.Name = "txtADCAccInputVoltage"
         Me.txtADCAccInputVoltage.ReadOnly = True
-        Me.txtADCAccInputVoltage.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccInputVoltage.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccInputVoltage.TabIndex = 79
         '
         'txtADCAccOutputCurrent
         '
-        Me.txtADCAccOutputCurrent.Location = New System.Drawing.Point(285, 135)
+        Me.txtADCAccOutputCurrent.Location = New System.Drawing.Point(382, 61)
         Me.txtADCAccOutputCurrent.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccOutputCurrent.Name = "txtADCAccOutputCurrent"
         Me.txtADCAccOutputCurrent.ReadOnly = True
-        Me.txtADCAccOutputCurrent.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccOutputCurrent.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccOutputCurrent.TabIndex = 78
         '
         'txtADCAccInputCurrent
         '
-        Me.txtADCAccInputCurrent.Location = New System.Drawing.Point(285, 106)
+        Me.txtADCAccInputCurrent.Location = New System.Drawing.Point(382, 32)
         Me.txtADCAccInputCurrent.Margin = New System.Windows.Forms.Padding(4)
         Me.txtADCAccInputCurrent.Name = "txtADCAccInputCurrent"
         Me.txtADCAccInputCurrent.ReadOnly = True
-        Me.txtADCAccInputCurrent.Size = New System.Drawing.Size(95, 22)
+        Me.txtADCAccInputCurrent.Size = New System.Drawing.Size(43, 22)
         Me.txtADCAccInputCurrent.TabIndex = 77
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(29, 276)
+        Me.Label17.Location = New System.Drawing.Point(7, 199)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(88, 17)
         Me.Label17.TabIndex = 76
@@ -2650,7 +2935,7 @@ Partial Class FrmMain_mp12
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(29, 250)
+        Me.Label16.Location = New System.Drawing.Point(7, 173)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(115, 17)
         Me.Label16.TabIndex = 75
@@ -2659,7 +2944,7 @@ Partial Class FrmMain_mp12
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(29, 224)
+        Me.Label15.Location = New System.Drawing.Point(7, 147)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(105, 17)
         Me.Label15.TabIndex = 74
@@ -2668,7 +2953,7 @@ Partial Class FrmMain_mp12
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(29, 196)
+        Me.Label14.Location = New System.Drawing.Point(7, 119)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(103, 17)
         Me.Label14.TabIndex = 73
@@ -2677,7 +2962,7 @@ Partial Class FrmMain_mp12
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(29, 168)
+        Me.Label13.Location = New System.Drawing.Point(7, 91)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(91, 17)
         Me.Label13.TabIndex = 72
@@ -2686,7 +2971,7 @@ Partial Class FrmMain_mp12
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(29, 140)
+        Me.Label12.Location = New System.Drawing.Point(7, 63)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(102, 17)
         Me.Label12.TabIndex = 71
@@ -2695,7 +2980,7 @@ Partial Class FrmMain_mp12
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(29, 112)
+        Me.Label11.Location = New System.Drawing.Point(7, 35)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(90, 17)
         Me.Label11.TabIndex = 70
@@ -2704,65 +2989,27 @@ Partial Class FrmMain_mp12
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(29, 81)
+        Me.Label10.Location = New System.Drawing.Point(9, 0)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(92, 17)
         Me.Label10.TabIndex = 69
         Me.Label10.Text = "ADC Channel"
         '
-        'txtADCTestNTCVoltage
+        'btnADCTestStart
         '
-        Me.txtADCTestNTCVoltage.Location = New System.Drawing.Point(162, 273)
-        Me.txtADCTestNTCVoltage.Name = "txtADCTestNTCVoltage"
-        Me.txtADCTestNTCVoltage.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestNTCVoltage.TabIndex = 68
-        '
-        'txtADCTestDieTemp
-        '
-        Me.txtADCTestDieTemp.Location = New System.Drawing.Point(162, 247)
-        Me.txtADCTestDieTemp.Name = "txtADCTestDieTemp"
-        Me.txtADCTestDieTemp.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestDieTemp.TabIndex = 67
-        '
-        'txtADCTestBattVoltage
-        '
-        Me.txtADCTestBattVoltage.Location = New System.Drawing.Point(162, 219)
-        Me.txtADCTestBattVoltage.Name = "txtADCTestBattVoltage"
-        Me.txtADCTestBattVoltage.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestBattVoltage.TabIndex = 66
-        '
-        'txtADCTestOutputVoltage
-        '
-        Me.txtADCTestOutputVoltage.Location = New System.Drawing.Point(162, 191)
-        Me.txtADCTestOutputVoltage.Name = "txtADCTestOutputVoltage"
-        Me.txtADCTestOutputVoltage.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestOutputVoltage.TabIndex = 65
-        '
-        'txtADCTestInputVoltage
-        '
-        Me.txtADCTestInputVoltage.Location = New System.Drawing.Point(162, 163)
-        Me.txtADCTestInputVoltage.Name = "txtADCTestInputVoltage"
-        Me.txtADCTestInputVoltage.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestInputVoltage.TabIndex = 64
-        '
-        'txtADCTestOutputCurrent
-        '
-        Me.txtADCTestOutputCurrent.Location = New System.Drawing.Point(162, 135)
-        Me.txtADCTestOutputCurrent.Name = "txtADCTestOutputCurrent"
-        Me.txtADCTestOutputCurrent.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestOutputCurrent.TabIndex = 63
-        '
-        'txtADCTestIIN
-        '
-        Me.txtADCTestIIN.Location = New System.Drawing.Point(162, 107)
-        Me.txtADCTestIIN.Name = "txtADCTestIIN"
-        Me.txtADCTestIIN.Size = New System.Drawing.Size(87, 22)
-        Me.txtADCTestIIN.TabIndex = 62
+        Me.btnADCTestStart.BackColor = System.Drawing.SystemColors.Control
+        Me.btnADCTestStart.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.btnADCTestStart.Location = New System.Drawing.Point(462, 216)
+        Me.btnADCTestStart.Name = "btnADCTestStart"
+        Me.btnADCTestStart.Size = New System.Drawing.Size(76, 26)
+        Me.btnADCTestStart.TabIndex = 85
+        Me.btnADCTestStart.Text = "Test"
+        Me.btnADCTestStart.UseVisualStyleBackColor = False
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(159, 26)
+        Me.Label9.Location = New System.Drawing.Point(123, 12)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(71, 17)
         Me.Label9.TabIndex = 61
@@ -2770,9 +3017,10 @@ Partial Class FrmMain_mp12
         '
         'txtXslFileName
         '
-        Me.txtXslFileName.Location = New System.Drawing.Point(158, 47)
+        Me.txtXslFileName.Location = New System.Drawing.Point(126, 34)
         Me.txtXslFileName.Name = "txtXslFileName"
-        Me.txtXslFileName.Size = New System.Drawing.Size(222, 22)
+        Me.txtXslFileName.ReadOnly = True
+        Me.txtXslFileName.Size = New System.Drawing.Size(231, 22)
         Me.txtXslFileName.TabIndex = 60
         '
         'btnSaveADC
@@ -2786,29 +3034,20 @@ Partial Class FrmMain_mp12
         Me.btnSaveADC.Text = "Save"
         Me.btnSaveADC.UseVisualStyleBackColor = False
         '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(159, 80)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(115, 17)
-        Me.Label8.TabIndex = 3
-        Me.Label8.Text = "Measured Result"
-        '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(29, 27)
+        Me.Label7.Location = New System.Drawing.Point(15, 14)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(119, 17)
+        Me.Label7.Size = New System.Drawing.Size(61, 17)
         Me.Label7.TabIndex = 2
-        Me.Label7.Text = "Times of Repeats"
+        Me.Label7.Text = "Repeats"
         '
         'cmbADCTestRepeats
         '
         Me.cmbADCTestRepeats.FormattingEnabled = True
-        Me.cmbADCTestRepeats.Items.AddRange(New Object() {"10", "50", "100"})
-        Me.cmbADCTestRepeats.Location = New System.Drawing.Point(32, 47)
+        Me.cmbADCTestRepeats.Items.AddRange(New Object() {"10", "50", "100", "200", "500"})
+        Me.cmbADCTestRepeats.Location = New System.Drawing.Point(18, 34)
         Me.cmbADCTestRepeats.Name = "cmbADCTestRepeats"
         Me.cmbADCTestRepeats.Size = New System.Drawing.Size(82, 24)
         Me.cmbADCTestRepeats.TabIndex = 0
@@ -2912,7 +3151,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmManual.Name = "tsmManual"
         Me.tsmManual.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.tsmManual.Size = New System.Drawing.Size(258, 24)
+        Me.tsmManual.Size = New System.Drawing.Size(264, 26)
         Me.tsmManual.Text = "Open the User Manual..."
         Me.tsmManual.ToolTipText = "Open the User Manual with an external PDF viewer"
         '
@@ -2920,7 +3159,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmAbout.Name = "tsmAbout"
         Me.tsmAbout.ShortcutKeyDisplayString = ""
-        Me.tsmAbout.Size = New System.Drawing.Size(258, 24)
+        Me.tsmAbout.Size = New System.Drawing.Size(264, 26)
         Me.tsmAbout.Text = "About..."
         Me.tsmAbout.ToolTipText = "Version and file information"
         '
@@ -2935,7 +3174,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmInterval4.Name = "tsmInterval4"
         Me.tsmInterval4.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D4), System.Windows.Forms.Keys)
-        Me.tsmInterval4.Size = New System.Drawing.Size(260, 24)
+        Me.tsmInterval4.Size = New System.Drawing.Size(266, 26)
         Me.tsmInterval4.Text = "&Four times a second"
         Me.tsmInterval4.ToolTipText = "Read ADC and interrupts four times a second"
         '
@@ -2943,20 +3182,20 @@ Partial Class FrmMain_mp12
         '
         Me.tsmInterval1.Name = "tsmInterval1"
         Me.tsmInterval1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D1), System.Windows.Forms.Keys)
-        Me.tsmInterval1.Size = New System.Drawing.Size(260, 24)
+        Me.tsmInterval1.Size = New System.Drawing.Size(266, 26)
         Me.tsmInterval1.Text = "&Once a second"
         Me.tsmInterval1.ToolTipText = "Read ADC and interrupts once a second"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(257, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(263, 6)
         '
         'tsmInterval0
         '
         Me.tsmInterval0.Name = "tsmInterval0"
         Me.tsmInterval0.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D0), System.Windows.Forms.Keys)
-        Me.tsmInterval0.Size = New System.Drawing.Size(260, 24)
+        Me.tsmInterval0.Size = New System.Drawing.Size(266, 26)
         Me.tsmInterval0.Text = "&Disabled"
         Me.tsmInterval0.ToolTipText = "Registers are read manually"
         '
@@ -2964,7 +3203,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmRefresh.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsmInterval0, Me.ToolStripSeparator3, Me.tsmInterval1, Me.tsmInterval2, Me.tsmInterval4})
         Me.tsmRefresh.Name = "tsmRefresh"
-        Me.tsmRefresh.Size = New System.Drawing.Size(159, 24)
+        Me.tsmRefresh.Size = New System.Drawing.Size(165, 26)
         Me.tsmRefresh.Text = "&Auto refresh"
         Me.tsmRefresh.ToolTipText = "Refresh interval for ADC and interrupts"
         '
@@ -2972,33 +3211,33 @@ Partial Class FrmMain_mp12
         '
         Me.tsmInterval2.Name = "tsmInterval2"
         Me.tsmInterval2.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D2), System.Windows.Forms.Keys)
-        Me.tsmInterval2.Size = New System.Drawing.Size(260, 24)
+        Me.tsmInterval2.Size = New System.Drawing.Size(266, 26)
         Me.tsmInterval2.Text = "&Twice a second"
         Me.tsmInterval2.ToolTipText = "Read ADC and interrupts twice a second"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(156, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(162, 6)
         '
         'tsmReset
         '
         Me.tsmReset.Name = "tsmReset"
         Me.tsmReset.ShortcutKeys = System.Windows.Forms.Keys.F7
-        Me.tsmReset.Size = New System.Drawing.Size(159, 24)
+        Me.tsmReset.Size = New System.Drawing.Size(165, 26)
         Me.tsmReset.Text = "Re&set"
         Me.tsmReset.ToolTipText = "Reset PCA949x to defaults"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(156, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(162, 6)
         '
         'tsmWrite
         '
         Me.tsmWrite.Name = "tsmWrite"
         Me.tsmWrite.ShortcutKeys = System.Windows.Forms.Keys.F6
-        Me.tsmWrite.Size = New System.Drawing.Size(159, 24)
+        Me.tsmWrite.Size = New System.Drawing.Size(165, 26)
         Me.tsmWrite.Text = "&Write all"
         Me.tsmWrite.ToolTipText = "Write all registers"
         '
@@ -3006,7 +3245,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmRead.Name = "tsmRead"
         Me.tsmRead.ShortcutKeys = System.Windows.Forms.Keys.F5
-        Me.tsmRead.Size = New System.Drawing.Size(159, 24)
+        Me.tsmRead.Size = New System.Drawing.Size(165, 26)
         Me.tsmRead.Text = "&Read all"
         Me.tsmRead.ToolTipText = "Read all registers"
         '
@@ -3021,7 +3260,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmRegisters.Name = "tsmRegisters"
         Me.tsmRegisters.ShortcutKeys = System.Windows.Forms.Keys.F9
-        Me.tsmRegisters.Size = New System.Drawing.Size(190, 24)
+        Me.tsmRegisters.Size = New System.Drawing.Size(196, 26)
         Me.tsmRegisters.Text = "&Register map"
         Me.tsmRegisters.ToolTipText = "Registers values in hexadecimal and binary"
         '
@@ -3029,7 +3268,7 @@ Partial Class FrmMain_mp12
         '
         Me.tsmFunctions.Name = "tsmFunctions"
         Me.tsmFunctions.ShortcutKeys = System.Windows.Forms.Keys.F8
-        Me.tsmFunctions.Size = New System.Drawing.Size(190, 24)
+        Me.tsmFunctions.Size = New System.Drawing.Size(196, 26)
         Me.tsmFunctions.Text = "&Functions"
         Me.tsmFunctions.ToolTipText = "Functional view of register map"
         '
@@ -3059,6 +3298,10 @@ Partial Class FrmMain_mp12
         Me.pnlRegisters.Size = New System.Drawing.Size(814, 497)
         Me.pnlRegisters.TabIndex = 38
         Me.pnlRegisters.Visible = False
+        '
+        'tmrADCTest
+        '
+        Me.tmrADCTest.Interval = 1000
         '
         'FrmMain_mp12
         '
@@ -3121,6 +3364,8 @@ Partial Class FrmMain_mp12
         Me.gbxDebug.PerformLayout()
         Me.tbpADCTest.ResumeLayout(False)
         Me.tbpADCTest.PerformLayout()
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.theToolbar.ResumeLayout(False)
         Me.theToolbar.PerformLayout()
         Me.TheMenu.ResumeLayout(False)
@@ -3362,15 +3607,33 @@ Partial Class FrmMain_mp12
     Friend WithEvents txtCFlyShortSts As System.Windows.Forms.TextBox
     Friend WithEvents chkCFlyShortSts As System.Windows.Forms.CheckBox
     Friend WithEvents tbpADCTest As System.Windows.Forms.TabPage
-    Friend WithEvents btnSaveADC As System.Windows.Forms.Button
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents txtADCAccNTCDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccDieTempDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVbatDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVoutDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVinDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccIoutDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccIINDelta As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccNTCMin As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccDieTempMin As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVbatMin As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVoutMin As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVinMin As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccIoutMin As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccIINMin As System.Windows.Forms.TextBox
+    Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label8 As System.Windows.Forms.Label
-    Friend WithEvents Label7 As System.Windows.Forms.Label
-    Friend WithEvents cmbADCTestRepeats As System.Windows.Forms.ComboBox
-    Friend WithEvents Label9 As System.Windows.Forms.Label
-    Friend WithEvents txtXslFileName As System.Windows.Forms.TextBox
-    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents txtADCAccNtcMax As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccDieTempMax As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVbatMax As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVoutMax As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccVinMax As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccIoutMax As System.Windows.Forms.TextBox
+    Friend WithEvents txtADCAccIINMax As System.Windows.Forms.TextBox
     Friend WithEvents txtADCAccNTCVoltage As System.Windows.Forms.TextBox
     Friend WithEvents txtADCAccDieTemp As System.Windows.Forms.TextBox
+    Friend WithEvents Label18 As System.Windows.Forms.Label
     Friend WithEvents txtADCAccBattVoltage As System.Windows.Forms.TextBox
     Friend WithEvents txtADCAccOutputVoltage As System.Windows.Forms.TextBox
     Friend WithEvents txtADCAccInputVoltage As System.Windows.Forms.TextBox
@@ -3384,12 +3647,15 @@ Partial Class FrmMain_mp12
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents Label10 As System.Windows.Forms.Label
-    Friend WithEvents txtADCTestNTCVoltage As System.Windows.Forms.TextBox
-    Friend WithEvents txtADCTestDieTemp As System.Windows.Forms.TextBox
-    Friend WithEvents txtADCTestBattVoltage As System.Windows.Forms.TextBox
-    Friend WithEvents txtADCTestOutputVoltage As System.Windows.Forms.TextBox
-    Friend WithEvents txtADCTestInputVoltage As System.Windows.Forms.TextBox
-    Friend WithEvents txtADCTestOutputCurrent As System.Windows.Forms.TextBox
-    Friend WithEvents txtADCTestIIN As System.Windows.Forms.TextBox
     Friend WithEvents btnADCTestStart As System.Windows.Forms.Button
+    Friend WithEvents Label9 As System.Windows.Forms.Label
+    Friend WithEvents txtXslFileName As System.Windows.Forms.TextBox
+    Friend WithEvents btnSaveADC As System.Windows.Forms.Button
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents cmbADCTestRepeats As System.Windows.Forms.ComboBox
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents chkADCEnDis As System.Windows.Forms.CheckBox
+    Friend WithEvents cmbADCAccDelay As System.Windows.Forms.ComboBox
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents tmrADCTest As System.Windows.Forms.Timer
 End Class
