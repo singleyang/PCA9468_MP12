@@ -105,7 +105,6 @@ Public Class Model
         End Set
     End Property
 
-#If DEBUG Then
     Public Shared Function DbgWriteRegister(regnumber As Integer, regval As Integer) As pca_result_t
         Return pcaDbgWriteRegister_hidden(regnumber, regval)
     End Function
@@ -113,6 +112,8 @@ Public Class Model
     Public Shared Function DbgReadRegister(regnumber As Integer) As Integer
         Return pcaDbgReadRegister_hidden(regnumber)
     End Function
-#End If
 
+    Public Shared Function WriteRegisterField(DataField As pca_data_fields_enum_t, Value As Integer) As pca_result_t
+        Return pcaSetAndWriteDataField_hidden(DataField, Value)
+    End Function
 End Class

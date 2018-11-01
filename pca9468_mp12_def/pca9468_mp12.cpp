@@ -244,6 +244,20 @@ pca_result_t pcaReadADCRegisters(int regNumber, int count) {
 		data[7] =  0xCC;
 		data[8] =  0xBC;
 #else
+#if 0
+	/*Disable and enable ADC Channel*/
+	data[0] = 0x00;
+	if ((result = (pca_result_t)pc_writeRegister(gSla, 0x24, (uint8_t *)&data[0], 1)) != pca_ok)
+	{
+		return result;
+	}
+
+	data[0] = 0xFF;
+	if ((result = (pca_result_t)pc_writeRegister(gSla, 0x24, (uint8_t *)&data[0], 1)) != pca_ok)
+	{
+		return result;
+	}
+#endif
 	/*Check whether auto incremental(0x80) need to to changed */
 	if ((result = (pca_result_t)pc_readRegister(gSla, pca_registers[regNumber].offset, (uint8_t *)&data, 9)) == pca_ok)
 	{
@@ -271,19 +285,45 @@ pca_result_t pcaReadADCRegisters(int regNumber, int count) {
 		value = ((*(int *)&data[8] & 0x00FF) << 8) | (*(int *)&data[7] & 0x00FF);
 		_pcaSetRegister(0x0E, value);
 	}
+
+	return result;
+}
+
+pca_result_t pcaReadNTCRegisters(int regNumber, int count) {
+	pca_result_t result = pca_ok;
+	int idx;
+	uint8_t data[2];
+	int value;
+
+	/*Check whether auto incremental(0x00) need to to changed */
+	if ((result = (pca_result_t)pc_readRegister(gSla, pca_registers[0x18].offset, (uint8_t *)&data, 2)) == pca_ok)
+	{
+		value = ((*(int *)&data[1] & 0x00FF) << 8) | (*(int *)&data[0] & 0x00FF);
+		_pcaSetRegister(0x18, value);
+	}
+
 	return result;
 }
 
 /*This function is modified for MP12*/
 pca_result_t pcaReadAll() {
 	pca_result_t result = pca_ok;
+	pca_data_bits_t data_bits = 0;
+
 	/*Read out Interrupt and Status Regs 0x00-0x10 (RegNo 00-16)*/
 	if ((result = pcaReadRegisters(00, 8)) == pca_ok)
 	{
-		if ((result = pcaReadADCRegisters(8, 9)) == pca_ok)
+		if ((result = pcaReadADCRegisters(8, 7)) == pca_ok)
 		{
+			
+#if 1
+			result = pcaReadRegisters(15, 9);
+			/*swap 0x20 and 0x2A */
+			pcaReadNTCRegisters(24,2);
+#else
 			/*Read out Interrupt and Status Regs 0x20-0x2A (11 Registers)*/
 			result = pcaReadRegisters(17, 11);
+#endif
 		}
 	}
 	return result;
@@ -336,7 +376,7 @@ pca_result_t pcaDbgWriteRegister(int regAddr, int val)
 	return (pca_result_t)pc_writeRegister(gSla, regAddr&0xFF, (uint8_t *)&val, 1);
 }
 
-/*MP12 write dbg registers*/
+/*MP12 read dbg registers*/
 int pcaDbgReadRegister(int regAddr)
 {
 	uint8_t readRegVal = 0;
@@ -370,8 +410,8 @@ pca_result_t pcaWriteAll() {
 			data[offset++] = (pca_registers[idx].data_bits & 0xFF);
 		}
 		/*Write Config Reg 0x29-0x2A*/
-		data[offset++] = (pca_registers[24].data_bits) >> 8 & 0xFF;
-		data[offset++] = (pca_registers[24].data_bits) & 0xFF;
+		data[offset++] = (pca_registers[24].data_bits)  & 0xFF;
+		data[offset++] = (pca_registers[24].data_bits)  >> 8 & 0xFF;
 		result = pc_writeRegister(gSla, 0x20, data, 11) == pc_ok ? pca_ok : pca_writeFailed;
 	}
 	return result;

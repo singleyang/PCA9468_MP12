@@ -27,9 +27,9 @@ pca_data_bits_t pca_data_bits_default[] = {
 	/* 08 */ 0xF3FE, 0x8FF3, 0x3F8F, 0xFC3F,
 	/* 0C */ 0x03E0, 0x4D9F, 0x380F,
 #endif
-	/* 20 */ 0x3C, 0x1E, 0x88, 0x00,
+	/* 20 */ 0x3C, 0x9E, 0x38, 0x00,
 	/* 24 */ 0xFF, 0x02, 0x00, 0x7D,
-	/* 28 */ 0x02, 0xFFFF
+	/* 28 */ 0x02, 0x03FF
 };
 
 pca_register_t pca_registers[];
@@ -204,10 +204,10 @@ void pca_tf_uv_delta(char *textbuffer, size_t sz, int index)
 				sprintf_s(textbuffer, sz, "%s", "10%");
 				break;
 			case 1:
-				sprintf_s(textbuffer, sz, "%s", "20%");
+				sprintf_s(textbuffer, sz, "%s", "30%");
 				break;
 			case 2:
-				sprintf_s(textbuffer, sz, "%s", "30%");
+				sprintf_s(textbuffer, sz, "%s", "20%");
 				break;
 			default:
 				sprintf_s(textbuffer, sz, "%s", "40%");
@@ -324,10 +324,17 @@ void pca_tf_ichg_cfg(char *textbuffer, size_t sz, int index)
 	if (textbuffer && sz > 0) {
 		*textbuffer = '\0';
 		if (sz >= 10) {
-			if (index <= 80)
-				sprintf_s(textbuffer, sz, "%dmA", index*100);
+			if (index <= 5){
+				sprintf_s(textbuffer, sz, "500mA");
+			}
+			else if (index <= 80)
+			{
+				sprintf_s(textbuffer, sz, "%dmA", index * 100);
+			}
 			else
+			{
 				sprintf_s(textbuffer, sz, "%s", "Illegal value");
+			}
 		}
 	}
 }
@@ -339,9 +346,9 @@ void pca_tf_iin_cfg(char *textbuffer, size_t sz, int index)
 		*textbuffer = '\0';
 		if (sz >= 10) {
 			if (index <= 5)
-				sprintf_s(textbuffer, sz, "%smA", "400");
+				sprintf_s(textbuffer, sz, "%smA", "500");
 			else if (index > 5 && index <= 0x32)
-				sprintf_s(textbuffer, sz, "%dmA", (index-1) * 100);
+				sprintf_s(textbuffer, sz, "%dmA", (index) * 100);
 			else
 				sprintf_s(textbuffer, sz, "%s", "Illegal value");
 		}
@@ -520,11 +527,12 @@ void pca_tf_Iout_adc(char *textbuffer, size_t sz, int index)
 			/*first check whether it's 5mohm or 10mOhm*/
 			if (pca_registers[17].data_bits & 0x0080)
 			{
-				/*I = V/R*/
-				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489)*100);
+				/*I = V/R* 10mOhm*/
+				sprintf_s(textbuffer, sz, "%0.0fmA", (val*9.78));	//B0 change
 			}
 			else{
-				sprintf_s(textbuffer, sz, "%0.0fmA", (val*0.489) * 200);
+				/*5mOhm*/
+				sprintf_s(textbuffer, sz, "%0.0fmA", (val*9.78)); //B0 Change
 			}
 		}
 	}
@@ -538,17 +546,16 @@ void pca_tf_DieTemp_adc(char *textbuffer, size_t sz, int index)
 		if (sz >= 10) {
 			float val = float(index & 0x3FF);
 			/*LSB 0.5C with -25C ~ 160C*/
-			if (val > 951)
+			if (val > 992)
 			{	
 				sprintf_s(textbuffer, sz, "-25°C");
 			}
-			else if (val <= 500)
+			else if (val <= 567)
 			{
 				sprintf_s(textbuffer, sz, "160°C");
 			}
 			else{ 
-				//sprintf_s(textbuffer, sz, "%0.1f °C", (891 - val)*0.41); 
-				sprintf_s(textbuffer, sz, "%0.1f °C", (922 - val)*0.52);  /*according to Dennis*/
+				sprintf_s(textbuffer, sz, "%0.1f °C", (935 - val)*0.435); 
 			}
 		}
 	}
@@ -562,7 +569,7 @@ void pca_tf_NTC_adc(char *textbuffer, size_t sz, int index)
 		if (sz >= 10) {
 			float val = float(index & 0x3FF);
 			/*2.4mA per step 2.4V*/
-			sprintf_s(textbuffer, sz, "%0.1fmV", val * 2.4);
+			sprintf_s(textbuffer, sz, "%0.1fmV", val * 2.346);
 		}
 	}
 }
@@ -873,6 +880,36 @@ void pca_tf_CFlyShort_sts(char *textbuffer, size_t sz, int index)
 	}
 }
 
+/*Added for B0 version*/
+void pca_tf_sc_dither_rate(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 10) {
+			switch (index)
+			{
+			case 0: sprintf_s(textbuffer, sz, "%s", "25KHz"); break;
+			case 1: sprintf_s(textbuffer, sz, "%s", "5KHz"); break;
+			case 2: sprintf_s(textbuffer, sz, "%s", "1KHz"); break;
+			case 3: sprintf_s(textbuffer, sz, "%s", "100Hz"); break;
+			default:
+				sprintf_s(textbuffer, sz, "%s", "10Hz");
+				break;
+			}
+		}
+	}
+}
+
+void pca_tf_sc_dither_limit(char *textbuffer, size_t sz, int index)
+{
+	if (textbuffer && sz > 0) {
+		*textbuffer = '\0';
+		if (sz >= 20) {
+			sprintf_s(textbuffer, sz, "%0.3f %%", (index+1) * 0.625);  
+		}
+	}
+}
+
 
 pca_data_field_t pca_DataFields[] = {
 	/*25 Datafiled in total, all callbacks need to be reviewed YY*/
@@ -940,7 +977,7 @@ pca_data_field_t pca_DataFields[] = {
 	/*REG 0x20, ICHG_CTRL (R/W)*/
 	{ 0x0F, 7, 1, 0, ichg_ss, "Charge Current Step Time", pca_tf_ichg_ss },
 	{ 0x0F, 0, 7, 0x51, ichg_cfg, "Charge Current Set", pca_tf_ichg_cfg },
-	/*REG 0x20, ICHG_CTRL (R/W)*/
+	/*REG 0x21, IIN_CTRL (R/W)*/
 	{ 0x10, 7, 1, 0, limit_increment_en, "Input Increment Enable", pca_tf_En_Dis },
 	{ 0x10, 6, 1, 0, iin_ss, "Input Current Step Time", pca_tf_iin_ss },
 	{ 0x10, 0, 6, 0x33, iin_cfg, "Input Current Set", pca_tf_iin_cfg },
@@ -954,9 +991,7 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x12, 6, 2, 0, force_adc_mode, "ADC Mode Selection", pca_tf_force_ADCmode },
 	{ 0x12, 5, 1, 0, adc_shutdown_cfg, "ADC Shutdown Config", pca_tf_En_Dis },
 	{ 0x12, 3, 2, 0, hibernate_delay, "ADC Hibernate Delay", pca_tf_hib_delay },
-	{ 0x12, 2, 1, 0, adc_offset_cfg, "ADC Offset Configration", pca_tf_adcoffset_cfg },
-	{ 0x12, 1, 1, 0, adc_osr_cfg, "ADC Oscillator Select", pca_tf_adcosr_cfg },
-	{ 0x12, 0, 1, 0, adc_en, "ADC Enable", pca_tf_En_Dis },
+	{ 0x12, 0, 3, 0x5, sc_clk_dither_rate, "Spread Spectrum Rate", pca_tf_sc_dither_rate },		//added in B0
 	/*REG 0x24, ADCCH_CFG (R/W)*/
 	/*modified according to v1.0 spec*/
 	{ 0x13, 7, 1, 0, ch7_en, "NTC Voltage", pca_tf_En_Dis },
@@ -972,12 +1007,13 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x14, 3, 1, 0, temp_reg_en, "DieTemp Regulation", pca_tf_En_Dis },
 	{ 0x14, 2, 1, 0, ntc_protection_en, "Ext Thermistor Temp Protection", pca_tf_En_Dis },
 	{ 0x14, 1, 1, 0, temp_max_en, "DieTemp Standby Mode", pca_tf_En_Dis },
+	{ 0x14, 0, 1, 0, sc_clk_dither_en, "Spread Spectrum Feature Enable", pca_tf_En_Dis },
 	/*REG 0x26, PWR_COLLAPSE (R/W)*/
 	{ 0x15, 6, 2, 0, uv_delta, "VIN UnderVoltage Setting", pca_tf_uv_delta },
 	{ 0x15, 5, 1, 0, collapse_det_en, "Power Collapse Detection", pca_tf_En_Dis },
 	{ 0x15, 4, 1, 0, iin_force_count, "Force IIN increment", pca_tf_En_Dis },
 	{ 0x15, 3, 1, 0, bat_miss_det_en, "Battery Missing Detection", pca_tf_En_Dis },
-	{ 0x15, 2, 1, 0, batt_miss_shdn_en, "Battery Missing Shutdown", pca_tf_En_Dis },
+	{ 0x15, 2, 1, 0, unplug_force_standby, "Unplug Force Standby Enable", pca_tf_En_Dis },
 	/*REG 0x27, V_FLOAT (R/W)*/
 	{ 0x16, 0, 8, 0, v_float, "V Float voltage set", pca_tf_V_float },
 	/*REG 0x28, SAFETY_CTRL (R/W)*/
@@ -987,7 +1023,8 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x17, 2, 2, 0, chg_timer_cfg, "Charger Timer Select", pca_tf_chgtmr_cfg },
 	{ 0x17, 0, 2, 0, ov_delta, "VIN Overvoltage Set", pca_tf_uv_delta },
 	/*REG 0x29-0x2A, NTC_THRESHOLD_1(R/W)*/
-	{ 0x18, 0, 10, 0x400, ntc_threshold, "Ext NTC Voltage Threshold", pca_tf_ntcvthres_set },
+	{ 0x18, 12, 4, 0, sc_clk_dither_limit, "Max devitation of spread spectrum", pca_tf_sc_dither_limit },
+	{ 0x18, 0, 10, 0, ntc_threshold, "Ext NTC Voltage Threshold", pca_tf_ntcvthres_set },
 	/* Registers */
 	{ 0x00, 0,  8,   0, reg_0, "DEV_INFO", pca_tf_byte },
 	{ 0x01, 0,  8,   0, reg_1, "INT1", pca_tf_byte },
@@ -1017,7 +1054,7 @@ pca_data_field_t pca_DataFields[] = {
 	{ 0x16, 0,  8,   0, reg_27, "V_VFLOAT", pca_tf_byte },
 	{ 0x17, 0,  8,   0, reg_28, "SAFETY_CTRL", pca_tf_byte },
 	{ 0x18, 0,  8,   0, reg_29, "NTC_TH_1", pca_tf_byte },
-	{ 0x18, 8,  2,   0, reg_2A, "NTC_TH_2", pca_tf_byte }
+	{ 0x18, 8,  8,   0, reg_2A, "NTC_TH_2", pca_tf_byte }
 };
 
 pca_register_t pca_registers[] = {

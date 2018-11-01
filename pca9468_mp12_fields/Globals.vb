@@ -77,9 +77,7 @@ Public Enum pca_data_fields_enum_t
     force_adc_mode
     adc_shutdown_cfg
     hibernate_delay
-    adc_offset_cfg
-    adc_osr_cfg
-    adc_en
+    sc_clk_dither_rate     'added in B0
     'REG 0x24, ADCCH_CFG (R/W) 
     'modified according to v1.0 spec
     ntc_adc_en
@@ -95,12 +93,13 @@ Public Enum pca_data_fields_enum_t
     temp_reg_en
     ntc_protection_en
     temp_max_en
+    sc_clk_dither_en    'added in B0
     'REG 0x26, PWR_COLLAPSE (R/W)
     uv_delta
     collapse_det_en
     iin_force_count
     bat_miss_det_en
-    batt_miss_shdn_en
+    unplug_force_standby 'added in B0
     'REG 0x27, V_FLOAT (R/W)
     v_float
     'REG 0x28, SAFETY_CTRL (R/W)
@@ -110,6 +109,7 @@ Public Enum pca_data_fields_enum_t
     chg_timer_cfg
     ov_delta
     'REG 0x29-0x2A, NTC_THRESHOLD_1(R/W)
+    sc_clk_dither_limit  'added in B0
     ntc_threshold
     'registers
     reg_0

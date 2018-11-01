@@ -103,6 +103,15 @@ Public Class FrmMain_mp12
                 End If
             Next
             I2C_connected = con
+            '2018.10.26. Clark Kim 
+            'Set LIMIT_INCREMENT_EN bit to 0 after connection
+            'and disable the selection.
+            'Disable LIMIT_INCREMENT_EN of IIN_CTRL
+            mvc.Model.WriteRegisterField(pca_data_fields_enum_t.limit_increment_en, &H0)
+            'Delete the chopping mode selection.
+            'Enable chopping mode'
+            'mvc.Model.DbgWriteRegister(&H30, &H5B)
+            'mvc.Model.DbgWriteRegister(&H3E, &HA)
         End If
     End Sub
 
@@ -153,6 +162,11 @@ Public Class FrmMain_mp12
         lblHiberDelay.Text = Model.Caption(pca_data_fields_enum_t.hibernate_delay)
         v = New View(cmbAdcHibDelay, pca_data_fields_enum_t.hibernate_delay)
         v = New View(chkAdcShutDownCfg, pca_data_fields_enum_t.adc_shutdown_cfg)
+        lblScClkDitherSR.Text = Model.Caption(pca_data_fields_enum_t.sc_clk_dither_rate)
+        v = New View(cmbScClkDitherSR, pca_data_fields_enum_t.sc_clk_dither_rate)
+        lblScClkDitherLimit.Text = Model.Caption(pca_data_fields_enum_t.sc_clk_dither_limit)
+        v = New View(cmbScClkDitherLimit, pca_data_fields_enum_t.sc_clk_dither_limit)
+        v = New View(chkScClkDitherEn, pca_data_fields_enum_t.sc_clk_dither_en)
 
         'Rasied interrrupt View'
         v = New View(chkVOkInt, pca_data_fields_enum_t.v_ok_int)
@@ -243,6 +257,7 @@ Public Class FrmMain_mp12
         v = New View(chkMissBatteryDetEn, pca_data_fields_enum_t.bat_miss_det_en)
         v = New View(chkWatchDogEn, pca_data_fields_enum_t.watchdog_en)
         v = New View(chkChargerTimerEn, pca_data_fields_enum_t.chg_timer_en)
+        v = New View(chkForceUnplugStandby, pca_data_fields_enum_t.unplug_force_standby)
 
         'Thermal View'
         lblTempReg.Text = Model.Caption(pca_data_fields_enum_t.temp_reg)
@@ -270,12 +285,16 @@ Public Class FrmMain_mp12
         SetView(ViewEnum.ve_Functional)
         ' SetAutoRefresh(My.Settings.Interval)
         SetAutoRefresh(0)
+
+        '2018.10.29. Clark Kim - Delete chopping mode selection
+        'chkADCModeSelect.Text = "ADC in Chopping Mode"
+        'chkADCModeSelect.Checked = True
 #If DEBUG Then
         gbxDebug.Visible = True
-        'Write default value'
-        cmbADCTestRepeats.SelectedIndex = 0
-        cmbADCAccDelay.SelectedIndex = 0
-        txtXslFileName.Text = "C:\Users\nxp29394\Desktop\Result_" + DateTime.Now.Date.ToString("MMddyy ") + DateTime.Now.ToString("HH_mm") + ".xlsx"
+            'Write default value'
+            cmbADCTestRepeats.SelectedIndex = 0
+            cmbADCAccDelay.SelectedIndex = 0
+            txtXslFileName.Text = "C:\Users\nxp29394\Desktop\Result_" + DateTime.Now.Date.ToString("MMddyy ") + DateTime.Now.ToString("HH_mm") + ".xlsx"
 #Else
         TabControl2.TabPages.Remove(tbpMisc)
         TabControl2.TabPages.Remove(tbpADCTest)
@@ -491,7 +510,43 @@ Public Class FrmMain_mp12
     End Sub
 
     Private Sub btnCtlSet_Click(sender As Object, e As EventArgs) Handles btnCtlSet.Click
+        Dim RegVal As Integer
+        Dim OcpWA As Boolean
+
+        'Check STANDBY_EN bit CheckBox
+        If chkStandbyEn.Checked = False And chkCfgEn.Checked = True Then
+            'Read START_CTRL register to check the current STANDBY_EN and EN_CFG status
+            RegVal = mvc.Model.DbgReadRegister(&H22)
+            RegVal = RegVal And &H60
+            'Check the current STANDBY_EN and EN_CFG status
+            If RegVal <> &H40 Then
+                'STANDBY_EN bit is 1 or EN_CFG bit is 0
+                'Need OCP workaround
+                'Set chopper disable
+                '1. Open test register : [0x30] = 0x5B
+                mvc.Model.DbgWriteRegister(&H30, &H5B)
+                'Write Enable Chop bit to 0 : [0x3D] = [0x3D] & 0xF7
+                RegVal = mvc.Model.DbgReadRegister(&H3D)
+                RegVal = RegVal And &HF7
+                mvc.Model.DbgWriteRegister(&H3D, RegVal)
+                OcpWA = True
+            End If
+        End If
+
         WriteAll()
+
+        'Check OCP Workaround
+        If OcpWA = True Then
+            'Wait 50ms
+            Threading.Thread.Sleep(50)
+            'Chopper Enable : [0x3D] = ([0x3D] & 0xF7) | 0x08
+            RegVal = mvc.Model.DbgReadRegister(&H3D)
+            RegVal = RegVal Or &H8
+            mvc.Model.DbgWriteRegister(&H3D, RegVal)
+            'Close test register : [0x30] = 0x00
+            mvc.Model.DbgWriteRegister(&H30, &H0)
+            OcpWA = False
+        End If
     End Sub
 
     Private Sub btnAdcEnSet_Click(sender As Object, e As EventArgs) Handles btnAdcEnSet.Click
@@ -539,6 +594,14 @@ Public Class FrmMain_mp12
     End Sub
 
     Private Sub tsbRead_Click(sender As System.Object, e As System.EventArgs) Handles tsbRead.Click
+        ReadAll()
+    End Sub
+
+    Private Sub btnSpreadSet_Click(sender As Object, e As EventArgs) Handles btnSpreadSet.Click
+        WriteAll()
+    End Sub
+
+    Private Sub btnSpreadRead_Click(sender As Object, e As EventArgs) Handles btnSpreadRead.Click
         ReadAll()
     End Sub
 
@@ -772,11 +835,11 @@ Public Class FrmMain_mp12
             tmrADCTest.Enabled = False
             tmrADCTest.Stop()
         ElseIf cmbADCAccDelay.SelectedIndex = 1 Then
-            tmrADCTest.Interval = 50
+            tmrADCTest.Interval = 100
             tmrADCTest.Enabled = True
             tmrADCTest.Start()
         ElseIf cmbADCAccDelay.SelectedIndex = 2 Then
-            tmrADCTest.Interval = 100
+            tmrADCTest.Interval = 200
             tmrADCTest.Enabled = True
             tmrADCTest.Start()
         End If
@@ -882,9 +945,9 @@ Public Class FrmMain_mp12
         txtADCAccIINDelta.Text = CStr((IINMax - IINMin) * 4.89)
         txtADCAccInputCurrent.Text = CStr(IINMax - IINMin)
         'Iout'
-        txtADCAccIoutMax.Text = CStr(IoutMax * 48.9 * 2)
-        txtADCAccIoutMin.Text = CStr(IoutMin * 48.9 * 2)
-        txtADCAccIoutDelta.Text = CStr((IoutMax - IoutMin) * 48.9 * 2)
+        txtADCAccIoutMax.Text = CStr(IoutMax * 9.78)
+        txtADCAccIoutMin.Text = CStr(IoutMin * 9.78)
+        txtADCAccIoutDelta.Text = CStr((IoutMax - IoutMin) * 9.78)
         txtADCAccOutputCurrent.Text = CStr(IoutMax - IoutMin)
         'Vin'
         txtADCAccVinMax.Text = CStr(VinMax * 0.016)
@@ -916,5 +979,20 @@ Public Class FrmMain_mp12
 
 #End If
 
-   
+    Private Sub chkADCModeSelect_CheckedChanged(sender As Object, e As EventArgs) Handles chkADCModeSelect.CheckedChanged
+        If chkADCModeSelect.Checked Then
+            chkADCModeSelect.Text = "ADC in Chopping Mode"
+            'Enable chopping mode'
+            mvc.Model.DbgWriteRegister(&H30, &H5B)
+            mvc.Model.DbgWriteRegister(&H3E, &HA)
+        Else
+            chkADCModeSelect.Text = "ADC in Offset Mode"
+            'Enable offset mode'
+            mvc.Model.DbgWriteRegister(&H30, &H5B)
+            mvc.Model.DbgWriteRegister(&H3E, &H2)
+        End If
+
+    End Sub
+
+
 End Class

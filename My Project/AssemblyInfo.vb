@@ -11,14 +11,14 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyTitle("PCA9468")> 
 <Assembly: AssemblyDescription("PCA9468 evaluation and demonstration utility")> 
 <Assembly: AssemblyCompany("NXP Semiconductors")> 
-<Assembly: AssemblyProduct("PCA9468")> 
-<Assembly: AssemblyCopyright("Copyright ©  2017")> 
+<Assembly: AssemblyProduct("PCA9468")>
+<Assembly: AssemblyCopyright("Copyright ©  2018")>
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("c701e0ed-e0c1-492e-8f9e-c61143eae8a9")> 
+<Assembly: Guid("c701e0ed-e0c1-492e-8f9e-c61143eae8a9")>
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.0.2.0")> 
-<Assembly: AssemblyFileVersion("1.0.2.0")> 
+<Assembly: AssemblyVersion("2.3.1.0")>
+<Assembly: AssemblyFileVersion("2.3.1.0")>
