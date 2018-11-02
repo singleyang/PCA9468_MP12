@@ -291,7 +291,6 @@ pca_result_t pcaReadADCRegisters(int regNumber, int count) {
 
 pca_result_t pcaReadNTCRegisters(int regNumber, int count) {
 	pca_result_t result = pca_ok;
-	int idx;
 	uint8_t data[2];
 	int value;
 

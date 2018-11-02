@@ -181,11 +181,6 @@
     <ClInclude Include="version.h" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Twinkie_hal\Twinkie_hal.vcxproj">
-      <Project>{c3602c17-be0a-4580-b4ab-1d5cef17a118}</Project>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="pca9498_com.def" />
   </ItemGroup>
   <ItemGroup>
