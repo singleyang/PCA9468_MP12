@@ -276,16 +276,16 @@ void pca_tf_temp_reg(char *textbuffer, size_t sz, int index)
 			switch (index)
 			{
 			case 0:
-				sprintf_s(textbuffer, sz, "%s", "90°C");
+				sprintf_s(textbuffer, sz, "%s", "90degC");
 				break;
 			case 1:
-				sprintf_s(textbuffer, sz, "%s", "100°C");
+				sprintf_s(textbuffer, sz, "%s", "100degC");
 				break;
 			case 2:
-				sprintf_s(textbuffer, sz, "%s", "110°C");
+				sprintf_s(textbuffer, sz, "%s", "110degC");
 				break;
 			default:
-				sprintf_s(textbuffer, sz, "%s", "120°C");
+				sprintf_s(textbuffer, sz, "%s", "120degC");
 				break;
 			}
 		}
@@ -301,16 +301,16 @@ void pca_tf_temp_delta(char *textbuffer, size_t sz, int index)
 			switch (index)
 			{
 			case 0:
-				sprintf_s(textbuffer, sz, "%s", "0°C");
+				sprintf_s(textbuffer, sz, "%s", "0degC");
 				break;
 			case 1:
-				sprintf_s(textbuffer, sz, "%s", "5°C");
+				sprintf_s(textbuffer, sz, "%s", "5degC");
 				break;
 			case 2:
-				sprintf_s(textbuffer, sz, "%s", "10°C");
+				sprintf_s(textbuffer, sz, "%s", "10degC");
 				break;
 			default:
-				sprintf_s(textbuffer, sz, "%s", "15°C");
+				sprintf_s(textbuffer, sz, "%s", "15degC");
 				break;
 			}
 		}
@@ -548,14 +548,14 @@ void pca_tf_DieTemp_adc(char *textbuffer, size_t sz, int index)
 			/*LSB 0.5C with -25C ~ 160C*/
 			if (val > 992)
 			{	
-				sprintf_s(textbuffer, sz, "-25°C");
+				sprintf_s(textbuffer, sz, "-25degC");
 			}
 			else if (val <= 567)
 			{
-				sprintf_s(textbuffer, sz, "160°C");
+				sprintf_s(textbuffer, sz, "160degC");
 			}
 			else{ 
-				sprintf_s(textbuffer, sz, "%0.1f °C", (935 - val)*0.435); 
+				sprintf_s(textbuffer, sz, "%0.1fdegC", (935 - val)*0.435); 
 			}
 		}
 	}

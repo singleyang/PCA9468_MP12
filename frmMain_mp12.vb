@@ -289,6 +289,18 @@ Public Class FrmMain_mp12
         '2018.10.29. Clark Kim - Delete chopping mode selection
         'chkADCModeSelect.Text = "ADC in Chopping Mode"
         'chkADCModeSelect.Checked = True
+
+        '2018.11.28. Clark Kim
+        'Delete Battery Missing Detection CheckBox
+        chkMissBatteryDetEn.Enabled = False
+        chkMissBatteryDetEn.Visible = False
+
+        '2018.11.28. Clark Kim
+        'Delete Charging Current Set, Label and TrackBar
+        lblIchgCfg.Visible = False
+        lblIchgCfgVal.Visible = False
+        trbIchgCfg.Visible = False
+
 #If DEBUG Then
         gbxDebug.Visible = True
             'Write default value'
